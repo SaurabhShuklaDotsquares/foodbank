@@ -1,0 +1,187 @@
+﻿@model List<FB.Dto.ReportGarntorsDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 5px;
+        }
+        /*.test {
+            border-collapse: collapse;
+            width: 100%;
+            border-bottom: 1px solid;
+        }*/
+        .test1 {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid;
+        }
+
+        /*tr:nth-child(even) {
+            background-color: #D6EEEE;
+        }*/
+    </style>
+    @*<link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />*@
+</head>
+<body>
+    @if (Model != null)
+    {
+        foreach (var model in Model)
+        {
+
+
+            <div class="row">
+                <br />
+            </div><div class="row">
+                <table id="grid-label-columns" class="table table-bordered table-striped table-hover">
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="test">
+                                <td>
+                                    <table>
+                                        <tr><td>Name:- @item.GrantorName</td></tr>
+                                        <tr>
+                                            <td class="test1">
+                                                <table>
+                                                    <thead>
+                                                        <tr style="border-bottom:1px solid">
+                                                            <th>Amount received</th>
+                                                            <th>Date received</th>
+                                                            <th>Amount remaining</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>@item.AmountReceived</td>
+                                                            <td>@item.DateReceived</td>
+                                                            <td>@item.AmountRemaining</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td class="test1">
+                                                <table>
+                                                    <thead>
+                                                        <tr style="border-bottom:1px solid">
+                                                            <th>Food item</th>
+                                                            <th>Quantity</th>
+                                                            <th>Price</th>
+                                                            <th>Date bought</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if (item.FoodBought.Count>0)
+                                                        {
+                                                            @foreach (var foodDetail in item.FoodBought)
+                                                            {
+                                                                <tr>
+                                                                    <td>@foodDetail.FoodItemName</td>
+                                                                    <td>@foodDetail.Quantity</td>
+                                                                    <td>@foodDetail.Price</td>
+                                                                    <td>@foodDetail.DateBought</td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>--</td>
+                                                                <td>--</td>
+                                                                <td>--</td>
+                                                                <td>--</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td class="test1">
+                                                <table>
+                                                    <thead>
+                                                        <tr style="border-bottom:1px solid">
+                                                            <th>Location</th>
+                                                            <th>Parcel Type</th>
+                                                            <th>Date packed</th>
+                                                            <th>Date delivered</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if (item.FoodBought.Count>0)
+                                                        {
+                                                            @foreach (var location in item.ParcelsLocation)
+                                                            {
+                                                                <tr>
+                                                                    @if (location.Location != null)
+                                                                    {
+                                                                        <td>@location.Location</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>--</td>
+                                                                    }
+                                                                    @if (location.ParceType != null)
+                                                                    {
+                                                                        <td>@location.ParceType</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>--</td>
+                                                                    }
+                                                                    @if (location.DatePacked != null)
+                                                                    {
+                                                                        <td>@location.DatePacked</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>--</td>
+                                                                    }
+                                                                    @if (location.DateDelivered != null)
+                                                                    {
+                                                                        <td>@location.DateDelivered</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>--</td>
+                                                                    }
+                                                                </tr>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr>
+                                                                <td>--</td>
+                                                                <td>--</td>
+                                                                <td>--</td>
+                                                                <td>--</td>
+                                                            </tr>
+                                                        }
+
+
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Total:&nbsp;&nbsp;@Model.Count</h4>
+
+            break;
+        }
+
+    }
+</body>
+</html>

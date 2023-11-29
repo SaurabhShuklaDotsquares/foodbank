@@ -1,0 +1,131 @@
+﻿@model FB.Dto.ParcelTypeDto
+
+@{
+    ViewBag.Title = "Add Parcel Type";
+}
+@section head{
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/alertify/css/alertify.css" rel="stylesheet" />
+}
+
+<div class="inner-bg">
+    <section class="content-header">
+        <h1>
+            @(Model.ParcelTypeId==0? "Add Parcel Type" : "Edit Parcel Type")
+        </h1>
+    </section>
+    <section class="content">
+        <partial name="_Notification" />
+        <div id="frm-create-donor" class="cmxform donor-form">
+            <div id="validation-summary-create-donor"></div>
+            <input type="hidden" id="hdnParcelTypeId" asp-for="ParcelTypeId" />
+            <div class="frm-main">
+                @using (Html.BeginForm("createedit", "parceltype", FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-5 col-xs-12 control-label" for="Title">Title<span class="redtext">*</span></label>
+                                <div class="col-sm-7 col-xs-12">
+                                    @if (Model.ParcelTypeId > 0)
+                                    {
+                                        <input class="form-control " asp-for="Title" placeholder="Title" type="text" disabled maxlength="40" required> 
+                                    }
+                                    else
+                                    {
+                                        <input class="form-control " asp-for="Title" placeholder="Title" type="text" maxlength="40" required>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row marT25">
+
+
+                        <fieldset class="field-border-block">
+                            <legend>Add FoodItems</legend>
+                            <div class="row">
+                                <input type="hidden" asp-for="ParcelTypeId" />
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label class="col-xs-12 col-sm-5 control-label" for="Title">Choose Food Items<span class="redtext">*</span></label>
+                                        <div class="col-xs-12 col-sm-7">
+                                            <select asp-for="FoodItemId" class="form-control food-items" asp-items="@((List<SelectListItem>)ViewBag.FoodItemList)"></select>
+                                            <span asp-validation-for="FoodItemId" class="text-red"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label class="col-xs-12 col-sm-4 control-label" for="Title">Quantity<span class="redtext">*</span></label>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <input asp-for="Quantity" class="form-control" placeholder="Quantity" type="number"  onkeypress="OnlyIntvaluepacel(this)" onkeyup="OnlyIntvaluepacel(this)" required min="1">
+                                            <span asp-validation-for="Quantity" class="text-red"></span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <input asp-for="QuantityUnit" class="form-control" placeholder="Unit" type="text" disabled>
+                                            <span asp-validation-for="QuantityUnit" class="text-red"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" id="btn-submit" type="submit">
+                                            Save
+                                            <i class="fa fa-arrow-circle-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                }
+                <div class="row marT25">
+
+                    <div class="col-sm-12">
+                        <table id="grid-parceltype-fooditem" class=" table table-bordered table-striped table-condensed food-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>S.No</th>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                            <tfoot></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="frm-footer">
+                <a asp-controller="parceltype" asp-action="index" data-dismiss="modal" id="btn-cancel" class="btn btn-default" type="button">
+                    <i class="fa fa-arrow-circle-left"></i>
+                    Cancel
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+<partial name="_Modal" model='new Modal { ID="modal-delete-parceltype-fooditem" , AreaLabeledId="modal-delete-parceltype-fooditem-label" , Size=ModalSize.Medium }' />
+
+@section scripts{
+    <script>
+        function OnlyIntvaluepacel(textbox) {
+
+            if (textbox.value.length > 5) {
+
+                textbox.value = '';//textbox.value.replace(/(\..*)\./g, '$1');;
+            }
+            textbox.value = textbox.value.replace(/[^0-9]/g, '');
+            textbox.value = textbox.value.replace(/(\..*)\./g, '$1');
+
+        }
+    </script>
+    <script src="~/Scripts/custom/parceltype/create-edit.js"></script>
+}
+

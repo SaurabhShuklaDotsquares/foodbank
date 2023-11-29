@@ -1,0 +1,186 @@
+﻿@model FB.Dto.FamilyParcelDto
+
+@{
+    ViewBag.Title = "View Parcel";
+}
+
+<div class="inner-bg">
+    <section class="content-header">
+        <h1>
+            @(Model.ParcelId==0? "View Parcel" : "View Parcel")
+        </h1>
+    </section>
+    <section class="content">
+        <partial name="_Notification" />
+        <div id="frm-create-donor" class="cmxform donor-form">
+            <form method="post" novalidate="novalidate" id="create-edit-form">
+                <div id="validation-summary-create-donor"></div>
+                <input type="hidden" asp-for="ParcelId" />
+                <div class="frm-main">
+                    <div class="row divfamily">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12 control-label" for="FamilyId"> Family</label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <select asp-for="FamilyId" class="form-control" asp-items="@((List<SelectListItem>)ViewBag.FamilyList)" disabled></select>
+                                    <span asp-validation-for="FamilyId" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12 control-label" for="ParcelTypeId">
+                                     Parcel Type
+                                </label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <select asp-for="ParcelTypeId" class="form-control ddlParcelTypeId" asp-items="@((List<SelectListItem>)ViewBag.ParcelTypeList)" disabled></select>
+                                    <span asp-validation-for="ParcelTypeId" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" id="divStandardType" style="display:none;">
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12 control-label" for="StandardParcelId">
+                                     Standard Parcel
+                                </label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <select asp-for="StandardParcelId" class="form-control ddlStandardParcelTypeId" asp-items="@((List<SelectListItem>)ViewBag.StandardParcelList)" disabled></select>
+                                    <span asp-validation-for="StandardParcelId" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12 control-label" for="PackerId"> Packer</label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <select asp-for="PackerId" class="form-control ddlPacker" asp-items="@((List<SelectListItem>)ViewBag.PackerList)" disabled></select>
+                                    <span asp-validation-for="PackerId" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12 control-label" for="DeliverrerId"> Deliverrer</label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <select asp-for="DeliverrerId" class="form-control ddlDeliverrer" asp-items="@((List<SelectListItem>)ViewBag.PackerList)" disabled></select>
+                                    <span asp-validation-for="DeliverrerId" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12 control-label" for="DeliveryDate">Date of Delivery</label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <input class="form-control datepicker" asp-for="DeliveryDate" placeholder="DD/MM/YYYY" disabled>
+                                    <span asp-validation-for="DeliveryDate" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12 control-label" for="DeliveredDate">Delivered Date</label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <input class="form-control datepicker" asp-for="DeliveredDate" placeholder="DD/MM/YYYY" disabled>
+                                    <span asp-validation-for="DeliveredDate" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12 control-label" for="SpecialNote">Special Notes</label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <textarea asp-for="SpecialNote" type="text" class="form-control" rows="10" cols="10" disabled></textarea>
+                                    <span asp-validation-for="SpecialNote" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12 control-label"></label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <input type="checkbox" asp-for="IncludeRecipe" disabled />
+                                    <label asp-for="IncludeRecipe">Include Recipe?</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row divIsInclude" style="display:none;">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-12 control-label" for="RecipeId">Choose Recipe</label>
+                                <div class="col-sm-8 col-xs-12">
+                                    <select asp-for="RecipeId" class="form-control ddlDeliverrer" asp-items="@((List<SelectListItem>)ViewBag.RecipeList)" disabled></select>
+                                    <span asp-validation-for="RecipeId" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row marT25">
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed food-table" id="tablefamilyfooditem">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Quantity</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="fooditemtable">
+                                        @if (Model.FamilyParcelList.Count > 0)
+                                        {
+                                            @foreach (var item in Model.FamilyParcelList)
+                                            {
+                                                <tr>
+
+                                                    <td width="50%">
+                                                        <input name="hdnfoodItemId" type="hidden" value="@item.FoodItemId" />
+                                                        <input class="form-control" placeholder="Food Item" name="" type="text" value="@item.FoodItemName" disabled>
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control tbl-quantity" data-foodId="@item.FoodItemId" disabled data-oldval="@item.Quantity" placeholder="Quantity" name="itemquantity" type="number" min="1" value="@item.Quantity">
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr class="odd" role="row">
+                                                <td colspan="3" style="text-align:center">
+                                                    <label>No records found.</label>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="frm-footer">
+                    @*<a asp-controller="familyparcel" asp-action="index" data-dismiss="modal" id="btn-cancel" class="btn btn-default" type="button">
+                        <i class="fa fa-arrow-circle-left"></i>
+                        Cancel
+                    </a>*@
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+@section scripts{
+    <script src="~/Scripts/custom/family-parcel/create-edit.js"></script>
+}

@@ -1,0 +1,11 @@
+﻿@model Modal
+
+<div id="frm-delete">
+    @using (Html.BeginForm())
+    {
+        <partial name="_ModalHeader" model='Model.Header' />
+        <div id="validation-summary"></div>
+        <p class="del-msg">@Model.Message</p>
+        <partial name="_ModalFooter" model='Model.Footer' />
+    }
+</div>

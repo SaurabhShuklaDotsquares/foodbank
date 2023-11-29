@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "DonorList";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section head{
+    <link href="~/Scripts/plugins/select2/select2.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/select2/select2-bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/datepicker/datepicker3.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/bootstrap-tokenfield/dist/css/tokenfield-typeahead.css" rel="stylesheet" />
+}
+<div class="wrapper">
+    <div class="">
+        <div class="inner-bg">
+            <section class="content-header">
+
+                <h1>
+                    Donor List
+                </h1>
+              
+
+            </section>
+            <section class="content">
+                <div class="cmxform donor-form referrals-form">
+                 
+                       
+                    
+                <div class="">
+                    <div class="table-top add-btn-main">
+
+                        <div class="col-lg-4 col-sm-4 col-xs-12 filter-data" style="background: #efeded; margin:0px 0px 20px 0px;padding:10px 0px">
+                            <div class="col-lg-2 col-sm-12 col-xs-12" style="">
+                                <label>Charity  </label>
+                            </div>
+                            <div class="col-lg-4 col-sm-12 col-xs-12">
+                                @Html.DropDownList("CharityID", (List<SelectListItem>)ViewBag.Charities, new { @class = "form-control", @style = "min-width:300px" })
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-4 col-xs-12 filter-data" style="background: #efeded; margin:0px 0px 20px 0px;padding:10px 0px">
+                            <div class="col-lg-2 col-sm-12 col-xs-12" style="">
+                                <label>Branch  </label>
+                            </div>
+                            <div class="col-lg-4 col-sm-12 col-xs-12">
+                                @Html.DropDownList("BranchID", (List<SelectListItem>)ViewBag.Branches, new { @class = "form-control", @style = "min-width:300px" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-xs-12 filter-data" style="background: #efeded; margin:0px 0px 20px 0px;padding:10px 0px">
+                            <div class="col-lg-6 col-sm-12 col-xs-12" style="">
+                                <label>&nbsp;  </label>
+                            </div>
+                            <div class="col-lg-6 col-sm-12 col-xs-12">
+                                <a class="btn btn-primary" href="@Url.Action("DonorRegistration")"><img src="/Content/images/add.png" width="20px" alt="">Add Donor</a>
+                            </div>
+                        </div>
+                    </div>
+                        <table id="grid-my-donor" class="table table-bordered table-striped table-condensed food-table">
+                            <thead>
+                                <tr>
+                                    <th>Donor Id</th>
+                                    <th>S.No</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Organisation Name</th>
+                                    <th>Charity Name</th>
+                                    <th>Branch Name</th>
+                                    <th>Reference ID </th>
+                                    <th width="15%">Action </th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                            <tfoot></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/plugins/select2/select2.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="~/Scripts/plugins/datepicker/bootstrap-datepicker.js"></script>
+
+    <script src="~/Scripts/custom/donor/donorlist.js"></script>
+    <script src="~/Scripts/plugins/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
+
+
+}
+
+
+<partial name="_Modal" model='new Modal { ID="modal-delete-donor" , AreaLabeledId="modal-delete-donor-label" , Size=ModalSize.Medium }' />
+

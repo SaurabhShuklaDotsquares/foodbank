@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "StockList";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section head{
+    <link href="~/Scripts/plugins/select2/select2.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/select2/select2-bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/datepicker/datepicker3.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/bootstrap-tokenfield/dist/css/tokenfield-typeahead.css" rel="stylesheet" />
+}
+
+        <div class="inner-bg">
+            <section class="content-header">
+                <partial name="_Notification" />
+                <h1>
+                    Stock List
+                </h1>
+             
+            </section>
+            <section class="content">
+            
+                <div class="cmxform donor-form referrals-form">
+                    <div class="table-top add-btn-main">
+                        <a class="add-food-btn" href="@Url.Action("AddStock")" onclick="ShowLoader()"><img src="/Content/images/add.png" alt="" >Add Stock</a>
+                    </div>
+                    <table id="grid-my-stock" class="table table-bordered table-striped table-condensed food-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>S.No</th>
+                                <th>Food items</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Price per item</th>
+                                <th>Is the item low in stock</th>
+                                <th width="15%">Action </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot></tfoot>
+                    </table>
+
+                </div>
+            </section>
+        </div>
+
+@section scripts{
+    <script src="~/Scripts/plugins/select2/select2.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="~/Scripts/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/custom/stock/stocklist.js"></script>
+    <script src="~/Scripts/plugins/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
+
+
+}
+
+
+<partial name="_Modal" model='new Modal { ID="modal-delete-stock" , AreaLabeledId="modal-delete-stock-label" , Size=ModalSize.Medium }' />
+

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Volunteer-Dashboard";
+}
+@model FB.Dto.VolunteerPackingListDto
+@section head{
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/alertify/css/alertify.css" rel="stylesheet" />
+}
+<div class="inner-bg">
+    <section class="content-header">
+        <h1>
+            Packing List
+        </h1>
+    </section>
+    <section class="content">
+        <input id="hdnVolunteerId" value="@ViewBag.VolunteerId" hidden />
+        <div class="cmxform donor-form referrals-form admin-frm gran-frm">
+            <div class="table-top">
+                <div class="status-box">
+                    <select class="form-control valid">
+                        <option>Status</option>
+                        <option value="0">Pending</option>
+                        <option value="1">Packed and Delivered</option>
+                    </select>
+                </div>
+            </div>
+            <div class="">
+                <table class="table table-bordered food-table" id="grid-volunteer-packing-list">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Assigned Date</th>
+                            <th>Parcel Type</th>
+                            <th>Packing Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+    </section>
+</div>
+@section scripts
+{
+    <script src="~/Scripts/custom/volunteer/volunteer-packing-listing.js"></script>
+}

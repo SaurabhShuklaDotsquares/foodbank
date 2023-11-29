@@ -1,0 +1,213 @@
+﻿@model FB.Dto.VolunteerRegisterDto
+@{
+    ViewBag.Title = "Volunteer Register";
+}
+
+@section head{
+    <link href="~/Scripts/plugins/select2/select2.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/select2/select2-bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/datepicker/datepicker3.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/bootstrap-tokenfield/dist/css/tokenfield-typeahead.css" rel="stylesheet" />
+}
+<div class="inner-bg">
+    <section class="content-header">
+        <h1>
+            @(!string.IsNullOrWhiteSpace(Model.BranchName)? "["+@Model.BranchName+ "] Volunteer Register" : "Volunteer Register")
+        </h1>
+    </section>
+    <section class="content">
+        <div id="frm-create-donor" class="cmxform donor-form ref-frm my-profile-frm ref-register-frm">
+            <form method="post" asp-controller="Account" asp-action="VolunteerRegistration" id="Volunteer-Register-form">
+                <div id="validation-summary-create-donor"></div>
+                <input data-val="true" data-val-number="The field PersonID must be a number."
+                       data-val-required="'Person I D' must not be empty." id="PersonID" name="PersonID"
+                       type="hidden" value="0">
+
+                <div class="frm-main">
+                    <div class="row">
+                        <!--==================== Volunteer Detail Section =====================================-->
+                        <div class="col-xs-12 volunteer-first-page">
+                            <h3 class="page-header">Volunteer Details</h3>
+                        </div>
+                        <div class="col-xs-12 volunteer-first-page">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label"
+                                           for="Forenames">
+                                        Volunteer Name<span class="redtext">*</span>
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <input asp-for="VolunteerName" class="form-control" placeholder="Volunteer Name" type="text">
+                                        <span asp-validation-for="VolunteerName" class="text-red"></span>
+                                        <input asp-for="FoodbankToken" type="hidden" />
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label" for="Title">
+                                        Contact Number<span class="redtext">*</span>
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <input asp-for="ContactNumber" class="form-control" placeholder="Contact Number" type="text" maxlength="20">
+                                        <span asp-validation-for="ContactNumber" class="text-red"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label" for="Forenames">
+                                        Want to
+                                        do packing or delivery?
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <select asp-for="WorkType" class="form-control create-donor-country" asp-items="@((List<SelectListItem>)ViewBag.WorkTypeList)"></select>
+                                        <span asp-validation-for="WorkType" class="text-red"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label" for="Title">
+                                        Email<span class="redtext">*</span>
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <input asp-for="Email" class="form-control" placeholder="Email" type="text">
+                                        <span asp-validation-for="Email" class="text-red"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label" for="Title">
+                                        How else can
+                                        you help
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <input asp-for="HowCanYouHelp" class="form-control" placeholder="How else can you help" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label" for="Forenames">
+                                        Are you
+                                        individual or couple?
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <select asp-for="MaritalStatus" class="form-control create-donor-country" asp-items="@((List<SelectListItem>)ViewBag.MaritalTypeList)"></select>
+                                        <span asp-validation-for="MaritalStatus" class="text-red"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--==================== Volunteer Detail Section =====================================-->
+                        <!--==================== Change Password Section =====================================-->
+                        <div class="change-password volunteer-first-page">
+                            <div class="col-sm-12">
+                                <h3 class="page-header">
+                                    <input data-val="true" class="hidden" data-val-required="'Overseas' must not be empty." asp-for="IsChangePassword" id="IsChangePassword" name="IsChangePassword" type="checkbox" checked value="true">
+                                    Account Detail
+                                </h3>
+                            </div>
+                            <div id="changepassword-container">
+                                <div class="col-xs-12">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 col-sm-4 control-label"
+                                                   for="UserName">Username<span class="redtext">*</span></label>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input asp-for="UserName" class="form-control serAvailbility txt-auto-complete" placeholder="Username" />
+                                                <span asp-validation-for="UserName" class="text-red"></span>
+                                                <div style="display:none">
+                                                    <div class="col-lg-3 col-sm-3 control-label"></div>
+                                                    <div id="divError" class="col-lg-8 col-sm-8"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 col-sm-4 control-label">Password<span class="redtext">*</span> </label>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input asp-for="EditPassword" class="form-control random-password" placeholder="Password" type="password" />
+                                                <span asp-validation-for="EditPassword" class="text-red"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 col-sm-4 control-label"
+                                                   for="UserName">Confirm Password<span class="redtext">*</span></label>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input asp-for="ConfirmPassword" class="form-control userAvailbility txt-auto-complete random-password" placeholder="Confirm Password " type="password">
+                                                <span asp-validation-for="ConfirmPassword" class="text-red"></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 col-sm-4 control-label">Password Question<span class="redtext">*</span></label>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input asp-for="PasswordQuestion" class="form-control alpha-numeric" placeholder="Password Question" />
+                                                <span asp-validation-for="PasswordQuestion" class="text-red"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 col-sm-4 control-label">Password Answer<span class="redtext">*</span></label>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input asp-for="PasswordAnswer" class="form-control alpha-numeric" placeholder="Password Answer" />
+                                                <span asp-validation-for="PasswordAnswer" class="text-red"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group" style="margin-left:6px;">
+                                            <label class="col-lg-4 col-sm-4 control-label" for=""> </label>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input id="password-field" class="toggle-password" name="password-field" type="checkbox">
+                                                        <label for="password-field">Show Password</label>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--==================== Change Password Section =====================================-->
+                        
+                        <div class="AvailabilityAndUnavailability"></div>
+
+                        <div class="frm-footer first-footer">
+                            <a data-dismiss="modal" id="btn-cancel" class="btn btn-default" href="@Url.Action("login","account")">
+                                <i class="fa fa-arrow-circle-left"></i>
+                                Cancel
+                            </a>
+                            @if (!string.IsNullOrWhiteSpace(Model.BranchName))
+                            {
+                                <button class="btn btn-primary" id="btn-submit" type="button">
+                                    Save And Next
+                                    <i class="fa fa-arrow-circle-right"></i>
+                                </button>
+                            }
+                        </div>
+                        <div class="frm-footer second-footer" style="display:none;">
+                            <a id="btn-submit" class="btn btn-primary second-submit" href="@Url.Action("loginpageredirection","account")">
+                                <i class="fa fa-arrow-circle-right"></i>
+                                Submit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </section>
+</div>
+<partial name="_Modal" model='new Modal { ID="modal-add-availability" , AreaLabeledId="modal-add-availability-label" , Size=ModalSize.Large }' />
+<partial name="_Modal" model='new Modal { ID="modal-add-unavailability" , AreaLabeledId="modal-add-unavailability-label" , Size=ModalSize.Large }' />
+<partial name="_Modal" model='new Modal { ID = "modal-delete-volunteer-availability", AreaLabeledId = "modal-delete-volunteer-availability-label", Size = ModalSize.Medium }' />
+<partial name="_Modal" model='new Modal { ID = "modal-delete-volunteer-unavailability", AreaLabeledId = "modal-delete-volunteer-unavailability-label", Size = ModalSize.Medium }' />
+
+@section scripts{
+    <script src="~/Scripts/custom/volunteer/Volunteer-Register.js"></script>
+    <script src="~/Scripts/custom/volunteer/volunteer-register-availability.js"></script>
+}

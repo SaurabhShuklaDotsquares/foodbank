@@ -1,0 +1,110 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\EnrolNow.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\OrganisationList.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\RegularDonation.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\SendEmail.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_AddUpdatePersonAddress.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_AgencyFamily.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_ChangePersonFamily.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_CreatEditMSMember.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_CreatePerson.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_FamilyAgencyEdit.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_FamilyAgencyView.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_FamilyList.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_FamilyParcelView.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_GiftMessage.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_GiftView.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_ModalPersonFamily.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_MSMemberView.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_Parcelfamily.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_SendEmail.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_SendMail.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_UpdateFamilyInActive.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_UpdateFamilyPhoto.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_UpdatePersonDeceased.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_UpdatePersonDOB.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_UpdatePersonInActive.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_UpdatePersonPhoto.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_VoucherFamily.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\FamilyRecord\_VoucherFamilyView.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\Feedback\_FeedbackListView.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\Feedback\_FeedbackListViewone.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\User\UserPreference.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\User\_CreateEditMSUser.cshtml" />
+    <Content Remove="Areas\FoodBank\Views\User\_UserDataAccess.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.27" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="System.Data.OleDb" Version="6.0.0" />
+    <PackageReference Include="ZXing.Net" Version="0.16.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FB.Core\FB.Core.csproj" />
+    <ProjectReference Include="..\FB.Data\FB.Data.csproj" />
+    <ProjectReference Include="..\FB.Dto\FB.Dto.csproj" />
+    <ProjectReference Include="..\FB.Service\FB.Service.csproj" />
+    <ProjectReference Include="..\FB.Validator\FB.Validator.csproj" />
+    <ProjectReference Include="..\FB.ExportReport\FB.ExportReport.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\FoodBank\Data\" />
+    <Folder Include="wwwroot\FoodbankSettingPhotos\" />
+    <Folder Include="wwwroot\Scripts\custom\common\" />
+    <Folder Include="wwwroot\VolunteerPhotos\" />
+    <Folder Include="wwwroot\FoodbankSettingPhotos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\FoodBank\Views\FamilyRecord\_FamilyParcelView.cshtml" />
+    <None Include="Areas\FoodBank\Views\FamilyRecord\_FamilyAgencyView.cshtml" />
+    <None Include="Areas\FoodBank\Views\FamilyRecord\_VoucherFamily.cshtml" />
+    <None Include="Areas\FoodBank\Views\FamilyRecord\_ParcelFamily.cshtml" />
+    <None Include="Areas\FoodBank\Views\FamilyRecord\_AgencyFamily.cshtml" />
+    <None Include="Areas\FoodBank\Views\FamilyRecord\_VoucherFamilyView.cshtml" />
+    <None Include="Areas\FoodBank\Views\FamilyRecord\_FeedbackListViewone.cshtml" />
+    <None Include="Areas\FoodBank\Views\FamilyRecord\_FeedbackListView.cshtml" />
+    <None Include="Areas\FoodBank\Views\Notes\_CreateEdit.cshtml" />
+    <None Include="Areas\FoodBank\Views\Notes\_NoteView.cshtml" />
+    <None Include="Areas\Report\Views\FamilyReport\Index.cshtml" />
+    <None Include="Areas\Report\Views\FamilyReport\_ExportReferrerTab3.cshtml" />
+    <None Include="Areas\Report\Views\FamilyReport\_ReportFamaily.cshtml" />
+    <None Include="Areas\Report\Views\FamilyReport\_ReportReferFamaily.cshtml" />
+    <None Include="Areas\Report\Views\FamilyReport\_ReportReferFamilywithMember.cshtml" />
+    <None Include="Areas\Report\Views\GrantorsReport\Index.cshtml" />
+    <None Include="Areas\Report\Views\GrantorsReport\_ExportReferrerTab3.cshtml" />
+    <None Include="Areas\Report\Views\GrantorsReport\_ReportGrantors.cshtml" />
+    <None Include="Areas\Report\Views\ParcelsReport\Index.cshtml" />
+    <None Include="Areas\Report\Views\ParcelsReport\_ExportReferrerTab3.cshtml" />
+    <None Include="Areas\Report\Views\ParcelsReport\_ReportParcels.cshtml" />
+    <None Include="Areas\Report\Views\ReferrerReport\Index.cshtml" />
+    <None Include="Areas\Report\Views\ReferrerReport\_ExportReferrerTab3.cshtml" />
+    <None Include="Areas\Report\Views\ReferrerReport\_ReportReferFamaily.cshtml" />
+    <None Include="Areas\Report\Views\ReferrerReport\_ReportReferFamilywithMember.cshtml" />
+    <None Include="Areas\Report\Views\VolunteerReports\Index.cshtml" />
+    <None Include="Areas\Report\Views\VolunteerReports\_ExportReferrerTab3.cshtml" />
+    <None Include="Areas\Report\Views\VolunteerReports\_ReportVolunteers.cshtml" />
+    <None Include="Areas\Report\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Report\Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\Scripts\custom\report\Family-Report.js" />
+    <None Include="wwwroot\Scripts\custom\report\Referrer-Report.js" />
+    <None Include="wwwroot\Scripts\custom\report\report-export-report.js" />
+    <None Include="wwwroot\TempPdfFiles\wkhtmltopdf.exe" />
+    <None Include="wwwroot\TempPdfFiles\wkhtmltopdf1.exe" />
+  </ItemGroup>
+
+</Project>

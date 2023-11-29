@@ -1,0 +1,88 @@
+﻿@model List<FB.Dto.ReportVolunterrsDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .test {
+            border-collapse: collapse;
+            width: 100%;
+            border-bottom: 1px solid;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        /*tr:nth-child(even) {
+            background-color: #D6EEEE;
+        }*/
+    </style>
+    @*<link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />*@
+</head>
+<body>
+    @if (Model != null)
+    {
+        <div class="row">
+            <br />
+        </div><div class="row">
+            <table id="grid-label-columns" class="table table-bordered table-striped table-hover">
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+
+                        <tr>
+                            <td>
+                                <table class="test">
+                                    @if (item.IsSortByVolunteer)
+                                    {
+                                        <tr style="border-bottom: 1px solid"><td>Name:- @item.VolunteersName</td></tr>
+                                    }
+                                    <tr>
+                                        <td>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>From</th>
+                                                        <th>To</th>
+                                                        <th>Shift</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    @foreach (var date in item.AllAvailableDate.OrderBy(x => x.FromDate))
+                                                    {
+                                                        <tr>
+                                                            <td>@date.FromDate</td>
+                                                            <td>@date.ToDate</td>
+                                                            <td>@item.ShiftType</td>
+                                                        </tr>
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    @if (!item.IsSortByVolunteer)
+                                    {
+                                        <tr><td>Name:- @item.VolunteersName</td></tr>
+                                    }
+                                </table>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <h4>Total:&nbsp;&nbsp;@Model.Count</h4>
+    }
+</body>
+</html>

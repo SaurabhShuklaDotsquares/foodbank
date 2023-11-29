@@ -1,0 +1,96 @@
+﻿@model FB.Dto.AgenciesFamilyDto
+
+<div class="box-header">
+    <div id="agencyformmaster" novalidate>
+        <div class="col-lg-6 col-sm-12">
+            <div class="form-group">
+                <input type="hidden" id="hnd_feedbackfamilyid" value="@Model.Familyid" />
+
+                <label class="col-sm-4 control-label" for="Forenames">Select Agency<span class="redtext">*</span></label>
+                <div class="col-sm-8 col-xs-12">
+
+                    @Html.DropDownListFor(M => M.Agencieslist, new SelectList(Model.Agencieslist, "Id", "Name"), "Select Agency...", new { @class = "form-control", @style = "min-width:300px" })
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+
+            <div class="btn-group">
+                <a id="Addagecnyfamily" class="btn btn-primary btnHide ps3">
+                    Add Agency for Family
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box-body ">
+    <input type="hidden" id="hdnCurrentUserId" data-rolename="@( CurrentUser.RoleID>10 ? string.Empty :  ((UserRoles)CurrentUser.RoleID).GetDescription())" value="@CurrentUser.UserID" />
+    <div class="table-responsive">
+        <div class="col-lg-12 col-sm-12">
+            <table id="grid-person-agency" class="table table-bordered table-striped table-hover tbl_bg_clr row-pointer">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>S.No</th>
+                        <th>Agency Name</th>
+                        <th>Email Address</th>
+                        <th>Phone Number</th>
+                        <th width="30%">Action </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<script>
+        $("#Addagecnyfamily").on("click", function () {
+            alertify.dismissAll();
+            if ($("#Agencieslist").val() == "" || $("#Agencieslist").val() == "") {
+                Global.ShowMessage("Please select agency.", Global.MessageType.Error);
+                return;
+            }
+
+            $.ajax({
+                url: Global.DomainName + "FoodBank/familyrecord/FamilyagencySave",
+                data: { agencyid: $("#Agencieslist").val(), familyid: $("#hnd_feedbackfamilyid").val() },
+                type: "post",
+                success: function (data) {
+                    
+                    $(".img-loading-div").hide();
+                    if (data.isSuccess) { alertify.dismissAll(); Global.ShowMessage(data.data, Global.MessageType.Success); $("a[href=#agency]").trigger("click"); }
+                    else { alertify.dismissAll(); Global.ShowMessage(data.data, Global.MessageType.Error); }
+                },
+                error: function (data) {
+                    
+                    $(".img-loading-div").hide();
+                },
+                complete: function (data) {
+                    
+                    $(".img-loading-div").hide();
+                }
+            });
+        });
+        $('body').delegate('.agcecyremoveforfamily', 'click', function () {
+            alertify.dismissAll();
+            $.ajax({
+                url: Global.DomainName + "FoodBank/familyrecord/FamilyagencyDelete",
+                data: { id: $(this).attr("data-id") },
+                type: "get",
+                success: function (data) {
+                    $(".img-loading-div").hide();
+                    if (data.isSuccess) { alertify.dismissAll(); Global.ShowMessage(data.data, Global.MessageType.Success); $("a[href=#agency]").trigger("click"); }
+                    else { alertify.dismissAll(); Global.ShowMessage(data.data, Global.MessageType.Error); }
+                },
+                error: function (data) {
+                    $(".img-loading-div").hide();
+                },
+                complete: function (data) {
+                    $(".img-loading-div").hide();
+                }
+            });
+        });
+</script>
+<script src="../../Scripts/custom/agencies/family-agency.js"></script>

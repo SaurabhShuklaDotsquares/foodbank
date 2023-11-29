@@ -1,0 +1,297 @@
+﻿@model FB.Dto.FeedbackDto
+@using FB.Dto;
+@{
+    ViewBag.Title = "Family Feedback";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/ionicons.min.css" rel="stylesheet" />
+<link href="~/Content/style.css" rel="stylesheet" />
+<link href="~/Content/newlayout.css" rel="stylesheet" />
+<link href="~/Content/responsive.css" rel="stylesheet" />
+<link href="~/Scripts/plugins/alertify/css/alertify.css" rel="stylesheet" />
+<link href="~/Scripts/plugins/alertify/css/themes/default.css" rel="stylesheet" />
+<link href="~/Scripts/plugins/datepicker/datepicker3.css" rel="stylesheet" />
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link rel="icon" href="~/favicon.ico" type="image/x-icon" />
+
+@section scripts{
+<script>
+    function Onlynumericvalue(textbox) {
+        textbox.value = textbox.value.replace(/[^0-9.]/g, ''); textbox.value = textbox.value.replace(/(\..*)\./g, '$1');
+    }
+    function OnlyIntvalue(textbox) {
+        textbox.value = textbox.value.replace(/[^0-9]/g, ''); textbox.value = textbox.value.replace(/(\..*)\./g, '$1');
+    }
+</script>
+    <script src="~/Scripts/custom/Feedback/FamilyFeedbackSubmit.js"></script>
+}
+<div class="inner-bg">
+    <section class="content-header">
+        <h1>
+            Parcel Details
+        </h1>
+    </section>
+    <section class="content">
+        <partial name="_Notification" />
+        <div id="frm-create-donor" class="cmxform donor-form add-donor-frm">
+            <form method="post" >
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Surname">&nbsp;</label>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Surname">Date of Feedback</label>
+                            <div class="col-sm-9">
+                                <label class="form-control" placeholder="" disabled>@Model.ToDaydate</label>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Surname">Family</label>
+                            <div class="col-sm-9">
+                                <label class="form-control" placeholder="" disabled>@Model.FamilyName</label>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group ">
+                            <label class="col-sm-3 control-label" for="Suffix">Delivery Date</label>
+                            <div class="col-sm-9">
+                                <label class="form-control" placeholder="" disabled>@Model.DeliveryDate</label>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="col-sm-3 control-label" for="Suffix">Delivery Drivers Name</label>
+                            <div class="col-sm-9">
+                                <label class="form-control" placeholder="" disabled>@Model.DeliversName</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+
+                        <div class="form-group">
+                            <label class="col-lg-3 col-sm-3 control-label" for="Initials">Parcel Type</label>
+                            <div class="col-lg-9 col-sm-9">
+                                <label class="form-control" placeholder="" disabled>@Model.ParcelTypeName</label>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 col-sm-3 control-label" for="Forenames">
+                                Packing Date
+                            </label>
+                            <div class="col-lg-9 col-sm-9">
+                                <label class="form-control" placeholder="" disabled>@Model.PackingDate</label>
+                                <input asp-for="FoodbankId" type="hidden" />
+                                <input asp-for="FamilyId" type="hidden" />
+                                <input asp-for="ParcelId" type="hidden" />
+                                <input asp-for="dynamicString" type="hidden" />
+                                <input asp-for="ParcelToken" type="hidden" />
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label class="col-sm-3 control-label" for="Suffix">Packers Drivers Name</label>
+                            <div class="col-sm-9">
+                                <label class="form-control" placeholder="" disabled>@Model.PackersName</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.FamilyId > 0)
+                {
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-header">Family Feedback Form</h3>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+
+                            @if (ViewBag.resQuestions.Count > 0)
+                            {
+                                int i = 0;
+                            <div class="row">
+                                @foreach (var item in ViewBag.resQuestions)
+                                {
+
+
+                                    if (item.FieldType == (int)UserFieldType.Text)
+                                    {
+                                        string controllId = UserFieldType.Text + "_" + i;
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="col-lg-3 col-sm-3 control-label">@item.FieldDescription*</label>
+                                                <div class="col-lg-9 col-sm-9">
+                                                    <input id="@controllId" maxlength="100" name="@item.FieldDescription" class="form-control dynamic-control validate-control" data-FieldId="@item.FieldId" required autocomplete=off value="@(item.IsAutoAssignDefaultValue == true ? item.FieldDefaultValue : "")" />
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    }
+                                    if (item.FieldType == (int)UserFieldType.Date)
+                                    {
+                                        string controllId = UserFieldType.Date + "_" + i;
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="col-lg-3 col-sm-3 control-label" for="Initials">@item.FieldDescription</label>
+                                                <div class="col-lg-9 col-sm-9">
+                                                    <input id="@controllId" maxlength="19" class="form-control datepicker dynamic-control validate-control" data-FieldId="@item.FieldId" data-mask="" , data-inputmask="'alias': 'dd/mm/yyyy'" value="@(item.IsAutoAssignDefaultValue == true ? item.FieldDefaultValue : "")" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    }
+                                    if (item.FieldType == (int)UserFieldType.Numeric)
+                                    {
+                                        string controllId = UserFieldType.Numeric + "_" + i;
+
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="col-lg-3 col-sm-3 control-label">@item.FieldDescription*</label>
+                                                <div class="col-lg-9 col-sm-9">
+                                                    <input id="@controllId" maxlength="100" name="@item.FieldDescription"  onkeypress="Onlynumericvalue(this)" onkeyup="Onlynumericvalue(this)" class="form-control dynamic-control validate-control" data-FieldId="@item.FieldId" required autocomplete=off value="@(item.IsAutoAssignDefaultValue == true ? item.FieldDefaultValue : "")" />
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    }
+                                    if (item.FieldType == (int)UserFieldType.List)
+                                    {
+                                        var optionList = item.Option;
+                                        List<SelectListItem> options = new List<SelectListItem>();
+                                        foreach (var itemsub in optionList)
+                                        {
+
+                                            var options1 = new SelectListItem
+                                            {
+                                                Text = itemsub.OptionVaue,
+                                                Value = itemsub.OptionVaue,
+                                                Selected = (item.IsAutoAssignDefaultValue == true ? (item.FieldDefaultValue == itemsub.OptionVaue ? true : false) : false)
+                                            };
+
+                                            options.Add(options1);
+                                        }
+                                        string controllId = UserFieldType.List + "_" + i;
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="col-lg-3 col-sm-3 control-label">@item.FieldDescription*</label>
+                                                <div class="col-lg-9 col-sm-9">
+                                                    <select id="@controllId" class="form-control dynamic-control " required asp-items="@(options)" data-FieldId="@item.FieldId">
+                                                        <option value="">Select...</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    }
+                                    if (item.FieldType == (int)UserFieldType.Logical)
+                                    {
+                                        string controllId = UserFieldType.List + "_" + i;
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="col-lg-3 col-sm-3 control-label" for="Initials">@item.FieldDescription</label>
+                                                <div class="col-lg-9 col-sm-9">
+                                                    <input type="checkbox" id="@controllId" data-FieldId="@item.FieldId" value="" class=" dynamic-control " @(item.IsAutoAssignDefaultValue == true ? (item.IsLogical == true ? "checked" : "") : "") />
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    }
+                                    if (item.FieldType == (int)UserFieldType.TextArea)
+                                    {
+                                        string controllId = UserFieldType.TextArea + "_" + i;
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="col-lg-3 col-sm-3 control-label" >@item.FieldDescription</label>
+                                                <div class="col-lg-9 col-sm-9">
+
+                                                    <textarea id="@controllId" name="w3review" class="dynamic-control" data-FieldId="@item.FieldId" rows="4" cols="50" style="resize: auto !important;width: 880px; height: 102px; " maxlength="500" value=" @(item.IsAutoAssignDefaultValue == true ? item.FieldDefaultValue : "")"></textarea>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    }
+
+                                    i++;
+                                }
+                            </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+                <div clas="frm-footer">
+
+                    <button class="btn btn-primary" id="btn-submit" type="submit">
+                        Submit
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </button>
+                </div>
+                }
+            </form>
+        </div>
+
+    </section>
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/respond.js"></script>
+<script src="~/Scripts/plugins/datatables/jquery.dataTables.js"></script>
+<script src="~/Scripts/plugins/datatables/dataTables.bootstrap.js"></script>
+<script src="~/Scripts/plugins/alertify/alertify.min.js"></script>
+<script src="~/Scripts/plugins/postcode4u/postcodes4u.js"></script>
+<script src="~/Scripts/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="~/Scripts/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="~/Scripts/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="~/scripts/global.js"></script>
+<script src="~/scripts/common.js"></script>
+<script src="~/Scripts/custom/common.js"></script>
+<script>
+    $(".datepicker").datepicker({ format: "dd/mm/yyyy" }).inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
+   
+
+    $(document).ready(function () {
+        // Stop user to press enter in textbox
+        $("input:text").keypress(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+        $("textarea").keypress(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+</script>

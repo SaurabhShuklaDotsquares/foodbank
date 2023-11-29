@@ -1,0 +1,299 @@
+﻿@model FB.Dto.UserDto
+<div id="frm-create-edit-user" class="cmxform">
+    <form asp-controller="User" asp-action="CreateEdit" method="post" asp-antiforgery="true">
+        <partial name="_ModalHeader" model='new ModalHeader { Heading = @Model.UserID == 0 ? " <label>Add User</label>" : "<label>Edit User</label>" }' />
+        <div id="validation-summary"></div>
+        <input type="hidden" asp-for="UserID" />
+        <input type="hidden" asp-for="IsMGO" />
+        <input type="hidden" asp-for="IsMMO" />
+        <input type="hidden" asp-for="IsFoodbank" /> 
+        <input type="hidden" asp-for="FbAddressId" />
+        <input type="hidden" asp-for="IsMMOSystemCreated" />
+        <input type="hidden" id="hdnRoleName" name="hdnRoleName" value="@((string)ViewBag.RoleName)" />
+        <div class="modal-body form-horizontal">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <label id="userMessage" class="text-red"></label>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <label class="col-lg-4 col-sm-4 control-label" id="">Main Role<span class="redtext">*</span></label>
+                                <div class="col-lg-8 col-sm-8">
+                                    <select asp-for="RoleID" class="form-control" asp-items="@((List<SelectListItem>)ViewBag.Roles)">
+                                        <option value="">Select Roles...</option>
+                                    </select>
+                                    <span asp-validation-for="RoleID" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                      
+                           
+                                <div class="col-lg-6 col-sm-6" id="divCustomRoles">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 col-sm-4 control-label">Custom Role</label>
+                                        <div class="col-lg-8 col-sm-8">
+                                            <select asp-for="CustomRoleID" class="form-control" asp-items="@((List<SelectListItem>)ViewBag.CustomRoles)">
+                                                <option value="">Select Custom Role...</option>
+                                            </select>
+                                            <span asp-validation-for="CustomRoleID" class="text-red"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                                
+                    </div>
+                    <div class="row">
+                    </div>
+                    <h3 class="page-header"> <label>General Info</label></h3>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="FirstName" class="col-lg-4 col-sm-4 control-label">First Name<span class="redtext">*</span></label>
+                                <div class="col-lg-8 col-sm-8">
+                                    <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                                    <span asp-validation-for="FirstName" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="LastName" class="col-lg-4 col-sm-4 control-label">Last Name<span class="redtext">*</span></label>
+                                <div class="col-lg-8 col-sm-8">
+                                    <input asp-for="LastName" class="form-control"  placeholder="Last Name" />
+                                    <span asp-validation-for="LastName" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="UserName" class="col-lg-4 col-sm-4 control-label">User Name<span class="redtext">*</span></label>
+                                <div class="col-lg-8 col-sm-8">
+                                    <input asp-for="UserName" class="form-control txt-auto-complete" autocomplete="new-password"  placeholder="User Name" />
+                                    <span asp-validation-for="UserName" class="text-red"></span>
+                                    <div style="display:none">
+
+                                        <div id="divError" class="col-lg-12 col-sm-12"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="Email" class="col-lg-4 col-sm-4 control-label">Email<span class="redtext">*</span></label>
+                                <div class="col-lg-8 col-sm-8">
+                                    <input asp-for="Email" class="form-control"  placeholder="Email"/>
+                                    <span asp-validation-for="Email" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="PrimaryMobile" class="col-lg-4 col-sm-4 control-label">Primary Mobile<span class="redtext">*</span></label>
+                                <div class="col-lg-8 col-sm-8">
+                                    <input asp-for="PrimaryMobile" class="form-control" maxlength="20"  placeholder="Primary Mobile" />
+                                    <span asp-validation-for="PrimaryMobile" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="AlternateMobile" class="col-lg-4 col-sm-4 control-label">Alternate Mobile</label>
+                                <div class="col-lg-8 col-sm-8">
+                                    <input asp-for="AlternateMobile" class="form-control" maxlength="20" placeholder="Alternate Mobile"/>
+                                    <span asp-validation-for="AlternateMobile" class="text-red"></span> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="Landline" class="col-lg-4 col-sm-4 control-label"></label>
+                                <div class="col-lg-8 col-sm-8">
+                                    <input asp-for="Landline" class="form-control" maxlength="20" placeholder="Land line" />
+                                    <span asp-validation-for="Landline" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="page-header">  <label>Address</label></h3>
+                    <div class="auto-address">
+                        <div class="row">
+                            <div class="form-group">
+                                <label asp-for="Postcode" class="col-lg-3 col-sm-3 control-label">Postcode<span class="redtext">*</span></label>
+                                <div class="col-sm-6">
+                                    <input asp-for="Postcode" class="form-control postcode capital" width="300px" autocomplete="off" placeholder="Postcode" />
+                                    <span asp-validation-for="Postcode" class="text-red"></span>
+                                   
+                                    <div style="display:none">
+
+                                        <div id="errorms" style="color:red" class="errormsg col-lg-12 col-sm-12"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="button" class="btn btn-primary ps3" onclick="SearchBegin(this);" value="Lookup" />
+                                </div>
+                            </div>
+                          
+                        </div>
+                    
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-12 col-sm-12">
+                                    <div class="post-dropdown" style="display:none;">
+                                        <label class="col-lg-3 col-sm-3 control-label">Select Address</label>
+                                        <div class="col-lg-9 col-sm-9">
+                                            <select id="dropdown" style='display:none;' onchange="SearchIdBegin(this)" class="form-control dropdown">
+                                                <option>Select an address:</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="Addresses_0__HouseName">House Name<span class="redtext">*</span></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="HouseName" name="HouseName" id="HouseName" class="form-control house-name" placeholder="House Name" />
+                                    <span asp-validation-for="HouseName" class="text-red"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="Addresses_0__HouseNumber">House Number</label>
+                                <div class=" col-sm-9">
+                                    <input asp-for="HouseNumber" name="HouseNumber" id="HouseNumber" class="form-control house-number" placeholder="House Number" />
+                                    <span asp-validation-for="HouseNumber" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Street Name<span class="redtext">*</span></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="Street" name="Street" id="Street" class="form-control street-name" placeholder="Street Name" />
+                                    <span asp-validation-for="Street" class="text-red"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">City<span class="redtext">*</span></label>
+                                <div class="col-sm-9">
+                                    <input asp-for="City" name="City" id="City" class="form-control street-name" placeholder="City Name" />
+                                    <span asp-validation-for="City" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Other Address Line</label>
+                                <div class="col-sm-9">
+                                    <input asp-for="OtherAddressLine" name="OtherAddressLine" id="OtherAddressLine" class="form-control other-address-line" placeholder="Other Address Line" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"
+                                       for="Addresses_0__CountryID">Country</label>
+                                <div class="col-sm-9">
+                                    <select asp-for="CountryId" name="CountryId" id="CountryId" class="form-control create-donor-country" asp-items="@((List<SelectListItem>)ViewBag.Countries)"></select>
+                                    <span asp-validation-for="CountryId" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-3">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="Overseas" />
+
+                                            <label for="overseas">address is overseas</label>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3"></div>
+                                <div class="col-lg-3 col-sm-3">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" asp-for="IsActive" />
+                                            <label asp-for="IsActive"></label>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="page-header">
+                        @if (Model.UserID == 0)
+                        {
+                           <label>Password</label>
+                        }
+                        else
+                        {
+                            <input type="checkbox" asp-for="IsPasswordChange" />
+                            <label asp-for="IsPasswordChange"></label>
+
+                        }
+                    </h3>
+                    <div @(Model.UserID == 0 ? "" : "id=change-password-section")>
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Password" class="col-lg-4 col-sm-4 control-label">Password<span class="redtext">*</span></label> 
+                                    <div class="col-lg-8 col-sm-8">
+                                        <input type="password" asp-for="Password" class="form-control random-password txt-auto-complete" autocomplete="new-password" placeholder="New password" />
+                                        <span asp-validation-for="Password" class="text-red"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="ConfirmPassword" class="col-lg-4 col-sm-4 control-label">ConfirmPassword<span class="redtext">*</span></label>
+                                    <div class="col-lg-8 col-sm-8">
+                                        <input autocomplete="off" type="password" asp-for="ConfirmPassword" class="form-control random-password" placeholder="Confirm password"/>
+                                        <span asp-validation-for="ConfirmPassword" class="text-red"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="PasswordQuestion" class="col-lg-4 col-sm-4 control-label">PasswordQuestion<span class="redtext">*</span></label>
+                                    <div class="col-lg-8 col-sm-8">
+                                        <input asp-for="PasswordQuestion" class="form-control alpha-numeric" placeholder="Password Question"/>
+                                        <span asp-validation-for="PasswordQuestion" class="text-red"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="PasswordAnswer" class="col-lg-4 col-sm-4 control-label">PasswordAnswer<span class="redtext">*</span></label>
+                                    <div class="col-lg-8 col-sm-8">
+                                        <input asp-for="PasswordAnswer" class="form-control alpha-numeric" placeholder="Password Answer" />
+                                        <span asp-validation-for="PasswordAnswer" class="text-red"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12 col-xs-12">
+                                <button id="btnGeneratePassword" class="btn btn-primary pull-right" type="button">Generate Random Password</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <partial name="_ModalFooter" model='new ModalFooter { }' />
+    </form>
+</div>

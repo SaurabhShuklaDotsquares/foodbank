@@ -1,0 +1,185 @@
+﻿@model FB.Dto.ReferrerRegisterDto
+@{
+    ViewBag.Title = "View Referral";
+}
+
+<section class="content-header">
+    <h1>
+        View Referrer
+    </h1>
+</section>
+
+<section class="content">
+    <partial name="_Notification" />
+    <div id="frm-create-donor" class="cmxform donor-form ref-frm">
+        <form asp-controller="FoodbankReferrer" asp-action="AddReferrer" method="post">
+            <div id='postcodes4ukey' style='display: none;'>@SiteKeys.Postcode4uKey</div>
+            <div id='postcodes4uuser' style='display: none;'>@SiteKeys.Postcode4uUser</div>
+            <div class="frm-main">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 col-xs-12 control-label">User Name </label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input asp-for="UserName" name="UserName" id="UserName" class="form-control " placeholder="User Name" type="text" disabled>
+                                <span asp-validation-for="UserName" class="text-red"></span>
+                                <div style="display:none">
+                                    <div class="col-lg-3 col-sm-3 control-label"></div>
+                                    <div id="divError" class="col-lg-8 col-sm-8"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 col-xs-12 control-label">First Name</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input asp-for="FirstName" name="FirstName" id="FirstName" class="form-control" placeholder="First Name" type="text" disabled>
+                                <span asp-validation-for="FirstName" class="text-red"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 col-xs-12 control-label">Last Name </label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input asp-for="LastName" name="LastName" id="LastName" class="form-control " placeholder="Last Name" type="text" disabled>
+                                <span asp-validation-for="LastName" class="text-red"></span>
+                                <div style="display:none">
+                                    <div class="col-lg-3 col-sm-3 control-label"></div>
+                                    <div id="divError" class="col-lg-8 col-sm-8"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 col-xs-12 control-label">Email</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input asp-for="Email" name="Email" id="Email" class="form-control" placeholder="Email" type="text" disabled>
+                                <span asp-validation-for="Email" class="text-red"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 col-xs-12 control-label">Contact Number </label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input asp-for="ContactNumber" name="ContactNumber" id="ContactNumber" class="form-control " placeholder="Contact Number" type="text" disabled>
+                                <span asp-validation-for="ContactNumber" class="text-red"></span>
+                                <div style="display:none">
+                                    <div class="col-lg-3 col-sm-3 control-label"></div>
+                                    <div id="divError" class="col-lg-8 col-sm-8"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 col-xs-12 control-label">Profession</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input asp-for="Profession" name="Profession" type="hidden">
+                                <select asp-for="ProfessionId" name="ProfessionId" id="ProfessionId" class="form-control create-donor-country" disabled asp-items="@((List<SelectListItem>)ViewBag.ProfessionList)"></select>
+                                <span asp-validation-for="ProfessionId" class="text-red"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row auto-address">
+                    <div class="col-sm-12"><h3 class="page-header">Address</h3></div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"
+                                   for="Addresses_0__PostCode">Postcode</label>
+                            <div class="col-sm-9">
+                                @if (Model.Overseas)
+                                {
+                                    <input asp-for="PostCode" name="PostCode" id="PostCode" class="form-control postcode" placeholder="Postcode" disabled="disabled" />
+                                }
+                                else
+                                {
+                                    <input asp-for="PostCode" name="PostCode" id="PostCode" class="form-control postcode" placeholder="Postcode" disabled/>
+                                    @*<span asp-validation-for="PostCode" class="text-red"></span>*@
+                                }
+                            </div>
+                          
+                            <label class="col-sm-3 control-label"
+                                   for="Addresses_0__PostCode"></label>
+                            <div class="col-sm-6">
+                                @if (Model.Overseas)
+                                {
+                                }
+                                else
+                                {
+                                    <span asp-validation-for="PostCode" class="text-red"></span>
+                                }
+                            </div>
+                            <div class="col-sm-3">
+                            </div>
+                        </div>
+
+                        <div class="form-group post-dropdown" style="display:none;">
+                            <label class="col-lg-3 col-sm-3 control-label">Select Address</label>
+                            <div class="col-lg-9 col-sm-9">
+                                <select id="drpPostcodeAddr" style='display:none;' disabled class="form-control dropdown">
+                                    <option>Select an address:</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Addresses_0__HouseName">House Name</label>
+                            <div class="col-sm-9">
+                                <input asp-for="HouseName" name="HouseName" id="HouseName" class="form-control house-name" placeholder="House Name" disabled/>
+                                <span asp-validation-for="HouseName" class="text-red"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Addresses_0__HouseNumber">House Number</label>
+                            <div class=" col-sm-9">
+                                <input asp-for="HouseNumber" name="HouseNumber" id="HouseNumber" class="form-control house-number" placeholder="House Number" disabled />
+                                <span asp-validation-for="HouseNumber" class="text-red"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Street Name</label>
+                            <div class="col-sm-9">
+                                <input asp-for="StreetName" name="StreetName" id="StreetName" class="form-control street-name" placeholder="Street Name" disabled/>
+                                <span asp-validation-for="StreetName" class="text-red"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Addresses_0__City">City</label>
+                            <div class="col-sm-9">
+                                <input asp-for="City" name="City" id="City" class="form-control city-auto city" placeholder="City" disabled/>
+                                <span asp-validation-for="City" class="text-red"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"
+                                   for="Addresses_0__CountryID">Country</label>
+                            <div class="col-sm-9">
+                                <select asp-for="CountryID" name="CountryID" id="CountryID" class="form-control create-donor-country" disabled asp-items="@((List<SelectListItem>)ViewBag.CountryList)"></select>
+                                <span asp-validation-for="CountryID" class="text-red"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+@section scripts{
+    <script src="~/Scripts/custom/FoodbankReferrer/FoodbankAddReferrer.js"></script>
+}

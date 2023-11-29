@@ -1,0 +1,208 @@
+﻿@model FB.Dto.GrantorDto
+
+@{
+    ViewBag.Title = "Add Grantor";
+}
+
+@section head{
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/alertify/css/alertify.css" rel="stylesheet" />
+}
+<div class="inner-bg">
+    <section class="content-header">
+        <h1>
+            @(Model.GrantorId==0? "View Grantor": "View Grantor")
+        </h1>
+        <div class="btn-group pull-right">
+            <a data-toggle="modal" asp-controller="Grantor" asp-action="Index" asp-route-id="" class="btn btn-primary">
+                Back <i class="fa fa-undo"></i>
+            </a>
+        </div>
+    </section>
+    <section class="content">
+        <div id="frm-create-donor" class="cmxform donor-form ref-frm">
+            @using (Html.BeginForm("CreateEdit", "Grantor", FormMethod.Post))
+            {
+                <div id="validation-summary-create-donor"></div>
+                <div id='postcodes4ukey' style='display: none;'>@SiteKeys.Postcode4uKey</div>
+                <div id='postcodes4uuser' style='display: none;'>@SiteKeys.Postcode4uUser</div>
+                <input asp-for="GrantorId" type="hidden" />
+                <input asp-for="FoodBankId" type="hidden" />
+                <input type="hidden" asp-for="AddressID" />
+                <input type="hidden" asp-for="ContactId" />
+                <input type="hidden" asp-for="CountryName" />
+                <div class="frm-main">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 col-xs-12 control-label" for="Title">First Name* </label>
+                                <div class="col-sm-9 col-xs-12">
+                                    <input asp-for="ForeName" class="form-control" placeholder="Full Name" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-xs-12 control-label">
+                                    Email*
+                                </label>
+                                <div class="col-sm-9 col-xs-12">
+                                    <input asp-for="Email" class="form-control" placeholder="Email" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-xs-12 control-label">Total Grant (Amount)* </label>
+                                <div class="col-sm-9 col-xs-12">
+                                    <input asp-for="TotalAmount" class="form-control" placeholder="Total Grant (Amount)" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 col-xs-12 control-label" for="Title">Last Name </label>
+                                <div class="col-sm-9 col-xs-12">
+                                    <input asp-for="SurName" class="form-control" placeholder="Full Name" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-xs-12 control-label">
+                                    Contact Number*
+                                </label>
+                                <div class="col-sm-9 col-xs-12">
+                                    <input asp-for="ContactNumber" class="form-control" placeholder="Contact Number" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row auto-address">
+                        <div class="col-sm-12"><h3 class="page-header">Address</h3></div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"
+                                       for="Addresses_0__PostCode">Postcode*</label>
+                                <div class="col-sm-6">
+                                    @if (Model.Overseas)
+                                    {
+                                        <input asp-for="PostCode" class="form-control postcode" placeholder="Postcode" disabled="disabled" />
+                                        <input asp-for="OldPostCode" class="form-control postcode" placeholder="Postcode" hidden />
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="PostCode" class="form-control postcode" placeholder="Postcode" disabled />
+                                        <span asp-validation-for="PostCode" class="text-red"></span>
+                                    }
+                                </div>
+                                @*<div class="col-sm-3">
+                                        <input type="button" class="btn btn-primary ps3 btn-lookup" onclick="SearchBegin(this);" value="Lookup" />
+                                    </div>*@
+                            </div>
+
+                            <div class="form-group post-dropdown" style="display:none;">
+                                <label class="col-lg-3 col-sm-3 control-label">Select Address</label>
+                                <div class="col-lg-9 col-sm-9">
+                                    <select id="drpPostcodeAddr" style='display:none;' class="form-control dropdown">
+                                        <option>Select an address:</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="Addresses_0__HouseName">House Name</label>
+                                <div class="col-sm-9">
+                                    <input asp-for="HouseName" class="form-control house-name" placeholder="House Name" disabled />
+                                    <span asp-validation-for="HouseName" class="text-red"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="Addresses_0__HouseNumber">House Number</label>
+                                <div class=" col-sm-9">
+                                    <input asp-for="HouseNumber" class="form-control house-number" placeholder="House Number" disabled />
+                                    <span asp-validation-for="HouseNumber" class="text-red"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"
+                                       for="Addresses_0__CountryID">Country</label>
+                                <div class="col-sm-9">
+                                    <select asp-for="CountryID" class="form-control create-donor-country" asp-items="@((List<SelectListItem>)ViewBag.CountryList)" disabled></select>
+                                    <span asp-validation-for="CountryID" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Street Name*</label>
+                                <div class="col-sm-9">
+                                    <input asp-for="StreetName" class="form-control street-name" placeholder="Street Name" disabled />
+                                    <span asp-validation-for="StreetName" class="text-red"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Other Address Line</label>
+                                <div class="col-sm-9">
+                                    <input asp-for="OtherAddressLine" class="form-control other-address-line" placeholder="Other Address Line" disabled />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="Addresses_0__City">City*</label>
+                                <div class="col-sm-9">
+                                    <input asp-for="City" class="form-control city-auto city" placeholder="City" disabled />
+                                    <span asp-validation-for="City" class="text-red"></span>
+                                </div>
+                            </div>
+
+                            @*<div class="form-group" style="margin-left: 5px;">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-9">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.Overseas)
+                                                <input asp-for="Overseas" name="Overseas" type="hidden">
+                                                <label for="Overseas">Address is Overseas</label>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>*@
+                        </div>
+                    </div>
+                    <div class="row marT25">
+                        <div class="col-md-12">
+                            <table id="grid-family-parcel-grantor" style="margin-top:50px" class=" table table-bordered table-striped table-condensed food-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>S.No</th>
+                                        <th>Parcel Type</th>
+                                        <th>Family Name</th>
+                                        <th>Due Date</th>
+                                        <th>Delivered Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                                <tfoot></tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                @*<div class="frm-footer">
+                        <button data-dismiss="modal" id="btn-cancel" class="btn btn-default" type="button">
+                            <i class="fa fa-arrow-circle-left"></i>
+                            Cancel
+                        </button>
+                        <button class="btn btn-primary" id="btn-submit" type="submit">
+                            Save
+                            <i class="fa fa-arrow-circle-right"></i>
+                        </button>
+                    </div>*@
+            }
+        </div>
+    </section>
+    @section scripts{
+        <script src="~/Scripts/custom/grantor/add-edit-grantor.js"></script>
+    }
+</div>

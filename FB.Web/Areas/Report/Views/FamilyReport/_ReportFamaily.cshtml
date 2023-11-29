@@ -1,0 +1,197 @@
+﻿@model List<FB.Dto.ReportFamilyDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #DDD;
+        }
+
+        /* tr:nth-child(even) {
+            background-color: #D6EEEE;
+        }*/
+    </style>
+    @*<link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />*@
+</head>
+<body>
+    @if (Model != null)
+    {
+        foreach (var model in Model)
+        {
+            <div class="row">
+                <br />
+            </div><div class="row">
+                <div class="table-responsive">
+                    <table id="grid-label-columns" class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr style="text-align:left">
+                                <th>Family Name</th>
+                                <th>Family Address</th>
+                                <th>No of Adults</th>
+                                <th>No of Children</th>
+                                <th>Date Added</th>
+                                @if (model.IsMemberDetails)
+                                {
+                                    <th style="text-align: center;">
+                                        Members
+                                        <table>
+                                            <tr>
+                                                <th style="border-bottom: none; text-align: center;">Name </th>
+                                                <th style="border-bottom: none; text-align: center;">Dob</th>
+                                            </tr>
+                                        </table>
+                                    </th>
+                                }
+                                @if (model.IsParcelDetails)
+                                {
+
+                                    <th style="text-align: center;">
+                                        Parcel Details
+                                        <table>
+                                            <tr>
+                                                <th style="border-bottom: none; text-align: center;">Type </th>
+                                                <th style="border-bottom: none; text-align: center;">Delivery Date </th>
+                                                <th style="border-bottom: none; text-align: center;">Delivered Date</th>
+                                                <th style="border-bottom: none; text-align: center; ">Status</th>
+                                            </tr>
+                                        </table>
+                                    </th>
+
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr style="margin-bottom:30px">
+                                    <td>@item.FamilyName</td>
+                                    @if (item.FullAddressDto.FullAddress == "")
+                                    {
+                                        <td width="25%">Not Available</td>
+                                    }
+                                    else
+                                    {
+                                        <td width="25%">@item.FullAddressDto.FullAddress</td>
+                                    }
+                                    <td>@item.NoofAdults</td>
+                                    <td>@item.NoofChildren</td>
+                                    <td>@item.AddedDate</td>
+                                    @if (item.IsMemberDetails)
+                                    {
+                                        <td>
+                                            <table>
+                                                @if (item.FamailyMemberDetails.Count > 0)
+                                                {
+
+                                                    @foreach (var memberDetail in item.FamailyMemberDetails)
+                                                    {
+                                                        <tr>
+                                                            @if (memberDetail.FamilyMemberName != null)
+                                                            {
+                                                                <td style="border-bottom: none;">@memberDetail.FamilyMemberName</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td style="border-bottom: none; text-align: center">--</td>
+                                                            }
+                                                            @if (memberDetail.Dob != null)
+                                                            {
+                                                                <td style="border-bottom: none;" width="35%">@memberDetail.Dob</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td style="border-bottom: none; text-align: center" width="35%">--</td>
+                                                            }
+                                                        </tr>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <tr>
+                                                        <td style="border-bottom: none;">--</td>
+                                                        <td style="border-bottom: none;">--</td>
+                                                    </tr>
+                                                }
+                                            </table>
+                                        </td>
+                                    }
+                                    @if (item.IsParcelDetails)
+                                    {
+                                        <td>
+                                            <table>
+                                                @if (item.ParcelsDetails.Count > 0)
+                                                {
+                                                    @foreach (var ParcelsDetail in item.ParcelsDetails)
+                                                    {
+                                                        <tr>
+                                                            @if (ParcelsDetail.Type != null)
+                                                            {
+                                                                <td style="border-bottom: none;">@ParcelsDetail.Type</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td style="border-bottom: none;">--</td>
+                                                            }
+                                                            @if (ParcelsDetail.DeliveryDate != null)
+                                                            {
+                                                                <td style="border-bottom: none;">@ParcelsDetail.DeliveryDate</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td style="border-bottom: none;">--</td>
+                                                            }
+                                                            @if (ParcelsDetail.DeliveredDate != null)
+                                                            {
+                                                                <td style="border-bottom: none;">@ParcelsDetail.DeliveredDate</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td style="border-bottom: none;">--</td>
+                                                            }
+                                                            @if (ParcelsDetail.Status != null)
+                                                            {
+                                                                <td style="border-bottom: none;">@ParcelsDetail.Status</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td style="border-bottom: none;">--</td>
+                                                            }
+                                                        </tr>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <tr>
+                                                        <td style="border-bottom: none;">--</td>
+                                                        <td style="border-bottom: none;">--</td>
+                                                        <td style="border-bottom: none;">--</td>
+                                                        <td style="border-bottom: none;">--</td>
+                                                    </tr>
+                                                }
+
+                                            </table>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h4>Total:&nbsp;&nbsp;@Model.Count</h4>
+
+            break;
+        }
+
+    }
+</body>
+</html>

@@ -1,0 +1,205 @@
+﻿@model List<FB.Dto.ReportParcelsDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .test {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid;
+            margin-top: 25px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        /*tr:nth-child(even) {
+            background-color: #D6EEEE;
+        }*/
+    </style>
+    @*<link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />*@
+</head>
+<body>
+    @if (Model != null)
+    {
+        foreach (var data in Model)
+        {
+            if (data.IsListbyFamily)
+            {
+                <div class="row">
+                    <table id="grid-label-columns" class="table table-bordered table-striped table-hover">
+                        <tr>
+                            <td>
+                                @foreach (var item in Model)
+                                {
+                                    <table class="test">
+                                        <tr style="border-bottom:1px solid">
+                                            @if (item.FamilyName != null)
+                                            {
+                                                <td style="border-bottom:none;font-weight:bold">Family Name:-@item.FamilyName</td>
+                                            }
+                                            else
+                                            {
+                                                <td style="border-bottom:none">Family Name:-Unknown</td>
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table>
+                                                    <thead>
+                                                        <tr style="text-align: left; border-bottom: 1px solid">
+                                                            <th>Parcel Type</th>
+                                                            <th>Packer</th>
+                                                            <th>Packed Date</th>
+                                                            <th>Delivery Driver</th>
+                                                            <th>Delivered Date</th>
+                                                            <th>Status</th>
+                                                            @if (data.IsIncludeFoodDetails)
+                                                            {
+                                                                <th style="text-align: center;">
+                                                                    FoodDetail
+                                                                    <table>
+                                                                        <tr>
+                                                                            <th style="border-bottom:none">Food name </th>
+                                                                            <th style="border-bottom:none">Quantity</th>
+                                                                        </tr>
+                                                                    </table>
+                                                                </th>
+                                                            }
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr style="margin-bottom: 20px;">
+                                                            <td>@item.ParcelType</td>
+                                                            <td>@item.PackerName</td>
+                                                            <td>@item.PackedDate</td>
+                                                            <td>@item.DeliveryDriverName</td>
+                                                            <td>@item.DeliveredDate</td>
+                                                            <td>@item.Status</td>
+                                                            @if (data.IsIncludeFoodDetails)
+                                                            {
+                                                                <td width="20%">
+                                                                    <table>
+                                                                        @if (item.FoodDetail.Count > 0)
+                                                                        {
+                                                                            @foreach (var food in item.FoodDetail)
+                                                                            {
+                                                                                <tr>
+                                                                                    <td style="border-bottom:none">@food.FoodName</td>
+                                                                                    <td style="border-bottom:none">@food.Quantity</td>
+                                                                                </tr>
+                                                                            }
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <tr>
+                                                                                <td style="border-bottom:none">--</td>
+                                                                                <td style="border-bottom:none">--</td>
+                                                                            </tr>
+                                                                        }
+
+                                                                    </table>
+                                                                </td>
+                                                            }
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                }
+
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <br />
+                </div>
+                <div class="row">
+                    <table id="grid-label-columns" class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr style="text-align:left;background-color:#D6EEEE">
+                                <th>Parcel Type</th>
+                                <th>Packer</th>
+                                <th>Packed Date</th>
+                                <th>Delivery Driver</th>
+                                <th>Delivered Date</th>
+                                <th>Status</th>
+                                @if (data.IsIncludeFoodDetails)
+                                {
+                                    <th style="text-align: center;">
+                                        FoodDetail
+                                        <table>
+                                            <tr>
+                                                <th style="border-bottom:none">Food name </th>
+                                                <th style="border-bottom:none">Quantity</th>
+                                            </tr>
+                                        </table>
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr style="margin-bottom:30px">
+                                    <td>@item.ParcelType</td>
+                                    <td>@item.PackerName</td>
+                                    <td>@item.PackedDate</td>
+                                    <td>@item.DeliveryDriverName</td>
+                                    <td>@item.DeliveredDate</td>
+                                    <td>@item.Status</td>
+                                    @if (data.IsIncludeFoodDetails)
+                                    {
+                                        <td width="20%">
+                                            <table>
+                                                @if (item.FoodDetail.Count > 0)
+                                                {
+                                                    @foreach (var food in item.FoodDetail)
+                                                    {
+                                                        <tr>
+                                                            <td style="border-bottom:none">@food.FoodName</td>
+                                                            <td style="border-bottom:none">@food.Quantity</td>
+                                                        </tr>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <tr>
+                                                        <td style="border-bottom:none">--</td>
+                                                        <td style="border-bottom:none">--</td>
+                                                    </tr>
+                                                }
+
+                                            </table>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+
+
+
+            <h4>Total:&nbsp;&nbsp;@Model.Count</h4>
+            break;
+        }
+
+    }
+</body>
+</html>

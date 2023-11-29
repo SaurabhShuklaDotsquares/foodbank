@@ -1,0 +1,140 @@
+﻿@model List<FB.Dto.FeedbackFormDetailsFormDto>;
+<div id="frm-create-edit-note" class="cmxform">
+    <form  method="post">
+        <partial name="_ModalHeader" model='new ModalHeader {Heading=  "View Feedback Details"  }' />
+       
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="Surname">&nbsp;</label>
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="Surname">Date of Feedback</label>
+                        <div class="col-sm-9">
+                            @if (Model.FirstOrDefault()!=null)
+                            {       
+                                <label class="form-control" placeholder="" disabled>@Model.FirstOrDefault().DateCompletd</label>
+                            }
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="Surname">Family</label>
+                        <div class="col-sm-9">
+                            @if (Model.FirstOrDefault() != null)
+                            {
+                                <label class="form-control" placeholder="" disabled>@Model.FirstOrDefault().FamilyName</label>
+                            }
+                            </div>
+                    </div>
+
+
+                    <div class="form-group ">
+                        <label class="col-sm-3 control-label" for="Suffix">Delivery Date</label>
+                        <div class="col-sm-9">
+                            @if (Model.FirstOrDefault() != null)
+                            {
+                                <label class="form-control" placeholder="" disabled>@Model.FirstOrDefault().DeliveryDate</label>
+                            }
+                            </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-sm-3 control-label" for="Suffix">Delivery Drivers Name</label>
+                        <div class="col-sm-9">
+                            @if (Model.FirstOrDefault() != null)
+                            {
+                                <label class="form-control" placeholder="" disabled>@Model.FirstOrDefault().DeliversName</label>
+                            }
+                            </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+                    <div class="form-group">
+                        <label class="col-lg-3 col-sm-3 control-label" for="Initials">Parcel Type</label>
+                        <div class="col-lg-9 col-sm-9">
+                            @if (Model.FirstOrDefault() != null)
+                            {
+                                <label class="form-control" placeholder="" disabled>@Model.FirstOrDefault().ParcelTypeName</label>
+                            }
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 col-sm-3 control-label" for="Forenames">
+                            Packing Date
+                        </label>
+                        <div class="col-lg-9 col-sm-9">
+                            @if (Model.FirstOrDefault() != null)
+                            {
+                                <label class="form-control" placeholder="" disabled>@Model.FirstOrDefault().PackingDate</label>
+                            }
+
+                            </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-sm-3 control-label" for="Suffix">Packers Drivers Name</label>
+                        <div class="col-sm-9">
+                            @if (Model.FirstOrDefault() != null)
+                            {
+                                <label class="form-control" placeholder="" disabled>@Model.FirstOrDefault().PackersName</label>
+
+                            }
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-header">Feedback Form Details</h3>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+
+                        @if (Model.Count > 0)
+                        {
+                            int i = 0;
+                            <div class="row">
+                                @foreach (var item in Model)
+                                {
+
+
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="col-lg-3 col-sm-3 control-label">@item.Question</label>
+                                            <div class="col-lg-9 col-sm-9" style="max-width: 600px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow: hidden; ">
+                                                @item.Answer
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+                                    i++;
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+        </form>
+        @*<partial name="_ModalFooter" model='new ModalFooter { SubmitButtonID= "No"}' />*@
+  
+</div>

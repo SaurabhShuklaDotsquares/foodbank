@@ -1,0 +1,49 @@
+﻿@model FB.Dto.UserLoggedinOrganisationDto
+
+@if (!string.IsNullOrEmpty(Model.OrganisationName) || !string.IsNullOrEmpty(Model.CharityName) || !string.IsNullOrEmpty(Model.BranchName))
+{
+<style>
+        .headersetter {
+            width: 100%;
+            padding: 10px 10px 0 10px;
+            text-align: right;
+        }
+
+        .labelsetter {
+            color: #777;
+        }
+
+        .spansetter {
+            color: black;
+        }
+           @@media screen and (max-width:640px) {
+        .headersetter { text-align:center;}
+    }
+</style>
+    <div class="pull-right headersetter">
+        @if (!string.IsNullOrEmpty(Model.BranchName))
+        {
+            <label class="labelsetter"> @Model.BranchName <span class="spansetter"> (Branch) </span></label>
+            if (!string.IsNullOrEmpty(Model.CharityName))
+            {
+                <span> , </span>
+            }
+        }
+
+        @if (!string.IsNullOrEmpty(Model.CharityName))
+        {
+            <label class="labelsetter">@Model.CharityName <span class="spansetter">(Charity)</span></label>
+            if (!string.IsNullOrEmpty(Model.OrganisationName))
+            {
+                <span> , </span>
+            }
+        }
+
+        @if (!string.IsNullOrEmpty(Model.OrganisationName))
+        {
+            <label class="labelsetter"> @Model.OrganisationName <span class="spansetter">(Organisation)</span></label>
+        }
+
+    </div>
+}
+

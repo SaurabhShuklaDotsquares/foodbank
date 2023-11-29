@@ -1,0 +1,37 @@
+﻿@model FB.Dto.GrantorDto
+
+<div class="modal-content">
+    <div class="modal-header">
+        <!-- modal header  -->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"> Scan for grantor detail.</h4>
+    </div>
+    <div class="modal-body">
+        <section class="content">
+            @if (Model.GrantorQrCode != null)
+            {
+                <div class="col-sm-7 col-xs-12" style="float:right;">
+                    <a title="Downlaod" href="@Url.Action("downloadqrimage", "grantor", new { grantorToken = Model.GrantorToken })">
+                        <i class="fa fa-download fa-3x"></i>
+                    </a>
+                </div>
+            }
+            <div style="text-align: center;">
+                @if (Model.GrantorQrCode == null)
+                {
+                    <h4 class="modal-title">No QR Code is available.</h4>
+                }
+                else
+                {
+                    <img src="data:image/gif;base64,@Model.GrantorQrCode" style="width:60%" />
+
+                }
+            </div>
+
+        </section>
+    </div>
+</div>
+@section scripts{
+
+    <script src="~/Scripts/custom/family-parcel/create-edit.js"></script>
+}

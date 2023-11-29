@@ -1,0 +1,49 @@
+﻿@model FB.Dto.RoleDto
+<div id="frm-create-edit-role" class="cmxform">
+    <form asp-controller="Role" asp-action="CreateEdit" asp-antiforgery="true" method="post">
+        <partial name="_ModalHeader" model='new ModalHeader { Heading = @Model.RoleID == 0 ? "Add Role" : "Edit Role" }' />
+        <div id="validation-summary"></div>
+        <input type="hidden" asp-for="RoleID" />
+        <input type="hidden" asp-for="ParentRoleID" />
+        <input type="hidden" asp-for="AddedDate" />
+        <input type="hidden" asp-for="MyGivingOfflineAccess" />
+        <div class="modal-body form-horizontal">
+
+            @if (CurrentUser.OrganisationID == 0)
+            {
+            <div class="form-group">
+                <label asp-for="CentralOfficeID" class="col-lg-4 col-sm-4 control-label"></label>
+                <div class="col-lg-8 col-sm-8">
+                    <select asp-for="CentralOfficeID" class="form-control" asp-items="(List<SelectListItem>)ViewBag.Organisations">
+                        <option value="">Select Organisation...</option>
+                    </select>
+                    <span asp-validation-for="CentralOfficeID" class="text-red"></span>
+                </div>
+            </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="CentralOfficeID" />
+            }
+
+            <div class="form-group">
+                <label asp-for="RoleName" class="col-lg-4 col-sm-4 control-label">Role Name<span class="redtext">*</span></label>
+                <div class="col-lg-8 col-sm-8">
+                    <input asp-for="RoleName" class="form-control" maxlength="50"/>
+                    <span asp-validation-for="RoleName" class="text-red"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="col-lg-4 col-sm-4 control-label"></label>
+                <div class="col-lg-8 col-sm-8">
+                    <input asp-for="Description" class="form-control" maxlength="200" />
+                    <span asp-validation-for="Description" class="text-red"></span>
+                </div>
+            </div>
+
+
+        </div>
+        <partial name="_ModalFooter" model='new ModalFooter { }' />
+    </form>
+</div>

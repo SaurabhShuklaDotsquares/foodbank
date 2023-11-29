@@ -1,0 +1,221 @@
+﻿@model FB.Dto.AdminEditFamilyDto
+@using System.Web;
+@{
+    ViewBag.Title = "New Referrals";
+
+}
+
+@section head{
+
+
+}
+<script>
+    var listallerys = '';
+</script>
+@foreach (var appointement in ViewBag.AllergyList)
+{
+<script>
+        listallerys += "<option value='@appointement.Value'>@appointement.Text</option>";
+</script>
+}
+
+
+<section class="content-header">
+ 
+</section>
+<section class="content">
+    <div id="frm-edit-person-name" class="cmxform">
+        <form asp-controller="familyrecord" asp-action="UpdateFamilyMember" asp-antiforgery="true" method="post" novalidate="novalidate">
+            <partial name="_ModalHeader" model='new ModalHeader { Heading = "Family Members Details" }' />
+            <div id="validation-summary-update-person-name"></div>
+
+            <div id="validation-summary-create-donor"></div>
+            <input data-val="true" data-val-number="The field PersonID must be a number."
+                   data-val-required="'Person ID' must not be empty." id="PersonID" name="PersonID"
+                   type="hidden" value="0">
+            <div class="">
+                <div class="col-lg-12">
+                
+                   
+
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label class="col-sm-8 col-xs-12 control-label" for="Surname">
+                                    Number of
+                                    Family Members
+                                </label>
+                                <div class="col-sm-4 col-xs-12">
+                                    <select asp-for="TotalFamily" id="TotalFamily" class=" form-control" style="min-width:60px">
+
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label class="col-sm-8 col-xs-12 control-label" for="Surname">
+                                    How Many Adults
+                                </label>
+                                <div class="col-sm-4 col-xs-12">
+                                    <select asp-for="TotalAdults" class=" form-control " style="min-width:60px">
+                                        <option value="0">0</option>
+                                        <option value="1" selected>1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="form-group">
+                                <label class="col-sm-8 col-xs-12 control-label" for="Surname">
+                                    How
+                                    Many Child
+                                </label>
+                                <div class="col-sm-4 col-xs-12">
+                                    <select asp-for="TotalChild" class=" form-control " style="min-width:60px">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-12">
+                    <h3 class="page-header info-header">
+                        Family Member Information   <button class="btn btn-primary addRow" id="" type="button">
+                            Add &nbsp; &nbsp; <i class="fa fa-solid fa-plus"></i>
+
+                        </button>
+                    </h3>
+
+                    <div class="table-responsive">
+                        <table class="table table-responsive" id="tablefamily">
+                            <thead>
+
+
+                                <tr>
+                                    <th style="border-top:0px">Name<span class="redtext">*</span></th>
+                                    <th style="border-top:0px">DOB<span class="redtext">*</span></th>
+                                    <th style="border-top:0px;width:30%">Allergy<span class="redtext">*</span></th>
+                                    <th style="border-top:0px">IsAdult</th>
+                                    <th style="border-top:0px">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="subjecttable">
+                                @for (int i = 0; i < Model.subfamilyname.Count; i++)
+                                {
+                                    <tr>
+
+                                        <td>
+                                            <input class="form-control" placeholder="Name" name="subfamilyname" type="text" value="@Model.subfamilyname[i]">
+                                            <input class="form-control" placeholder="" name="subfamilynameIds" type="hidden" value="@Model.subfamilynameIds[i]">
+                                            <input class="form-control" placeholder="" name="SubFamilyAllergryarry123" type="hidden" value="@Model.SubFamilyAllergryarry[i]">
+                                            <input class="form-control" placeholder="" name="SubFamilyAllergryarryId4" type="hidden" value="@Model.SubFamilyAllergryarryId[i]">
+                                        </td>
+
+
+                                        <td><input class="form-control  datepicker" placeholder="DD/MM/YYYY" name="subfamilydob" type="text" value="@Model.subfamilydob[i]"></td>
+
+                                        <td style=" width: 30%">
+                                            <select name="SubFamilyAllergry" class="form-control family-allery select2" multiple="multiple">
+                                                @{
+                                                    var Arrayallery = Model.SubFamilyAllergryarry[i].Split('%').ToArray();
+                                                }
+
+                                                @foreach (var item in (List<SelectListItem>)ViewBag.AllergyList)
+                                                {
+
+                                                    if (Arrayallery.Contains(item.Value))
+                                                    {
+                                                        <option value="@item.Value" selected>@item.Text</option>
+                                                    }
+
+                                                    else
+                                                    {
+                                                        <option value="@item.Value">@item.Text</option>
+
+                                                    }
+
+                                                }
+                                            </select>
+                                        </td>
+                                        <td style="">
+                                            <input class="control-label checkboxauldt" placeholder="Is Adult" name="subfamilyisadult" type="checkbox" value="" @(Model.subfamilyisadult[i] == "True" ? "checked" : "")> IsAdult
+                                        </td>
+                                        <td style="">
+
+                                            <a class="deleterow" data-id="@Model.subfamilynameIds[i]" style="display:block;">
+                                                <img src="~/Content/images/delete.png" width="22px" />
+                                            </a>
+                                        </td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10 col-lg-10 col-md-1">
+                        </div>
+                        <div class="col-sm-12 col-lg-2 col-md-2">
+
+                           
+                        </div>
+                    </div>
+                    <input class=" " placeholder="IsAdult" id="subfamilyisadult2" asp-for="subfamilyisadult2" type="hidden" value="">
+                    <input class=" " placeholder="IsAdult" id="SubFamilyAllergries" asp-for="SubFamilyAllergries" type="hidden" value="">
+
+                </div>
+            </div>
+
+
+            <div class="clearfix"></div>
+            <partial name="_ModalFooter" model='new ModalFooter { }' />
+
+        </form>
+    </div>
+
+    <script src="~/Scripts/plugins/select2/select2.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="~/Scripts/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/custom/family/familyedit.js"></script>
+    <script src="~/Scripts/plugins/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
+
+
+
+</section>

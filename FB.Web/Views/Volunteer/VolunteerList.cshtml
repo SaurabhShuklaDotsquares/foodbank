@@ -1,0 +1,110 @@
+﻿@model FB.Dto.DeclarationDto
+@{
+    ViewBag.Title = "Donor Profile";
+}
+
+@section head{
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/alertify/css/alertify.css" rel="stylesheet" />
+
+}
+<section class="content-header">
+    <h1>
+        Volunteers
+    </h1>
+</section>
+<section class="content">
+    <partial name="_Notification" />
+    <div class="row">
+        <div class="col-xs-12">
+
+
+
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#food" data-toggle="tab"> Registered Volunteers</a></li>
+                    <li><a href="#referral" data-toggle="tab">Deliveries or Packing</a></li>
+                </ul>
+                <div class="tab-content donations-tab">
+
+                    <div id="food" class="tab-pane active">
+                        <div class="content form-horizontal">
+                            <div class="table-top">
+
+                                <a type="button" data-toggle="modal" 
+                                   id="#modal-add-edit-donations123" data-target="#modal-add-edit-donations" class="add-food-btn" href="@Url.Action("AddVolunteer","volunteer")">
+                                    <img src="Content/images/food-add.png" alt=""> New Volunteers
+                                    Donations
+                                </a>
+
+                            </div>
+                            <div class="table-responsive">
+                                <table id="grid-volunteer-list" class="table table-bordered food-table food-don volunteers-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Volunteer ID</th>
+                                            <th>Volunteer Name</th>
+                                            <th>Contact Number</th>
+                                            <th>Individual or Couple</th>
+                                            <th>Packing or Delivery</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="referral" class="tab-pane">
+                        <div class="content form-horizontal">
+                            <div class="table-top">
+                                <div class="search-box">
+                                    <input placeholder="Search..." type="search" value="" /><button class="search-icon">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div class="filter-input">
+                                    <input class="form-control filter-icon" placeholder="Charity" value="">
+                                    <input class="form-control filter-icon" placeholder="Branch" value="">
+                                    <input class="form-control filter-icon" placeholder="Packing or delivery " value="">
+                                    <button type="button" class="add-food-btn" href="javascript:void(0);">Apply filter </button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="grid-volunteer-delivery-list"  class="table table-bordered food-table food-don volunteers-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Volunteer ID</th>
+                                            <th>Volunteer Name</th>
+                                            <th>Contact Number</th>
+                                            <th>Individual or Couple</th>
+                                            <th>Packing or Delivery</th>
+                                            <th>Pending Deliveries</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<partial name="_Modal" model='new Modal { ID = "modal-add-edit-donations", AreaLabeledId = "modal-add-edit-donations-label", Size = ModalSize.Large }' />
+
+@section scripts{
+    @*<script src="~/Scripts/custom/volunteer/my-volunteer.js"></script>*@
+    <script src="~/Scripts/custom/volunteer/myvolunteer_list.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
+}

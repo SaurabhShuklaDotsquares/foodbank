@@ -1,0 +1,1187 @@
+@media screen and (max-width:1300px) {
+.ref-title { font-size: 16px;}
+}
+
+
+@media screen and (max-width:1279px) {
+	.scrl_default{ overflow-x: auto;}
+	.tbl_scroll {
+	overflow-x: auto;
+}
+	.tbl_scroll table.table {
+  max-width: inherit;
+  width: 1000px !important;
+}
+
+/*dashboard-css*/
+.new-header a.navbar-brand {display: flex; gap: 10px; align-items: center; position: initial;     padding: 10px;}
+.dash-box {    margin-bottom: 30px;}
+/*dashboard-css*/
+.ref-register-frm .modal-body {   height:400px;   overflow-y: scroll; }
+
+
+.lookup-box input[type="button"] {    margin: 0px 5px 0px;}
+
+.dashboard-refe .dash-box.label-success {max-width: 100%;}
+.dash-admin .ref-title {
+  margin-bottom: 20px;
+  flex-direction: inherit;
+  justify-content: space-between;
+  align-items: center;
+}
+
+}
+@media screen and (max-width:1170px) {
+    .latest-news-bg h3 { font-size: 18px; line-height: 22px; }
+    .latest-news-bg h3 { font-size: 16px; line-height: 18px; margin-bottom: 5px; }
+    .latest-news-bg p { font-size: 13px; }
+    .bnr_nav ul li a {padding: 10% 10px;}
+
+    .common-tablet {
+        display: block;
+        overflow-x: scroll;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+    }
+
+    .bnr_nav ul li a {
+        font-size: 15px;
+    }
+
+    .bnr_nav ul.submenu li a {
+        padding: 15px 10px 15px 23px;
+        font-size: 13px;
+    }
+
+    .bnr_nav i.fa.fa-angle-down {
+        font-size: 21px;
+        top: 18px;
+        right: 5px;
+    }
+   
+}
+
+@media screen and (max-width:1024px) {
+    body { font-size: 13px; }
+    .inner-wrap h1 { font-size: 22px; margin: 0 0 8px; }
+    a.link1 { font-size: 14px; }
+    .login-wrap { padding: 20px 18px 40px; }
+    .login-form label, .login-btn a { font-weight: normal; }
+    .form-control { font-size: 13px; }
+    .smart-solutions { font-size: 24px; }
+    .footer-links span { font-size: 13px; }
+    .footer-links ul { font-size: 12px; }
+    footer p { font-size: 12px; }
+    .footer-links i { font-size: 36px; }
+    .btns-right .btn-primary { font-size: 13px; }
+    footer { float: left; width: 100%; }
+    .top-head .navbar-collapse { font-size: 14px; }
+    .top-head .dropdown-menu { font-size: 12px; }
+    .doners-btns { margin: 30px 0 0 15%; }
+        .doners-btns .large-btn { font-size: 22px; width: 200px; }
+    .doners-logo { width: 30%; }
+    .top-head .navbar-header { width: 40%; }
+    .top-head .navbar { margin-bottom: 0; min-height: inherit; position: relative; }
+    .navbar-brand { float: left; height: auto; }
+    .blue-strip { margin: 0px 0 25px; }
+    .blue-strip-inner { margin-top: 0px; }
+    .latest-news-bg h2 { font-size: 28px; margin-bottom: 15px; }
+    .chk_box label { margin-right: 0; padding-left: 15px; text-align: left; width: 150px; }
+    .sv_btn2 { padding: 0; }
+    .pad_lt8 { padding-left: 10px; padding-top: 10px; }
+    .chk_mrg { padding-left: 36px; }
+    .mrg_top10_less { margin-top: 0; padding: 0; }
+    .transfer_btn { left: 95px; margin: -59px 0 0; right: inherit; }
+    .ps2 { margin: 10px 0 0; }
+    .new_res1 input[type="checkbox"], .new_res1 input[type="checkbox"], .new_res1 input[type="radio"], .new_res1 input[type="radio"] { margin-left: -8px;}
+    .bnr_nav ul li a {padding: 9.1% 10px;}
+    .day-of-week-box {
+      margin-bottom: 7px;
+    }
+
+
+}
+
+@media screen and (max-width:1020px) {
+    .news-col { height: 430px; padding: 15px; }
+    .news-img { position: inherit; width: auto; padding-bottom: 15px; height: 275px; }
+        .news-img img { object-fit: cover; }
+    .news-col a { position: static; }
+    .latest-news { width: 100%; margin-left: 0; }
+    .news-small, .new-small-img { height: 205px; }
+    .news-small { margin-bottom: 10px; }
+        .new-small-img, .news-small.bg-skyblue { margin-top: 10px; margin-bottom: 0; }
+            .new-small-img img { height: 100%; }
+    .news-col-full { margin-left: 0; width: 100%; }
+
+    .btn2 input { margin: 0 1% 10px; width: 47%; }
+    .pad_top50 .col-lg-4, .pad_top50 .col-sm-3, .mrg_top10 .col-lg-4, .mrg_top10 .col-sm-3 { padding: 0; }
+ .bnr_nav ul li a {font-size: 1.2em;padding: 9.1% 10px;}
+ .navbar-default .navbar-brand label {display: none;}
+.navbar-header .navbar-brand {
+  left: 0;
+  padding: 15px 0 0;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+}
+
+.ref-dash-top .ref-title .nav-tabs {    margin: 10px 0;}
+.ref-title { flex-direction: column; justify-content: flex-start; align-items: flex-start;}
+.ref-dash-top .ref-title .nav-tabs {
+  margin: 10px auto;
+}
+.admin-frm  .table-top .filter-input { margin-top: 15px;}
+
+}
+
+@media screen and (max-width:991px) {
+    .reg-form .form-group {
+        width: 100%;
+    }
+    table tr td, table tr th {
+        white-space: nowrap;
+    }
+    .referrals-form table tr td, .referrals-form table tr th {
+        white-space: break-spaces;
+    }
+
+    .referrals-form {
+        padding: 15px;
+    }
+    #regularavailability-container .form-group, #unavailability-container .form-group {
+        display: inline-block;
+    }
+
+    div#regularavailability-container [class*="col-"], #unavailability-container [class*="col-"] {
+        width: 100%;
+    }
+
+}
+
+    @media screen and (max-width:767px) {
+        body {
+            font-size: 12px;
+        }
+
+        .inner-wrap h1 {
+            font-size: 18px;
+            margin: 0 0 5px;
+        }
+
+        .footer-links .col-sm-3 {
+            text-align: center;
+            float: left;
+            width: 100%;
+        }
+
+        .footer-links ul {
+            border-bottom: 1px solid #999999;
+            padding-bottom: 15px;
+            margin-bottom: 0;
+        }
+
+        footer p {
+            text-align: center;
+        }
+
+        .footer-links i {
+            font-size: 30px;
+        }
+
+        .footer-strip ul {
+            text-align: center;
+        }
+
+        .smart-solutions {
+            font-size: 18px;
+        }
+
+        .doners-records {
+            margin: 42px 0 25px;
+        }
+
+        .doners-btns .large-btn {
+            font-size: 20px;
+            width: 182px;
+            margin-bottom: 26px;
+            padding: 18px 14px;
+        }
+
+        .smart-solutions br {
+            display: none;
+        }
+
+        .top-head .navbar-header {
+            width: 100%;
+        }
+
+        .banner {
+            margin-top: 10px;
+        }
+
+        .top-head .navbar-toggle {
+            margin-bottom: 0;
+            margin-right: 0;
+            margin-top: 50px;
+        }
+
+        .top-head .navbar-default .navbar-toggle {
+            border-color: #00c1f0;
+            background: #00c1f0;
+        }
+
+            .top-head .navbar-default .navbar-toggle .icon-bar {
+                background-color: #ffffff;
+            }
+
+        .navbar-collapse {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .top-head .navbar-nav {
+            float: left;
+            width: 100%;
+            margin: 0px 0 0 0;
+        }
+
+        .top-head .nav li {
+            background: #484848;
+            border-top: 1px solid #636363;
+        }
+
+        .top-head .navbar-nav li a {
+            padding: 10px 15px;
+            color: #fff;
+        }
+
+        .top-head .nav li ul.dropdown-menu li {
+            background: #737474;
+        }
+
+        .top-head .navbar-default .navbar-nav .open .dropdown-menu li a {
+            color: #dedede;
+        }
+
+            .top-head .navbar-default .navbar-nav .open .dropdown-menu li a:hover {
+                color: #000;
+            }
+
+        .top-head .dropdown-menu li a {
+            border-top: 0;
+        }
+
+        .top-head .dropdown-submenu a::after {
+            border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #dedede;
+        }
+
+        .top-head .nav li ul.dropdown-menu li.dropdown-submenu {
+            background: #575858;
+        }
+
+        .top-head .navbar-header img {
+            max-width: 100%;
+            width: auto;
+        }
+
+        .top-head .navbar-collapse {
+            margin-top: 0;
+        }
+
+        .top-head .navbar-default .navbar-collapse, .top-head .navbar-default .navbar-form {
+            border-color: rgba(0, 0, 0, 0);
+        }
+
+        .top-head .dropdown-menu {
+            min-width: 100%;
+        }
+
+        .top-head .navbar-collapse.in {
+            overflow-y: inherit;
+        }
+
+        .welcome-col, .btn-logout {
+            padding: 5px 10px;
+        }
+
+        .latest-news-bg {
+            padding: 20px;
+        }
+
+            .latest-news-bg h2 {
+                font-size: 18px;
+            }
+
+            .latest-news-bg h3 {
+                font-size: 14px;
+            }
+
+            .latest-news-bg p {
+                font-size: 12px;
+            }
+
+        .pad_lt {
+            padding-left: 4%;
+        }
+
+        .news-small.bg-green, .news-col.bg-dark {
+            margin-top: 20px;
+        }
+
+        .top-head .navbar-nav > li:first-child > a {
+            padding-left: 15px !important;
+        }
+
+        .pad_lt .checkbox label, .pad_lt .radio label {
+            margin: 0 0 10px;
+        }
+
+        .mrg_top10 .col-lg-6, .mrg_top10 col-sm-6 {
+            padding: 0 !important;
+        }
+
+        .mrg_top10 .btn-primary {
+            margin: 10px 0 0;
+        }
+
+        .pad_top50 {
+            padding-top: 0px;
+        }
+
+        .btn_top10 {
+            margin-top: 10px;
+        }
+
+        .new_res1 {
+            padding-left: 36px;
+        }
+
+        .pad2_lt8 {
+            padding-left: 10px;
+            padding-top: 10px;
+        }
+
+        .pad15 {
+            padding-left: 15px !important;
+        }
+
+        .pad_lt35 {
+            padding-left: 35px;
+        }
+
+        .btn_box2 {
+            padding: 10px;
+            position: relative;
+            right: inherit;
+        }
+
+        .bwizard-steps li a span.bigW {
+            display: none;
+        }
+
+        .bwizard-steps li a span.smallW {
+            display: block;
+        }
+
+        .bwizard-steps li {
+            padding: 12px 10px 10px 30px;
+        }
+
+        .ps3 {
+            margin: 10px 0 0;
+        }
+
+        .dis_block {
+            display: block !important;
+        }
+
+        .box-header .btn-group {
+            display: block;
+            margin: 10px 0 0;
+        }
+
+        #DonorFilter {
+            clear: both;
+            display: block;
+            float: left;
+            margin: 10px 0 0;
+        }
+
+        .frm-edit2 .content-header, .frm-edit2 .content {
+            padding: 0 0 15px;
+        }
+
+        .frm-edit2 .checkbox input[type="checkbox"], .frm-edit2 .checkbox-inline input[type="checkbox"], .frm-edit2 .radio input[type="radio"], .frm-edit2 .radio-inline input[type="radio"] {
+            margin-left: 0;
+        }
+
+        input.alphabet {
+            float: left !important;
+            margin: 1% !important;
+            width: 14%;
+        }
+
+        .bnr_nav ul li a {
+            font-size: 1em;
+            padding: 10.3% 10px;
+        }
+
+        .blue-strip-inner {
+            margin: 0;
+        }
+
+        .top-head .navbar-toggle {
+            margin-bottom: 8px;
+            margin-top: 40px;
+        }
+
+        .inner-bg-white {
+            min-height: inherit;
+        }
+
+        .smart-solutions {
+            margin-bottom: 0;
+        }
+
+        .top-head .navbar-nav > li:last-child .dropdown-submenu > a:after {
+            border-color: transparent transparent transparent #fff !important;
+            border-width: 5px !important;
+        }
+
+            .top-head .navbar-nav > li:last-child .dropdown-submenu > a:after:hover {
+                border-color: transparent transparent transparent #000 !important;
+            }
+
+        /*Donor-module-start*/
+        .navbar-header .navbar-brand .mob-hide, .new-header .navbar-toggle {
+            display: none;
+        }
+
+        .table-top {
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+        .search-box {
+            width: 100%;
+        }
+
+        .add-food-btn {
+            width: auto;
+            margin-top: 10px;
+        }
+
+        .pagination-main .row {
+            flex-direction: column;
+        }
+
+        div.dataTables_info {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .nav-tabs-custom > .tab-content {
+            padding: 0;
+        }
+
+        header.top-head.new-header > div {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .new-header .welcome-row {
+            position: absolute;
+            max-width: 190px;
+        }
+
+        .search-box input {
+            font-size: 14px;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .new-header a.navbar-brand {
+            padding: 10px 0
+        }
+
+        .welcome-col.super-col {
+            width: 100%;
+            margin-top: 4px;
+        }
+
+        a.btn-logout {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .new-header .welcome-row {
+            top: 4px;
+        }
+
+            .new-header .welcome-row .dropdown .btn {
+                padding: 3px 7px;
+            }
+
+
+        .frm-main .dob-box input {
+            width: 290px;
+        }
+
+        a.plus-icon {
+            right: 14px;
+        }
+
+        .filter-input .add-food-btn {
+            margin-top: 0px;
+        }
+        /*Donor-module-start*/
+
+        div.dataTables_paginate ul.pagination {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+            div.dataTables_paginate ul.pagination li {
+                margin: 0 8px;
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+
+        .donor-form .form-group {
+            display: block;
+            width: auto;
+        }
+
+        .donor-form [class*="col-"] {
+            margin-bottom: 10px;
+        }
+
+        .referrals-form .status-box {
+            width: 100%;
+        }
+
+        .referrals-form .dataTables_wrapper .row:first-child .col-sm-6 {
+            float: left;
+            width: 100%;
+        }
+
+            .referrals-form .dataTables_wrapper .row:first-child .col-sm-6 .dataTables_length {
+                float: left;
+                width: 100%;
+            }
+
+        .referrals-form div.dataTables_length label,
+        .referrals-form div.dataTables_filter label {
+            width: 100%;
+            white-space: normal;
+        }
+
+        .referrals-form .dataTables_wrapper .row:first-child .col-sm-6 .dataTables_filter {
+            width: 100%;
+        }
+
+        .referrals-form div.dataTables_length select {
+            width: calc(100% - 73px);
+            display: inline-block;
+            margin: 6px 0;
+        }
+
+        .referrals-form .table-responsive {
+            margin: 0;
+        }
+
+        .referrals-form .dataTables_wrapper .row:first-child .col-sm-6 .dataTables_filter .form-control {
+            width: 100%;
+            max-width: 100%;
+            margin: 5px 0 5px 0;
+        }
+
+        .referrals-form .dataTables_wrapper div.dataTables_filter input {
+            margin-left: 0;
+        }
+
+        .referrals-form table.table-bordered.dataTable {
+            width: 100% !important;
+            min-width: 920px;
+        }
+
+        .referrals-form .table-responsive table td,
+        .my-delivery-list .table-responsive table td {
+            text-align: left;
+        }
+
+        div.dataTables_filter input {
+            vertical-align: middle;
+            margin: -4px 4px 0 0;
+        }
+
+        .ref-frm .checkbox input[type="checkbox"] {
+            margin-left: 0;
+            left: 0;
+            margin-top: 2px;
+        }
+
+        .ref-frm .checkbox label {
+            padding-left: 10px;
+        }
+
+        .ref-frm .checkbox [class*="col-"] {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .ref-dashinner [class*="col-"] {
+            margin-bottom: 10px;
+        }
+
+        .top-head.without-login .navbar-default .navbar-toggle {
+            display: block;
+            margin-top: 20px;
+        }
+
+        /*.ref-dashinner .btn-primary {
+    margin-left:15px;
+}*/
+        .dash-admin .ref-title [class*="col-"] {
+            width: 100%;
+        }
+        .referrals-form div.dataTables_length select {
+            width:100%;
+        }
+        .dataTables_wrapper table {
+            overflow-y: scroll;
+            width: 100% !important;
+        }
+        .dataTables_wrapper .table-responsive {
+            width: 100% !important;
+            margin: 0px !important;
+        }
+
+        .dataTables_wrapper a.view_btn {
+            margin-bottom: 3px;
+            display: inline-block;
+        }
+        #tablefamily tbody input.form-control {
+            width: 170px !important;
+        }
+        .donat-popup-form input#QuantityUnit {
+            margin-top: 11px;
+        }
+
+        .donor-sec-top .welcome-row {
+            max-width: 177px;
+            top: 4px;
+        }
+            .donor-sec-top .welcome-row .dropdown span.noti-txt {
+                display: none;
+            }
+            .donor-sec-top .welcome-row .btn-primary {
+                margin: 0 0px 0 0;
+            }
+        .bnr_nav i.fa.fa-angle-down {
+            top: 14px;
+            right: 2px;
+        }
+        .bnr {
+            width: 100%;
+        }
+        .admin-box .bnr_nav {
+            position: inherit;
+            width: 100%;
+            height: 230px;
+        }
+
+     
+
+
+        .dataTables_wrapper a.view_btn {
+            margin-bottom: 3px;
+            display: inline-block;
+            padding: 5px;
+        }
+
+        .report-common div#rootwizard {
+            padding: 0px;
+        }
+
+        .report-common div#div-step-three .modal-body {
+            padding: 0px;
+            width: 100%;
+        }
+
+        .report-common .form-group {
+            flex-direction: column;
+        }
+
+        .report-common button#getTital {
+            margin-top: 10px;
+            margin-left: 0;
+        }
+
+        .report-common .form-group [class*="col-"] {
+            width: 100%;
+            padding-right: 0px;
+        }
+
+        .report-common #tab1 [class*="col-"] {
+            clear: both;
+        }
+
+        .admin-box .banner {
+            padding: 10px;
+        }
+
+        a.btn.btn-primary.create-person {
+            margin-bottom: 10px;
+        }
+
+        .dataTables_scrollBody {
+            height: 200px !important;
+        }
+
+        .referrals-form .form-control {
+            min-width: 100% !important;
+        }
+
+        #frm-create-donor .form-group {
+            display: inline-block;
+        }
+        .dataTables_scrollBody {
+            height: 200px !important;
+        }
+
+        .box-header .form-control.select2-container {
+            min-width: 100% !important;
+        }
+
+        table.food-table td {
+            white-space: break-spaces;
+        }
+
+       
+
+   }
+
+    @media screen and (min-width:767px) {
+        .top-head .navbar-nav > li:hover .dropdown-menu {
+            display: block;
+        }
+
+        .top-head .navbar-nav > li ul li.dropdown-submenu ul.dropdown-menu {
+            display: none;
+        }
+
+        .top-head .navbar-nav > li ul li:hover.dropdown-submenu > ul.dropdown-menu {
+            display: block;
+        }
+
+        .top-head .navbar-nav > li:hover .caret {
+            width: 0;
+            height: 0;
+            border-right: 4px solid rgba(0,0,0,0);
+            border-left: 4px solid rgba(0,0,0,0);
+            border-top: 4px dashed;
+            display: inline-block;
+            margin-left: 2px;
+            vertical-align: middle;
+        }
+    }
+
+@media screen and (max-width:640px) {
+    .secure-login {
+        position: relative;
+        right: 0;
+        top: 0;
+        display: block;
+        margin: 0 0 10px 0;
+    }
+
+    .login-form {
+        width: 100%;
+    }
+
+    .login-btn {
+        margin: 5px 0 0 0;
+    }
+
+    .btns-right {
+        position: relative;
+        right: 0;
+        top: 0;
+        display: block;
+        margin: 0 0 20px 0;
+    }
+
+        .btns-right .btn-primary {
+            margin: 0 5px 0 0;
+        }
+
+    .doners-btns {
+        margin: 0 0 15px 0;
+        width: 100%;
+    }
+
+        .doners-btns .large-btn {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding: 18px 14px;
+            width: 100%;
+        }
+
+    .doners-logo {
+        text-align: center;
+        width: 75%;
+        margin: auto;
+        float: none;
+    }
+
+    .top-head .navbar-toggle {
+        margin-bottom: 8px;
+        margin-top: 40px;
+    }
+
+    .doners-records {
+        padding: 0px 20px;
+    }
+
+    .doners-btns .btn {
+        margin-left: 0px;
+    }
+
+    .btn2 input {
+        margin: 0 0 10px;
+        width: 100%;
+    }
+
+    .dataTables_wrapper .row:first-child .col-sm-6 {
+        float: left;
+    }
+
+    .exp_btn {
+        left: inherit;
+        right: inherit;
+        margin: 0 0 8px;
+    }
+
+    .mrg_new_10 {
+        margin-top: 10px;
+    }
+
+    .bnr_nav ul li a {
+        font-size: 12px;
+        padding: 8.5% 10px;
+    }
+
+    /*Donor-module-start*/
+    .donations-tab .table-bordered > thead > tr > th,
+    .donations-tab .table-bordered > tbody > tr > th,
+    .donations-tab .table-bordered > tfoot > tr > th,
+    .donations-tab .table-bordered > thead > tr > td,
+    .donations-tab .table-bordered > tbody > tr > td,
+    .donations-tab .table-bordered > tfoot > tr > td {
+        font-size: 14px;
+    }
+
+
+    .ref-dash-top .ref-title .nav-tabs {
+        width: 100%;
+    }
+
+        .ref-dash-top .ref-title .nav-tabs li.active a, .ref-dash-top .ref-title .nav-tabs > li > a:hover {
+            border-radius: 20px;
+        }
+
+        .ref-dash-top .ref-title .nav-tabs li a {
+            padding: 10px 12px;
+            font-size: 14px;
+        }
+    /*Donor-module-start*/
+
+    .dash-admin .ref-title, .admin-frm .filter-input {
+        flex-wrap: wrap;
+    }
+
+        .admin-frm .filter-input input.form-control, .filter-input {
+            max-width: 100%;
+            width: 100%;
+        }
+
+
+    .new-header a.navbar-brand {
+        padding: 10px 0 43px;
+        width: 280px;
+    }
+
+    .new-header .welcome-row {
+        top: 18px;
+        max-width: 100%;
+        left: 15px;
+        right: 15px;
+        text-align: right;
+    }
+
+        .new-header .welcome-row .btn-primary {
+            margin: 0 80px 0 0;
+            padding: 3px 10px;
+        }
+
+    .top-head .navbar {
+        background: transparent;
+        z-index: 2;
+    }
+
+    .welcome-col.super-col {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .new-header.without-login a.navbar-brand {
+        padding: 14px 0 23px;
+    }
+
+    .dash-admin .ref-title [class*="col-"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .dataTables_wrapper .dataTables_length {
+        float: none !important;
+        text-align: center;
+    }
+
+    .dataTables_wrapper [class*="col-"] {
+        width: 100%;
+        margin: 0 auto 5px;
+    }
+
+
+    .donor-sec-top .welcome-row .dropdown, .donor-sec-top .welcome-row .dropdown .btn {
+        width: 100%;
+        margin: 0px;
+    }
+
+        .donor-sec-top .welcome-row .dropdown span.noti-txt {
+            display: initial;
+        }
+
+    .donor-sec-top .welcome-col.super-col {
+        margin-top: 5px;
+    }
+
+    .donor-sec-top .welcome-row .btn-primary {
+        margin: 0 80px 13px 0;
+    }
+    .donor-sec-top {
+        height:126px;
+    }
+}
+
+    @media screen and (max-width:480px) {
+        .top-head .navbar-toggle {
+            margin-top: 48px;
+        }
+
+        .today_btn .col-xs-3, .today_btn .col-sm-3 {
+            margin: 0 0 0 -12px;
+            padding: 0;
+        }
+
+        .exp_btn {
+            left: inherit;
+            margin: 0 0 10px;
+            position: relative;
+            right: inherit;
+            top: inherit;
+        }
+
+        .btn-group-lg > .btn, .btn-lg {
+            font-size: 13px;
+        }
+
+        .mrg-xs-10 a, .mrg-xs-10 input.btn-primary {
+            clear: both;
+            display: block;
+            margin: 0 0 10px;
+            width: 100%;
+        }
+
+        .pad_lt {
+            padding-left: 6%;
+        }
+
+        .btn_box2 {
+            padding: 0;
+        }
+
+        .chkdonor-email {
+            float: none;
+            width: 100%;
+        }
+
+        .bnr_nav {
+            background: #fff none repeat scroll 0 0;
+            border: 1px solid #ccc;
+            font-size: 100%;
+            height: auto;
+            left: inherit;
+            overflow: inherit;
+            position: relative;
+            top: inherit;
+            width: 100%;
+        }
+
+        .bnr {
+            clear: both;
+            display: block;
+            float: none !important;
+            width: 100%;
+        }
+
+        .bnr_nav ul li a {
+            font-size: 12px;
+            padding: 8px;
+        }
+
+        .dashboard-refe .dashboard-main {
+            padding: 15px 0px 33px 0px;
+        }
+
+        .frm-main .dob-box input {
+            width: 100%;
+        }
+
+        a.plus-icon {
+            right: -20px;
+        }
+
+        div.dataTables_filter input {
+            max-width: 91px;
+        }
+
+        .new-header a.navbar-brand {
+            padding: 10px 0 71px;
+            width: 100%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .top-head .navbar-header img {
+            max-width: 267px;
+            margin: 0 auto 10px;
+        }
+
+        .new-header .welcome-row {
+            top: 64px;
+        }
+
+            .new-header .welcome-row .btn-primary {
+                margin: 0 52% 0 0;
+                width: 48%;
+            }
+
+        a.btn-logout {
+            width: 48%;
+            text-align: center;
+        }
+
+        .welcome-col.super-col {
+            margin-top: 6px;
+        }
+
+        .new-header.without-login a.navbar-brand {
+            width: auto;
+            padding: 14px 0 15px;
+        }
+
+        .top-head.without-login .navbar-header img {
+            max-width: 222px;
+        }
+
+        .donor-sec-top .welcome-row .dropdown .btn {
+            width: 100%;
+            margin: 7px 0 0 0;
+        }
+
+        .donor-sec-top .welcome-col.super-col {
+            margin-top: 6px;
+        }
+
+        .donor-sec-top .welcome-row {
+            position: static;
+        }
+
+            .donor-sec-top .welcome-row .dropdown {
+                width: 100%;
+            }
+
+        .donor-sec-top .welcome-row {
+            margin-bottom: 10px;
+        }
+
+        .donor-sec-top a.btn-logout {
+            width: 100%;
+            text-align: center; position:static; margin-top:5px;
+        }
+
+        .donor-sec-top .welcome-row .btn-primary {
+            width: 100%;
+        }
+
+        .donor-sec-top a.navbar-brand {
+            padding: 10px 0 0px;
+        }
+
+        .donor-sec-top {
+            height: auto;
+        }
+
+        .gen-info h3.page-header {
+            padding: 0px 10px 10px 0px;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .gen-info .info-header .btn-primary {
+            margin: 10px 0px 0px 0px;
+        }
+
+        .bnr_nav i.fa.fa-angle-down {
+            top: 5px;
+            right: 2px;
+        }
+
+
+    }
+
+    @media screen and (max-width:360px) {
+        ul.nav.nav-tabs li a {
+            padding: 10px 5px;
+            font-size: 11px;
+        }
+    }
+
+    @media screen and (max-width:1700px) {
+        .navbar-nav > li:last-child ul.dropdown-menu li ul.dropdown-menu {
+            left: inherit;
+            right: 100%;
+        }
+
+        .top-head .navbar-nav > li:last-child .dropdown-submenu > a:after {
+            float: left;
+            border-color: transparent #fff;
+            border-width: 5px 5px 5px 0;
+            margin-left: -10px;
+        }
+
+        .top-head .navbar-nav > li:last-child .dropdown-submenu:hover > a:after {
+            border-right-color: #000;
+        }
+    }
+
+    .grid-btn {
+        margin: 1px;
+    }

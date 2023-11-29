@@ -1,0 +1,133 @@
+﻿@model FB.Dto.StockDto
+@{
+    ViewBag.Title = "Stock Details";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper">
+    <div class="container inner-wrap">
+        <div class="inner-bg">
+            <section class="content-header">
+                <h1>
+                    Stock Details
+                </h1>
+                <div class="btn-group pull-right">
+                    <a data-toggle="modal" asp-controller="stock" asp-action="stocklist" asp-route-id="" class="btn btn-primary">
+                        Back <i class="fa fa-undo"></i>
+                    </a>
+                </div>
+            </section>
+            <section class="content">
+                <div id="frm-create-donor" class="cmxform donor-form ref-frm">
+                    <form method="post" novalidate="novalidate">
+                        <div id="validation-summary-create-donor"></div>
+                        <input data-val="true" data-val-number="The field PersonID must be a number."
+                               data-val-required="'Person I D' must not be empty." id="PersonID" name="PersonID"
+                               type="hidden" value="0">
+                        <div class="frm-main">
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+
+                                    <div class="form-group">
+                                        <label class="col-sm-5 col-xs-12 control-label" for="Forenames">
+                                            Food Item
+                                        </label>
+                                        <div class="col-sm-7 col-xs-12">
+                                            @Model.FoodName
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-5 col-xs-12 control-label" for="Title">Total Quantity</label>
+                                        <div class="col-sm-7 col-xs-12">
+                                            @Model.TotalQuantity
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label class="col-sm-5 col-xs-12 control-label " for="Title">Unit</label>
+                                        <div class="col-sm-7 col-xs-12">
+                                            @Model.Unit
+                                        </div>
+                                    </div>
+                                    <div class="form-group txt-area">
+                                        <label class="col-sm-5 col-xs-12 control-label " for="Forenames">
+                                            About Servicer Offered
+                                        </label>
+                                        <div class="col-sm-7 col-xs-12">
+                                            @Model.AboutServicerOffered
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+
+                                    <div class="form-group">
+                                        <label class="col-sm-5 col-xs-12 control-label" for="Forenames">
+                                            Is the item low in stock?
+                                        </label>
+                                        <div class="col-sm-7 col-xs-12">
+                                            @Model.IsItemLowInStock
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label class="col-sm-5 col-xs-12 control-label " for="Title">Available Quantity</label>
+                                        <div class="col-sm-7 col-xs-12">
+                                            @Model.AvailQuantity
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-5 col-xs-12 control-label" for="Forenames">
+                                            Price per item
+                                        </label>
+                                        <div class="col-sm-7 col-xs-12">
+                                            @Model.PricePerItem
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-5 col-xs-12 control-label" for="Forenames">
+                                            Is Grantor money
+                                        </label>
+                                        <div class="col-sm-7 col-xs-12">
+                                            <div class="col-lg-3 col-sm-3">
+                                             @(Model.IsGrantorMoney==true?"Yes":"No")
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="Grantordiv" style="display:block">
+                                        <label class="col-sm-5 col-xs-12 control-label" for="">
+                                            Grantor
+                                        </label>
+                                        <div class="col-sm-7 col-xs-12">
+                                            @(Model.GrantorName)
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </section>
+
+
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/plugins/select2/select2.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="~/Scripts/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/custom/volunteer/Admin-Volunteerlist.js"></script>
+
+    <script src="~/Scripts/plugins/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
+
+
+}

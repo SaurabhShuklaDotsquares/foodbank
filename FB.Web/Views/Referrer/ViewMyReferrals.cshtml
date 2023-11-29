@@ -1,0 +1,263 @@
+﻿@model FB.Data.Models.Family;
+@using System.Web;
+@{
+    ViewBag.Title = "New Referrals";
+}
+@section head{
+}
+@{
+
+    }
+
+
+
+@section scripts{
+}
+
+<section class="content-header">
+    <h1>
+       View My Referrals
+    </h1>
+</section>
+<section class="content">
+    <partial name="_Notification" />
+    <div id="frm-create-donor" class="cmxform donor-form ref-frm">
+        <form method="post" novalidate="novalidate" id="myform">
+            <div id='postcodes4ukey' style='display: none;'>@SiteKeys.Postcode4uKey</div>
+            <div id='postcodes4uuser' style='display: none;'>@SiteKeys.Postcode4uUser</div>
+            <div id="validation-summary-create-donor"></div>
+            <input data-val="true" data-val-number="The field PersonID must be a number."
+                   data-val-required="'Person ID' must not be empty." id="PersonID" name="PersonID"
+                   type="hidden" value="0">
+            <div class="frm-main">
+                <div class="row">
+
+                    <div class="col-lg-5">
+                        <div class="col-sm-12 col-lg-12 col-md-12"><h3 class="page-header">General Information</h3></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 col-xs-12 control-label" for="Title">
+                                Referral Date
+                            </label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input value="@Model.AddedDate.ToString("dd/MM/yyyy")" disabled class="form-control" placeholder="Family Name" type="text" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 col-xs-12 control-label" for="Title">
+                                Family
+                                Name                          </label>
+                            <div class="col-sm-9 col-xs-12">
+
+                                <input value="@Model.FamilyName" disabled class="form-control" placeholder="Family Name" type="text" />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 col-xs-12 control-label" for="Initials">Email</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input value="@Model.Email" disabled class="form-control" placeholder="Family Name" type="text" />
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 col-xs-12 control-label" for="Initials">
+                                Contact
+                                Number
+                            </label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input value="@Model.Contactno" disabled class="form-control" placeholder="Family Name" type="text" />
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div class="col-lg-7">
+                        <div class="row auto-address">
+                            <div class="col-sm-12"><h3 class="page-header">Address</h3></div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"
+                                           for="Addresses_0__PostCode">Postcode</label>
+                                    <div class="col-sm-9">
+                                        <input value="@ViewBag.resaddress.Postcode" disabled class="form-control" placeholder="" type="text" />
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="Addresses_0__HouseName">House Name</label>
+                                    <div class="col-sm-9">
+                                        <input value="@ViewBag.resaddress.HouseName" disabled class="form-control" placeholder="" type="text" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="Addresses_0__HouseNumber">House Number</label>
+                                    <div class=" col-sm-9">
+                                        <input value="@ViewBag.resaddress.HouseNumber" disabled class="form-control" placeholder="" type="text" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Street Name</label>
+                                    <div class="col-sm-9">
+                                        <input value="@ViewBag.resaddress.Street" disabled class="form-control" placeholder="" type="text" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="Addresses_0__City">City</label>
+                                    <div class="col-sm-9">
+                                        <div class="">
+                                            <input value="@ViewBag.resaddress.City" disabled class="form-control" placeholder="" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"
+                                           for="Addresses_0__CountryID">Country</label>
+                                    <div class="col-sm-9">
+                                        <input value="@ViewBag.resaddress.Country.CountryName" disabled class="form-control" placeholder="" type="text" />
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+                      
+
+                      
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="col-sm-12 col-lg-12 col-md-12"><h3 class="page-header">Family Details</h3></div>
+                        <div class="form-group">
+
+                            <label class="col-sm-8 col-xs-12 control-label" for="Surname">
+                                Number of
+                                Family Members
+                            </label>
+                            <div class="col-sm-4 col-xs-12">
+                                <input value="@Model.TotalFamily" disabled class="form-control" placeholder="Family Name" type="text" />
+
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-sm-8 col-xs-12 control-label" for="Surname">
+                                        How Many Adults
+                                    </label>
+                                    <div class="col-sm-4 col-xs-12">
+                                        <input value="@Model.TotalAdults" disabled class="form-control" placeholder="Family Name" type="text" />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-sm-8 col-xs-12 control-label" for="Surname">
+                                        How
+                                        Many Child
+                                    </label>
+                                    <div class="col-sm-4 col-xs-12">
+                                        <input value="@Model.TotalChild" disabled class="form-control" placeholder="Family Name" type="text" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="col-sm-12 col-lg-12 col-md-12"><h3 class="page-header">  Family Member Information</h3></div>
+                        <div class="row" style="">
+                            <table class="table table-bordered" id="subjecttable">
+                                @{ int i = 1;}
+                                <tr>
+                                    <th>Sr.no</th>
+                                    <th>Name</th>
+                                    <th>Dob</th>
+                                    <th>Allery Name</th>
+                                    <th>Is Adult</th>
+
+                                </tr>
+                                @foreach (var item in @Model.FamilyMember)
+                                {
+                                    <tr>
+
+                                        <td>@i</td>
+
+                                        <td>
+                                            @item.ForeName
+                                        </td>
+
+
+                                        <td>
+                                            @item.Dob?.ToString("dd/MM/yyyy")
+                                        </td>
+
+
+                                        <td>
+                                            @if (item.FamilyMemberAllergy.Count > 0)
+                                            {
+                                                // @item.FamilyMemberAllergy.FirstOrDefault().Allergy.Name
+                                                for (int j = 0; j < item.FamilyMemberAllergy.Count; j++)
+                                                {
+                                                    if (j == item.FamilyMemberAllergy.Count - 1)
+                                                    {<div>  @item.FamilyMemberAllergy.ToList()[j].Allergy.Name</div>}
+                                                else
+                                                { <div>  @item.FamilyMemberAllergy.ToList()[j].Allergy.Name ,</div>}
+
+                                                }
+                                            }
+
+
+
+                                        </td>
+
+                                        <td>
+                                            @(item.IsAdult==false?"No":"Yes")
+
+                                        </td>
+                                        
+
+                                    </tr>
+                                    i = i + 1;
+                                }
+
+
+                            </table>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="frm-footer">
+               
+            </div>
+
+        </form>
+    </div>
+
+</section>

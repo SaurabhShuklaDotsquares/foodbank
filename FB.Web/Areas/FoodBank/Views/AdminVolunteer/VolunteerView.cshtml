@@ -1,0 +1,189 @@
+﻿@model FB.Dto.VolunteerDto
+@{
+    ViewBag.Title = "Volunteer Details";
+
+}
+@section head{
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/alertify/css/alertify.css" rel="stylesheet" />
+
+}
+<div class="inner-bg">
+    <section class="content-header">
+        <h1>
+            Volunteer Details
+        </h1>
+    </section>
+    <section class="content">
+        <partial name="_Notification" />
+        <div id="frm-create-donor" class="cmxform donor-form ref-frm my-profile-frm ref-register-frm">
+            <form>
+
+                <input type="hidden" asp-for="Availability.AvailabilityId" value="@(Model.Availability!=null? Model.Availability.AvailabilityId:0)" />
+                <input type="hidden" asp-for="Unavailability.UnavailabilityId" value="@(Model.Unavailability!=null?Model.Unavailability.UnavailabilityId:0)" />
+                <input type="hidden" asp-for="UserId" value="@Model.UserId" />
+                <input type="hidden" asp-for="VolunteerId" value="@Model.VolunteerId" id="hdnVolunteerId" />
+
+                <div id="validation-summary-create-donor"></div>
+                <input data-val="true" data-val-number="The field PersonID must be a number."
+                       data-val-required="'" id="PersonID" name="PersonID"
+                       type="hidden" value="0">
+                <div class="frm-main">
+                    <div class="row">
+                        <!--==================== Volunteer Detail Section =====================================-->
+                        @*<div class="col-xs-12">
+            <h3 class="page-header">Volunteer Details</h3>
+        </div>*@
+                        <div class="col-xs-12">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label"
+                                           for="Forenames">
+                                        Volunteer Name
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <input asp-for="VolunteerName" value="@Model.VolunteerName" class="form-control" placeholder="Volunteer Name" type="text" readonly>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label" for="Forenames">
+                                        Contact Number
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <input asp-for="Mobile" value="@Model.Mobile" class="form-control" placeholder="" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label" for="Forenames">
+                                        Is DBS check completed?
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <input asp-for="Mobile" value="@(Model.IsDBScheck==false?"No":"Yes")" class="form-control" placeholder="" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label" for="Title">
+                                        Any Valid ID
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+
+                                        @if (Model.DocPath != null)
+                                        {
+                                            <br />
+                                            <a href="/VolunteerPhotos/@Model.DocPath" class="btn btn-default" style="font-size: 11px;  margin-right: 8px;" target="_blank">View Document</a>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label" for="Title">
+                                        How else can
+                                        you help
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <input asp-for="HowCanYouHelp" class="form-control " value="@(Model.HowCanYouHelp == null ? string.Empty : Model.HowCanYouHelp)" placeholder="How else can you help" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label" for="Forenames">
+                                        Are you
+                                        individual or couple?
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <select readonly disabled asp-for="MaritalStatus" class="form-control create-donor-country" asp-items="@((List<SelectListItem>)ViewBag.MaritalTypeList)"></select>
+                                        <span asp-validation-for="MaritalStatus" class="text-red"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label" for="Forenames">
+                                        Want to
+                                        do packing or delivery?
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <select asp-for="WorkType" class="form-control create-donor-country" asp-items="@((List<SelectListItem>)ViewBag.WorkTypeList)" disabled></select>
+                                        <span asp-validation-for="WorkType" class="text-red"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-5 col-xs-12 control-label" for="Forenames">
+                                        Skills
+                                    </label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        @foreach (var item in Model.Skills)
+                                        {
+                                            <span> @item.SkillName ,</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--==================== Volunteer Detail Section =====================================-->
+                        <!--==================== Change Password Section =====================================-->
+                        <!--==================== Change Password Section =====================================-->
+                        <!--==================== Regular Alailibility Section =====================================-->
+                        <!--====================  UnAlailibility And Availability Grid Section ==============================================-->
+                        <div class="col-md-12">
+                            <div class="table-top">
+                                <div class="status-box">
+                                    <select class="form-control valid" id="availabilityunavailability">
+                                        <option>Select</option>
+                                        <option value="0">Regular Availability</option>
+                                        <option value="1">Unavailability</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="div-volunteer-availability-list">
+                                <div class="">
+                                    <div class="ref-title">Regular Availability</div><br />
+                                    <table class="table table-bordered table-striped food-table agencies-table" id="grid-volunteer-availability-list">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>From</th>
+                                                <th>Pattern</th>
+                                                <th>Until</th>
+                                                <th>Times</th>
+                                                @*<th>Actions</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="div-volunteer-unavailability-list">
+                                <div class="">
+                                    <div class="ref-title">Unavailability</div><br />
+                                    <table class="table table-bordered table-striped  food-table agencies-table" id="grid-volunteer-unavailability-list">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>From</th>
+                                                <th>Pattern</th>
+                                                <th>Until</th>
+                                                <th>Times</th>
+                                                @*<th>Actions</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!--====================  UnAlailibility And Availability Grid Section ==============================================-->
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </section>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/custom/volunteer/Volunteer-editadmin.js"></script>
+}

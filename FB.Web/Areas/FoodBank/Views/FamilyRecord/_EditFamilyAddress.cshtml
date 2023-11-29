@@ -1,0 +1,193 @@
+﻿@model FB.Dto.AdminEditFamilyDto
+@using System.Web;
+
+
+<script>
+    var listallerys = '';
+</script>
+@foreach (var appointement in ViewBag.AllergyList)
+{
+<script>
+        listallerys += "<option value='@appointement.Value'>@appointement.Text</option>";
+</script>
+}
+
+
+<section class="content-header">
+ 
+</section>
+<section class="content">
+    <div id="frm-edit-person-name" class="cmxform ref-frm">
+        <form asp-controller="familyrecord" asp-action="UpdateFamilyAddress" asp-antiforgery="true" method="post" novalidate="novalidate">
+            <partial name="_ModalHeader" model='new ModalHeader { Heading = "Family Address Details" }' />
+
+            <div id='postcodes4ukey' style='display: none;'>@SiteKeys.Postcode4uKey</div>
+            <div id='postcodes4uuser' style='display: none;'>@SiteKeys.Postcode4uUser</div>
+            <div id="validation-summary-create-donor"></div>
+            <input data-val="true" data-val-number="The field PersonID must be a number."
+                   data-val-required="'Person ID' must not be empty." id="PersonID" name="PersonID"
+                   type="hidden" value="0">
+            <div class="frm-main gen-info">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row auto-address">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"
+                                           for="Addresses_0__PostCode">Postcode<span class="redtext">*</span></label>
+                                    <div class="col-sm-6">
+                                        @if (Model.Overseas)
+                                        {
+                                            <input asp-for="PostCode" class="form-control postcode" placeholder="Postcode" disabled="disabled" />
+                                            <input asp-for="OldPostCode" class="form-control postcode" placeholder="Postcode" hidden />
+                                        }
+                                        else
+                                        {
+                                            <input asp-for="PostCode" class="form-control postcode" placeholder="Postcode" />
+                                        }
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="button" class="btn btn-primary ps3 btn-lookup" onclick="SearchBegin(this);" value="Lookup" />
+                                    </div>
+                                    <label class="col-sm-3 control-label"
+                                           for="Addresses_0__PostCode"></label>
+                                    <div class="col-sm-6">
+                                        @if (Model.Overseas)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <span asp-validation-for="PostCode" class="text-red"></span>
+                                        }
+                                    </div>
+                                    <div class="col-sm-3">
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group post-dropdown" style="display:none;">
+                                    <label class="col-lg-3 col-sm-3 control-label">Select Address</label>
+                                    <div class="col-lg-9 col-sm-9">
+                                        <select id="drpPostcodeAddr" style='display:none;' class="form-control dropdown">
+                                            <option>Select an address:</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="Addresses_0__HouseName">House Name</label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="HouseName" class="form-control house-name" placeholder="House Name" maxlength="50" />
+                                        <span asp-validation-for="HouseName" class="text-red"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="Addresses_0__HouseNumber">House Number</label>
+                                    <div class=" col-sm-9">
+                                        <input asp-for="HouseNumber" class="form-control house-number" placeholder="House Number" maxlength="50" />
+                                        <span asp-validation-for="HouseNumber" class="text-red"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Street Name<span class="redtext">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="StreetName" class="form-control street-name" placeholder="Street Name" maxlength="50" />
+                                        <span asp-validation-for="StreetName" class="text-red"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="Addresses_0__City">City<span class="redtext">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="City" class="form-control city-auto city" placeholder="City" maxlength="50" />
+                                        <input asp-for="Addressid" name="Addressid" type="hidden" />
+                                        <span asp-validation-for="City" class="text-red"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"
+                                           for="Addresses_0__CountryID">Country</label>
+                                    <div class="col-sm-9">
+                                        <select asp-for="CountryID" class="form-control create-donor-country" asp-items="@((List<SelectListItem>)ViewBag.CountryList)"></select>
+                                        <span asp-validation-for="CountryID" class="text-red"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <partial name="_ModalFooter" model='new ModalFooter { }' />
+            </div>
+
+        </form>
+    </div>
+
+    <script src="~/Scripts/plugins/select2/select2.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="~/Scripts/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script>
+        $("#drpPostcodeAddr").off("change").on("change", function () {
+            SearchIdBegin(this);
+            setTimeout(function () { BindHMRCAddress(); }, 1000);
+        });
+        $("#Overseas").off("change").on("change", function () {
+            if ($(this).is(":checked")) {
+                $('#OldPostCode').val($("#PostCode").val());
+                $("#PostCode").attr("disabled", "disabled");
+            }
+            else {
+                $('#OldPostCode').val("");
+                $("#PostCode").removeAttr("disabled");
+            }
+        });
+
+        $("#CountryID").off("change").on("change", function () {
+            if ($("#CountryID option:selected").text().toLowerCase().trim() == "united kingdom") {
+                $("#Overseas").prop("checked", false);
+            } else {
+                $("#Overseas").prop("checked", true);
+            }
+
+            $("#Overseas").trigger("change");
+        });
+        function BindHMRCAddress() {
+            if (!$("#HMRCAddressOverride").is(":checked")) {
+
+                var housename = $(".house-name").val();
+                var housenumber = $(".house-number").val();
+
+                var streetname = $(".street-name").val();
+                var postcode = $(".postcode").val();
+                var fulladdr = "";
+
+                if (housename.trim() != "") {
+                    fulladdr = housename;
+                }
+
+                if (housenumber.trim() != "" || streetname.trim() != "") {
+                    fulladdr = fulladdr != "" ? fulladdr + ", " : "";
+                    fulladdr = (fulladdr + housenumber + " " + streetname).trim();
+                }
+
+                if (postcode.trim() != "") {
+                    fulladdr = fulladdr != "" ? fulladdr + ", " : "";
+                    fulladdr = fulladdr + postcode;
+                }
+
+                $("#HMRCAddress").val(fulladdr.trim());
+            }
+        }
+    </script>
+    <script src="~/Scripts/plugins/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
+
+
+
+</section>

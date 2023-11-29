@@ -1,0 +1,69 @@
+﻿@model List<FB.Dto.MenuDto>
+
+<ul class="nav navbar-nav top1">
+    @foreach (var menu in Model.Where(m => m.ParentMenuID == null).OrderByDescending(o => o.Sequence.HasValue).ThenBy(o => o.Sequence).ToList())
+    {
+        <li>
+            @if (Model.Count(m => m.ParentMenuID == menu.MenuID) > 0)
+            {
+                if (menu.MenuName.ToLower().Equals("dashboard"))
+                {
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" onclick="location.href='@(SiteKeys.DomainName+menu.MenuUrl)'">@(menu.MenuName)&nbsp;<b class="caret"></b></a>
+                }
+                else
+                {
+                    <a href="@(menu.MenuUrl!="javascript:void(0);"?SiteKeys.DomainName+menu.MenuUrl:menu.MenuUrl)" class="dropdown-toggle" data-toggle="dropdown">@(menu.MenuName)&nbsp;<b class="caret"></b></a>
+                }
+                <ul class="dropdown-menu multi-level">
+                    @foreach (var menuLevel1 in Model.Where(m => m.ParentMenuID == menu.MenuID).OrderByDescending(o => o.Sequence.HasValue).ThenBy(o => o.Sequence).ToList())
+                    {
+                        if (Model.Count(m => m.ParentMenuID == menuLevel1.MenuID) > 0)
+                        {
+                            <li class="dropdown-submenu">
+                                <a href="@(menuLevel1.MenuUrl != "javascript:void(0);" ? SiteKeys.DomainName + menuLevel1.MenuUrl : menuLevel1.MenuUrl)" class=" dropdown-toggle" data-toggle="dropdown">@(CurrentUser.PersonID.HasValue ? "" : menuLevel1.MenuName)</a>
+                                <ul class="dropdown-menu">
+                                    @foreach (var menuLevel2 in Model.Where(m => m.ParentMenuID == menuLevel1.MenuID).OrderByDescending(o => o.Sequence.HasValue).ThenBy(o => o.Sequence).ToList())
+                                    {
+                                        if (Model.Count(m => m.ParentMenuID == menuLevel2.MenuID) > 0)
+                                        {
+                                            <li class="dropdown-submenu">
+                                                <a href="@(menuLevel2.MenuUrl != "javascript:void(0);" ? SiteKeys.DomainName + menuLevel2.MenuUrl : menuLevel2.MenuUrl)" class=" dropdown-toggle" data-toggle="dropdown">@(CurrentUser.PersonID.HasValue ? "" : menuLevel2.MenuName)</a>
+                                                <ul class="dropdown-menu">
+                                                    @foreach (var menuLevel3 in Model.Where(m => m.ParentMenuID == menuLevel2.MenuID).OrderByDescending(o => o.Sequence.HasValue).ThenBy(o => o.Sequence).ToList())
+                                                    {
+                                                        <li>
+                                                            <a href="@(menuLevel3.MenuUrl != "javascript:void(0);" ? SiteKeys.DomainName + menuLevel3.MenuUrl : menuLevel3.MenuUrl)">@menuLevel3.MenuName</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <a href="@(menuLevel2.MenuUrl != "javascript:void(0);" ? SiteKeys.DomainName + menuLevel2.MenuUrl : menuLevel2.MenuUrl)">@menuLevel2.MenuName</a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="@(menuLevel1.MenuUrl != "javascript:void(0);" ? SiteKeys.DomainName + menuLevel1.MenuUrl : menuLevel1.MenuUrl)">
+                                    @(CurrentUser.PersonID.HasValue ? "" : menuLevel1.MenuName)
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            }
+            else
+            {
+                <a href="@(menu.MenuUrl!="javascript:void(0);"?SiteKeys.DomainName+menu.MenuUrl:menu.MenuUrl)">@menu.MenuName</a>
+            }
+        </li>
+    }
+
+</ul>

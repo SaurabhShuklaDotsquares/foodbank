@@ -1,0 +1,283 @@
+﻿@{
+    ViewBag.Title = "Referrer-Dashboard";
+}
+@section head{
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/alertify/css/alertify.css" rel="stylesheet" />
+}
+<div class="inner-bg-white">
+    <div class="banner clearfix">
+        <div class="bnr_nav">
+            <ul>
+                <li><a href="@Url.Action("myreferrals","referrer")">My Referrals</a></li>
+                <li><a href="@Url.Action("updateprofile","referrer")">My Profile</a></li>
+                <li><a href="@Url.Action("newreferrals","referrer")">New Referral</a></li>
+            </ul>
+        </div>
+        <div class="pull-right bnr dashboard-sec dashboard-refe">
+            <div class="dashboard-bg">
+
+                <div class="dashboard-main">
+                    <div class="row">
+                        <div class="col-lg-9 col-xs-12">
+                            <div class="ref-dash-top">
+                                <div class="ref-title">
+                                    Total Referrals Made
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#monthly"
+                                               data-toggle="tab">Monthly</a>
+                                        </li>
+                                        <li><a href="#yearly" data-toggle="tab">Yearly</a></li>
+                                        <li><a href="#date" data-toggle="tab">Date range</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content donations-tab">
+
+                                    <div id="monthly" class="tab-pane active">
+
+                                        <div class="ref-dashinner">
+                                            <span> &nbsp; </span>
+                                            <select name="ddlMonth" id="ddlMonth" class="form-control  filter-drop" asp-items="@((List<SelectListItem>)ViewBag.Months)" onchange="monthIndexChange()"></select>
+                                           
+                                            <div class="barchat">
+                                                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="yearly" class="tab-pane">
+
+                                        <div class="ref-dashinner">
+                                            <span> &nbsp; </span>
+                                            <select name="ddlYear" id="ddlYear" class="form-control  filter-drop" asp-items="@((List<SelectListItem>)ViewBag.yearLoad)" onchange="yearIndexChange()"></select>
+
+                                            @*<select class="form-control  filter-drop">
+                                                    <option value="1">2014</option>
+                                                    <option value="2">2015</option>
+                                                    <option value="3">2016</option>
+                                                    <option value="4">2017</option>
+                                                </select>*@
+                                            <div class="barchat">
+                                                <canvas id="chartYear" style="width:100%;max-width:600px"></canvas>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div id="date" class="tab-pane">                                        
+                                        <div class="ref-dashinner">
+                                            <span> &nbsp; </span>
+
+                                            <div class="col-xs-12 col-sm-4">
+                                                @*<input asp-for="DonationDate" class="form-control datepicker" placeholder="DD/MM/YYYY" type="text">
+            <span asp-validation-for="DonationDate" class="text-red"></span>*@
+                                                <label class="control-label" for="Title">Start Date*</label>
+                                                <input id="sdate" name="sdate" class="form-control datepicker" placeholder="DD/MM/YYYY" type="text">
+                                            </div>
+
+                                            <div class="col-xs-12 col-sm-4">
+                                                <label class="control-label" for="Title">End Date*</label>
+                                                <input id="edate" name="edate" class="form-control datepicker" placeholder="DD/MM/YYYY" type="text">
+                                            </div>
+                                            <div class="col-xs-12 col-sm-4">
+                                                <label class="control-label" for="Title">&nbsp;</label>
+                                                <div>
+                                                    <button class="btn btn-primary" id="btn-submit" type="submit" onclick="filterDateHandler()">
+                                                        Search
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            @*<select class="form-control  filter-drop date-box">
+            <option value="1">Form 10/09/2021 To 10/12/2021</option>
+            <option value="2">Form 08/10/2021 To 08/12/2021</option>
+            <option value="3">Form 02/11/2021 To 02/12/2021</option>
+            <option value="4">Form 01/12/2021 To 01/12/2021</option>
+        </select>*@
+                                            @*<div class="barchat">
+                                                <canvas id="chartDateWise" style="width:100%;max-width:600px"></canvas>
+                                            </div>*@
+                                            <div class="barchat">
+                                                <canvas id="chartDateWise" style="width:100%;max-width:600px"></canvas>
+                                            </div>
+                                        </div>                                       
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-xs-12">
+                            <div class="ref-title">Pending New Referrals</div>
+                            <div class="dash-box label-success">
+                                <figure class="icon-box lt-green-icon-bg">
+                                    <img src="/Content/images/pending-icon.png">
+                                </figure>
+                                <strong>@ViewBag.Countpending</strong>
+                                <span class="dash-bt-txt">Pending Referrals</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="smart-solutions">
+        Software for Churches and Charities.....
+    </div>
+    <div class="doners-records dis_none">
+        <div class="doners-btns">
+        </div>
+        <div class="doners-logo"><img src="/Content/images/gamen.png" alt=""></div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/custom/Chart.min.js"></script>
+    <script>
+        function bindChart(value) {
+            debugger
+            //var xValues = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"];
+            //var yValues = [60, 50, 40, 30, 20, 10, 0];
+            //var barColors = ["red", "green", "blue", "orange", "brown"];
+            new Chart("myChart", {
+                type: "bar",
+                data: {
+                    /*labels: xValues,*/
+                    labels: value.labels,
+                    datasets: [{
+                        /*backgroundColor: barColors,*/
+                        backgroundColor: "#8ed1fc",
+                        data: value.data
+                       /* data: yValues*/
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: ""
+                    }
+                }
+            });
+        }
+        function bindChartDateRange(value) {
+            debugger
+            //var xValues = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"];
+            //var yValues = [60, 50, 40, 30, 20, 10, 0];
+            //var barColors = ["red", "green", "blue", "orange", "brown"];
+            new Chart("chartDateWise", {
+                type: "bar",
+                data: {
+                    /*labels: xValues,*/
+                    labels: value.labels,
+                    datasets: [{
+                        /*backgroundColor: barColors,*/
+                        backgroundColor: "#8ed1fc",
+                        data: value.data
+                        /* data: yValues*/
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: ""
+                    }
+                }
+            });
+        }
+        function monthIndexChange() {
+            var month = $("#ddlMonth").val();            
+            $.ajax({
+                url: "referrer/GetReferralMonth", //Your path should be here
+                data: { month: month },
+                type: "post",
+                success: function (response) {                   
+                    bindChart(response);
+                }
+            });
+        }
+        function yearIndexChange() {
+            var year = $("#ddlYear").val();
+            $.ajax({
+                url: "referrer/GetReferralYear", //Your path should be here
+                data: { year: year },
+                type: "post",
+                success: function (response) {
+                    yearChart(response);
+                }
+            });
+        }
+        function yearChart(value) {    
+            new Chart("chartYear", {
+                type: "bar",
+                data: {
+                    labels: value.labels,
+                    datasets: [{
+                        backgroundColor: "#8ed1fc",
+                        data: value.data
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: ""
+                    }
+                }
+            });
+        }
+        function filterDateHandler() {
+            
+            var sdate = $("#sdate").val();
+            var edate = $("#edate").val();
+            var sdate1 = sdate.split('/');
+            var sdate2 = edate.split('/');
+            var date1 = new Date(sdate1[1] + "/" + sdate1[0] + "/" + sdate1[2]);
+            var date2 = new Date(sdate2[1] + "/" + sdate2[0] + "/" + sdate2[2]);
+            var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            //alert(diffDays);
+            if (diffDays > 30) {
+                Global.Alert("Error", "Date range would be 30 days");
+                return;
+            }
+            $.ajax({
+                url: "referrer/GetReferralDate", //Your path should be here
+                data: { sdate: sdate, edate: edate },
+                type: "post",
+                success: function (response) {
+                    bindChartDateRange(response);
+                }
+            });
+        }
+        //function dateWiseChart(value) {
+        //    new Chart("chartDateWise", {
+        //        type: "bar",
+        //        data: {
+        //            labels: value.labels,
+        //            datasets: [{
+        //                backgroundColor: "#8ed1fc",
+        //                data: value.data
+        //            }]
+        //        },
+        //        options: {
+        //            legend: { display: false },
+        //            title: {
+        //                display: true,
+        //                text: ""
+        //            }
+        //        }
+        //    });
+        //}
+        window.onload = function () {
+            monthIndexChange();
+            yearIndexChange();
+            filterDateHandler();
+        }
+    </script>
+    <script src="~/Scripts/custom/referrer/index.js"></script>
+}

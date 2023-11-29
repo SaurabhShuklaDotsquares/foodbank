@@ -1,0 +1,126 @@
+﻿@model FB.Dto.DeclarationDto
+@{
+    ViewBag.Title = "Donor Profile";
+}
+
+@section head{
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/alertify/css/alertify.css" rel="stylesheet" />
+
+}
+<section class="content-header">
+    <h1>
+        My Donations
+    </h1>
+</section>
+<section class="content">
+    <partial name="_Notification" />
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#food" data-toggle="tab" class="food-tab">Food</a></li>
+                    <li><a href="#cash" data-toggle="tab" class="cash-tab">Cash/Card</a></li>
+                    <li><a href="#decla" data-toggle="tab">Declaration</a></li>
+                </ul>
+                <input asp-for="PersonId" type="hidden" id="hdnPersonID" value="@Model.PersonId" />
+                <div class="tab-content donations-tab">
+                    <div id="food" class="tab-pane active">
+                        <div class="content form-horizontal">
+                            <div class="table-top">
+                                <a type="button" data-toggle="modal" data-target="#modal-add-food-donations" class="add-food-btn" href="@Url.Action("adddonation","donor")" onclick="ShowLoader()">
+                                    <img src="Content/images/food-add.png" alt=""> New food
+                                    Donations
+                                </a>
+                            </div>
+                            <div class="">
+                                <table id="grid-food-donation" class="table table-bordered table-striped table-condensed food-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>S.No</th>
+                                            <th>Date of Donation</th>
+                                            <th>Food items</th>
+                                            <th>Quantity</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cash" class="tab-pane">
+                        <div class="content form-horizontal">
+                            <div class="table-top">
+                            </div>
+                            <div class="">
+                                <table id="grid-payment-donation" class="table table-bordered table-striped table-condensed food-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>S.No</th>
+                                            <th>Date of Donation</th>
+                                            <th>Donation Type</th>
+                                            <th>Card type</th>
+                                            <th>Amount</th>
+                                            <th>Is GA declared</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="decla" class="tab-pane declaration-tab declaration-tab">
+                        <div id="div-grid-declaration" class="tab-pane">
+
+                            <div class="content form-horizontal">
+                                <div class="table-top">
+                                </div>
+                                <div class="">
+                                    <table id="grid-declaration" class="table table-bordered table-striped table-condensed food-table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>S.No</th>
+                                                <th>Declaration Date</th>
+                                                <th>Valid From</th>
+                                                <th>Valid To</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@Html.Partial("_Modal", new Modal { ID = "modal-add-food-donations", AreaLabeledId = "modal-add-food-donations-label", Size = ModalSize.Medium })
+
+@section scripts{
+    <script>
+        if (window.location.href.split("/").pop().includes('food')) {
+            $('.food-tab').trigger('click');
+        }
+        else if (window.location.href.split("/").pop().includes('cash')) {
+            $('.cash-tab').trigger('click');
+        }
+        else if (window.location.href.split("/").pop().includes('card')) {
+            $('.cash-tab').trigger('click');
+        }
+    </script>
+    <script src="~/Scripts/custom/donor/my-donation-listing.js"></script>
+    <script src="~/Scripts/custom/donor/my-donation-declaration.js"></script>
+
+}

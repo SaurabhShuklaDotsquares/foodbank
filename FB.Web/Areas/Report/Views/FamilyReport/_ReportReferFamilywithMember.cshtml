@@ -1,0 +1,80 @@
+﻿@model List<FB.Dto.ReportFamilyDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #DDD;
+        }
+
+       /* tr:nth-child(even) {
+            background-color: #D6EEEE;
+        }*/
+    </style>
+    @*<link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />*@
+</head>
+<body>
+    @if (Model != null)
+    {
+
+        <div class="row">
+            <br />
+        </div>
+        <div class="row">
+            <table id="grid-label-columns" class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr style="text-align:left;background-color:#D6EEEE">
+                        <th>Family Name</th>
+                        <th>Family Address</th>
+                        <th>No of Adults</th>
+                        <th>No of Children</th>
+                        <th>Date Added</th>
+                        <th colspan="2">Members</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Name  Dob</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr style="margin-bottom:30px">
+                            <td>@item.FamilyName</td>
+                            <td>@item.FullAddressDto.FullAddress</td>
+                            <td>@item.NoofAdults</td>
+                            <td>@item.NoofChildren</td>
+                            <td>@item.AddedDate</td>
+                            <td width="20%">
+                                <table>
+                                    @foreach(var memberDetail in item.FamailyMemberDetails)
+                                    {
+                                        <tr>
+                                            <td>@memberDetail.FamilyMemberName</td>
+                                            <td>@memberDetail.Dob</td>
+                                        </tr>
+                                    }
+                                </table>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <h4>Total:&nbsp;&nbsp;@Model.Count</h4>
+    }
+</body>
+</html>

@@ -1,0 +1,227 @@
+﻿@model FB.Dto.FoodDashboardDto
+@{
+    ViewBag.Title = "Dashboard";
+}
+<section class="content-header">
+    <h1>
+        Dashboard
+    </h1>
+</section>
+<section class="content">
+    <partial name="_Notification" />
+    <div class="inner-bg admin-box">
+        <div class="inner-bg-white">
+            <div class="banner clearfix">
+                <div class="bnr_nav">
+                    <ul class="accordion" id="accordionExample">
+                        @foreach (var menu in Model.menuList.Where(m => m.ParentMenuID == null).OrderByDescending(o => o.Sequence.HasValue).ThenBy(o => o.Sequence).ToList())
+                        {
+                            if (menu.MenuName == "Reports")
+                            {
+                        <li>
+                            <a type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" class="drop-arrow" aria-controls="collapseOne">Reports <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                            <div class="collapsible-body">
+                                <ul id="collapseOne" class="collapse show submenu" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <li>
+                                        <a class="collapsible-header waves-effect" href="@(SiteKeys.DomainName + "Report/referrerreport")">
+                                            Referrer Report
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="collapsible-header waves-effect " href="@(SiteKeys.DomainName + "Report/familyreport")">
+                                            Family report
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="collapsible-header waves-effect " href="@(SiteKeys.DomainName + "Report/parcelsreport")">
+                                            Parcel report
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="collapsible-header waves-effect " href="@(SiteKeys.DomainName + "Report/grantorsreport")">
+                                            Grantor report
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="collapsible-header waves-effect " href="@(SiteKeys.DomainName + "Report/volunteerreports")">
+                                            Volunteer report
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </li>
+                            }
+                            else
+                            {
+                        <li>
+                            <a href="@(menu.MenuUrl!= null?SiteKeys.DomainName+menu.MenuUrl:menu.MenuUrl)">@menu.MenuName</a>
+                        </li>
+                            }
+                        }
+                    </ul>
+                </div>
+
+                <div class="pull-right bnr dashboard-sec dashboard-refe dash-admin donors-dash">
+                    <div class="dashboard-bg">
+                        <div class="dashboard-main">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="ref-title">
+                                        <span>
+                                            Number of<br />Food Parcels / Families Help
+                                        </span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="dash-box label-success mb-2">
+                                                <div class="food_dash">
+                                                    <figure><img src="/Content/images/food-1.png"></figure>
+                                                    <strong id="foodparcels"></strong>
+                                                </div>
+                                                <span class="dash-bt-txt">Food Parcels</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="dash-box label-danger mb-0">
+                                                <div class="food_dash">
+                                                    <figure><img src="/Content/images/family-1.png"></figure>
+                                                    <strong id="parcelsdelivered"></strong>
+                                                </div>
+                                                <span class="dash-bt-txt">Families Helped</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="ref-title par-delivered">
+                                        Parcels Delivered
+                                        <select name="ddlYearParcel" id="ddlYearParcel" class="form-control filter-drop" asp-items="@((List<SelectListItem>)ViewBag.yearLoad)" onchange="monthIndexChange()"></select>
+                                    </div>
+                                    <div class="barchat parcels-gra">
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="admin-dash-top">
+                                        <div class="ref-title"> Stock Item </div>
+
+                                        <table class="table table-bordered food-table admin-table" id="grid-stock-list">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>S.No</th>
+                                                    <th>Item name</th>
+                                                    <th>Levels</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+
+                                        <div style="text-align: right; margin-right: 8px;">
+                                            <a href="@Url.Action("Stocklist","Stock")" class="btn btn-default" style="font-size: 11px; ">View More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="ref-title">Age of people helped</div>
+                                    <div class="barchat parcels-gra" style="width: 300px !important; height: 300px !important;">
+                                        <canvas id="PieChart"></canvas>
+                                    </div>
+                                    <img src="~/Content/images/age-range.PNG" style="margin-top:7%" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="smart-solutions">
+            Software for Churches and Charities.....
+        </div>
+        <div class="doners-records dis_none">
+            <div class="doners-btns">
+            </div>
+            <div class="doners-logo"><img src="Content/images/gamen.png" alt=""></div>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script src="~/Scripts/custom/Chart.min.js"></script>
+    <script>
+        function bindChart(value) {
+            new Chart("myChart", {
+                type: "bar",
+                data: {
+                    /*labels: xValues,*/
+                    labels: value.labels,
+                    datasets: [{
+                        /*backgroundColor: barColors,*/
+                        backgroundColor: "#8ed1fc",
+                        data: value.data
+                        /* data: yValues*/
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: ""
+                    }
+                }
+            });
+        }
+        function monthIndexChange() {
+            var year = $("#ddlYearParcel").val();
+            $.ajax({
+                url: "/Foodbank/Dashboard/GetParcelMonth", //Your path should be here
+                data: { year: year },
+                type: "post",
+                success: function (response) {
+                    bindChart(response);
+                }
+            });
+        }
+        monthIndexChange();
+
+
+        function bindPieChart(value) {
+            var barColors = ["#5e3fbe", "#f4f0fd", "#e5dafb", "#cbb6f8", "#a88deb"];
+            //var yValues = [60, 50, 40, 30, 20];
+            new Chart("PieChart", {
+                type: "pie",
+                data: {
+                    labels: value.labels,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: value.data
+                        //data: yValues
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: ""
+                    }
+                }
+            });
+        }
+
+        function PieIndexChange() {
+            $.ajax({
+                url: "/Foodbank/Dashboard/GetAgeOfFamilyMember",
+                type: "post",
+                success: function (response) {
+                    bindPieChart(response);
+                }
+            });
+        }
+
+        PieIndexChange();
+    </script>
+    <script src="~/Scripts/custom/dashboard/index.js"></script>
+}

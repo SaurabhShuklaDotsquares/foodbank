@@ -1,0 +1,28 @@
+﻿@model FB.Dto.FamilyParcelDto
+
+<div class="modal-content">
+    <div class="modal-header">
+        <!-- modal header  -->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"> Scan for parcel detail.</h4>
+    </div>
+    <div class="modal-body">
+        <section class="content">
+            <div style="text-align: center;">
+                @if (Model.ParcelQrcode == null)
+                {
+                    <h4 class="modal-title">No QR Code is available.</h4>
+                }
+                else
+                {
+                    <img src="data:image/gif;base64,@Model.ParcelQrcode" style="width:60%" />
+
+                }
+            </div>
+        </section>
+    </div>
+</div>
+@section scripts{
+
+    <script src="~/Scripts/custom/family-parcel/create-edit.js"></script>
+}

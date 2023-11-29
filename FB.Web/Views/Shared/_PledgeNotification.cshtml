@@ -1,0 +1,12 @@
+﻿@model FB.Dto.PledgeList
+
+<li class="heading">Pledge Notifications</li>
+@if (Model.FoodItemCount > 0)
+{
+    <li><span>Please donate food for poor families.</span> <a href="@Url.Action("AddPledge","Common")" class="dropdown-item" data-toggle="modal" data-target="#pledge-popup">Pledge</a></li>
+}
+else
+{
+    <li><span>No record found</span></li>
+}
+

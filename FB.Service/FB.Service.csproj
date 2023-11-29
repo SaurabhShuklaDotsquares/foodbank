@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FB.Data\FB.Data.csproj" />
+    <ProjectReference Include="..\FB.Dto\FB.Dto.csproj" />
+    <ProjectReference Include="..\FB.ModalMapper\FB.ModalMapper.csproj" />
+    <ProjectReference Include="..\FB.Repo\FB.Repo.csproj" />
+  </ItemGroup>
+
+</Project>

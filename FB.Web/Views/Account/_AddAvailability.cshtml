@@ -1,0 +1,311 @@
+﻿@model FB.Dto.VolunteerDto
+<div id="adminUpdateVetMedicationModal">
+    <form method="post" asp-controller="Account" asp-action="AddAvailability" id="volunteerupdateprofileform" enctype="multipart/form-data">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- modal header  -->
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Availability</h4>
+            </div>
+            <div class="modal-body">
+                <div id="regularavailability-container" class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-4">
+                                <input type="hidden" asp-for="VolunteerId" />
+                                <div class="form-group">
+                                    <label class="col-lg-4 col-sm-4">Frequency</label>
+                                    <div class="col-lg-8 col-sm-8">
+                                        <select asp-for="Availability.FrequencyType" class="form-control create-donor-country">
+
+                                            @foreach (ScheduleFrequency frequency in Enum.GetValues(typeof(ScheduleFrequency)))
+                                            {
+
+                                                <option value="@((int)frequency)" selected="@(frequency == ScheduleFrequency.Daily ? true : false)">@(frequency.GetDescription())</option>
+                                            }
+                                        </select>
+
+
+                                    </div>
+                                </div></div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-4">
+                                    <div class="form-group">
+                                        <label asp-for="Availability.FromDate" class="col-lg-4 col-sm-4"></label>
+                                        <div class="col-lg-8 col-sm-8">
+                                            <input asp-for="Availability.FromDate" class="form-control datepicker datepicker-availibilty fromdate" type="text" data-mask="" , data-inputmask="'alias': 'dd/mm/yyyy'" />
+                                            <span asp-validation-for="Availability.FromDate" class="text-red"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-4">
+                                    <div class="form-group">
+                                        <label asp-for="Availability.ToDate" class="col-lg-4 col-sm-4"></label>
+                                        <div class="col-lg-8 col-sm-8">
+                                            <input asp-for="Availability.ToDate" class="form-control datepicker datepicker-availibilty todate" type="text" data-mask="" , data-inputmask="'alias': 'dd/mm/yyyy'" />
+                                            <span asp-validation-for="Availability.ToDate" class="text-red"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-sm-4">
+                                    <div class="form-group">
+                                        <div class="col-lg-12 col-sm-3 today-btn">
+                                            <input type="button" class="btn btn-primary date-today-availibilty ps3" value="Today" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="col-sm-12">
+                                <div id="daily-basis-avalibility">
+                                    <div class="row">
+                                       
+                                            <div class="col-sm-2">
+                                                <label class="control-label">
+                                                    <input asp-for="Availability.DailyType" type="radio" value="1" checked="checked" />
+                                                    Every
+                                                </label>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-3">
+                                                <input asp-for="Availability.DailyDays" min="1" max="99" maxlength="2" value="1" class="form-control" />
+                                                <span asp-validation-for="Availability.DailyDays" class="text-red"></span>
+                                            </div>
+                                            <div class="col-lg-1 col-sm-1">
+                                                <label class="control-label">Day(s)</label>
+                                            </div>
+                                        </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-sm-3">
+                                            <label class="control-label">
+                                                <input asp-for="Availability.DailyType" type="radio" value="2" />
+                                                Every Weekday
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="weekly-basis-avalibility" class="hidden">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label class="control-label">Every</label>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <input asp-for="Availability.WeeklyDays" value="1" min="1" max="99" maxlength="2" class="form-control" />
+                                            <span asp-validation-for="Availability.WeeklyDays" class="text-red"></span>
+                                        </div>
+
+                                        <div class="col-sm-8">
+                                            <label class="control-label"> Week(s) on :</label>
+                                            <span asp-validation-for="Availability.IsWeeklyMonday" class="text-red"></span>
+                                            <div class="row">
+
+                                                <div class="col-lg-3 col-sm-3">
+                                                    <input asp-for="Availability.IsWeeklyMonday" type="checkbox" />
+                                                    <label asp-for="Unavailability.IsWeeklyMonday"></label>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-3">
+                                                    <input asp-for="Availability.IsWeeklyTuesday" type="checkbox" />
+                                                    <label asp-for="Availability.IsWeeklyTuesday"></label>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-3">
+                                                    <input asp-for="Availability.IsWeeklyWednesday" type="checkbox" />
+                                                    <label asp-for="Availability.IsWeeklyWednesday"></label>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-3">
+                                                    <input asp-for="Availability.IsWeeklyThursday" type="checkbox" />
+                                                    <label asp-for="Availability.IsWeeklyThursday"></label>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-3">
+                                                    <input asp-for="Availability.IsWeeklyFriday" type="checkbox" />
+                                                    <label asp-for="Availability.IsWeeklyFriday"></label>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-3">
+                                                    <input asp-for="Availability.IsWeeklySaturday" type="checkbox" />
+                                                    <label asp-for="Availability.IsWeeklySaturday"></label>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-3">
+                                                    <input asp-for="Availability.IsWeeklySunday" type="checkbox" />
+                                                    <label asp-for="Availability.IsWeeklySunday"></label>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    <div class="row">
+                                      
+                                    </div>
+
+                                </div>
+
+                                <div id="monthly-basis-avalibility" class="hidden">
+                                    <div class="row">
+                                        <div class="col-lg-2 col-sm-2">
+                                            <label class="control-label">
+                                                <input asp-for="Availability.MonthlyType" type="radio" value="1" checked="checked" />
+                                                Day
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <input asp-for="Availability.MonthlyDays" value="1" min="1" max="31" class="form-control" />
+                                            <span asp-validation-for="Availability.MonthlyDays" class="text-red"></span>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <label class="control-label">of every</label>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <input asp-for="Availability.MonthlyMonths" value="1" min="1" max="99" class="form-control" />
+                                            <span asp-validation-for="Availability.MonthlyMonths" class="text-red"></span>
+                                        </div>
+                                        <div class="col-lg-1 col-sm-1">
+                                            <label class="control-label">month(s)</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <br />
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2 col-sm-2">
+                                            <label class="control-label">
+                                                <input asp-for="Availability.MonthlyType" type="radio" value="2" />
+                                                The
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <select asp-for="Availability.MonthlyWeek" asp-items="@((List<SelectListItem>)ViewBag.MonthWeek)" class="form-control"></select>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <select asp-for="Availability.MonthlyWeekDay" asp-items="@((List<SelectListItem>)ViewBag.WeekDay)" class="form-control"></select>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <label class="control-label">of every</label>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <input asp-for="Availability.MonthlyWeekMonth" value="1" min="1" max="99" class="form-control" />
+                                            <span asp-validation-for="Unavailability.MonthlyWeekMonth" class="text-red"></span>
+                                        </div>
+                                        <div class="col-lg-1 col-sm-1">
+                                            <label class="control-label">month(s)</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="annual-basis-avalibility" class="hidden">
+
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label class="control-label">Every</label>
+                                        </div>
+                                        <div class="col-lg-3 col-sm-3">
+                                            <input asp-for="Availability.AnnualYears" value="1" min="1" max="99" class="form-control" />
+                                            <span asp-validation-for="Availability.AnnualYears" class="text-red"></span>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-2">
+                                            <label class="control-label">Year(s):</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <br />
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2 col-sm-2">
+                                            <label class="control-label">
+                                                <input asp-for="Availability.AnnualType" type="radio" value="1" checked="checked" />
+                                                On
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-3 col-sm-3">
+                                            <select asp-for="Availability.AnnualMonth" asp-items="@((List<SelectListItem>)ViewBag.Month)" class="form-control"></select>
+                                        </div>
+
+                                        <div class="col-lg-2 col-sm-2">
+                                            <input asp-for="Availability.AnnualMonthDay" value="1" min="1" max="31" class="form-control" />
+                                            <span asp-validation-for="Availability.AnnualMonthDay" class="text-red"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <br />
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2 col-sm-2">
+                                            <label class="control-label">
+                                                <input asp-for="Availability.AnnualType" type="radio" value="2" />
+                                                On the
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-3 col-sm-3">
+                                            <select asp-for="Availability.AnnualWeek" asp-items="@((List<SelectListItem>)ViewBag.MonthWeek)" class="form-control"></select>
+                                        </div>
+                                        <div class="col-lg-3 col-sm-3">
+                                            <select asp-for="Availability.AnnualWeekDay" asp-items="@((List<SelectListItem>)ViewBag.WeekDay)" class="form-control"></select>
+                                        </div>
+                                        <div class="col-lg-1 col-sm-1">
+                                            <label class="control-label">of</label>
+                                        </div>
+                                        <div class="col-lg-3 col-sm-3">
+                                            <select asp-for="Availability.AnnualMonthWeek" asp-items="@((List<SelectListItem>)ViewBag.Month)" class="form-control"></select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12">
+                            <h3 class="page-header">Availability Times :</h3>
+
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-lg-6 col-sm-6">
+                                <label class="control-label">
+                                    <input asp-for="Availability.UnavailabilityTimeType" type="radio" value="1" checked="checked" />
+                                    All Day on the selected dates
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="col-lg-2 col-sm-2">
+                                <label class="control-label">
+                                    <input asp-for="Availability.UnavailabilityTimeType" type="radio" value="2" />
+                                    From
+                                </label>
+                            </div>
+                            <div class="col-lg-3 col-sm-3">
+                                <input asp-for="Availability.TimeForm" class="form-control timepicker" data-mask="" , data-inputmask="'alias': 'hh:mm'" />
+                                <span asp-validation-for="Availability.AnnualMonthDay" id="timefrom" class="text-red"></span>
+                            </div>
+                            <div class="col-lg-1 col-sm-1">
+                                <label class="control-label">
+                                    To
+                                </label>
+                            </div>
+                            <div class="col-lg-3 col-sm-3">
+                                <input asp-for="Availability.TimeTo" class="form-control timepicker" data-mask="" , data-inputmask="'alias': 'hh:mm'" />
+                                <span asp-validation-for="Availability.AnnualMonthDay" class="text-red"></span>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+            <div class="frm-footer">
+                <button class="btn btn-primary" id="btn-submit" type="submit">
+                    Submit
+                    <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </div>
+            <!-- end modal body content  -->
+        </div>
+    </form>
+</div>

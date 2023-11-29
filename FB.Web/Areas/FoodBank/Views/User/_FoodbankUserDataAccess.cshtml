@@ -1,0 +1,94 @@
+﻿@model FB.Dto.FoodbankUserDataAccessibilityDto
+<style>
+    span.info-message {
+        font-size: 11px;
+        color: #ed1c24;
+        font-style: normal;
+        font-weight: 700;
+    }
+</style>
+<div id="frm-user-data-access" class="cmxform">
+    <form asp-controller="User" asp-action="FoodbankUserDataAccess" asp-antiforgery="true" method="post">
+        <partial name="_ModalHeader" model='new ModalHeader { Heading = "Update Access level" }' />
+        <div id="validation-summary"></div>
+        @Html.HiddenFor(model => model.UserID)
+    <div class="modal-body form-horizontal">
+        @if (!string.IsNullOrEmpty(Model.CentralOfficeName))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.CentralOfficeName, new { @class = "col-lg-4 col-sm-4 control-label" })
+                <div class="col-lg-7 col-sm-7">
+                    <input asp-for="CentralOfficeName" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="CentralOfficeName" class="text-red"></span>
+                </div>
+            </div>
+        }
+
+        @Html.HiddenFor(model => model.CentralOfficeID)
+        @if (!string.IsNullOrEmpty(Model.CharityName))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.CharityName, new { @class = "col-lg-4 col-sm-4 control-label" })
+                <div class="col-lg-7 col-sm-7">
+                    <input asp-for="CharityName" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="CharityName" class="text-red"></span>
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserFullName, new { @class = "col-lg-4 col-sm-4 control-label" })
+            <div class="col-lg-7 col-sm-7">
+                <input asp-for="UserFullName" class="form-control" readonly="readonly" />
+                <span asp-validation-for="UserFullName" class="text-red"></span>
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.BranchesId)
+
+        <div class="form-group">
+            <label class="col-lg-4 col-sm-4 control-label">Grant Access to :</label>
+            <div class="col-lg-7 col-sm-7 custom-drop">
+                @if (Model.IsFullAccess)
+                {
+                    <select id="CharityGroupNotAccess" name="CharityGroupNotAccess" asp-items="@((List<SelectListItem>)ViewBag.CharitiesNotAccess)" multiple="multiple" disabled="disabled"></select>
+                }
+                else
+                {
+                    <select id="CharityGroupNotAccess" name="CharityGroupNotAccess" asp-items="@((List<SelectListItem>)ViewBag.CharitiesNotAccess)" multiple="multiple"></select>
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 col-sm-4 control-label">Current Access :</label>
+            <div class="col-lg-7 col-sm-7 custom-drop">
+                @if (Model.IsFullAccess)
+                {
+                    <select id="CharityGroupAccess" name="CharityGroupAccess" asp-items="@((List<SelectListItem>)ViewBag.CharitiesAccess)" multiple="multiple" disabled="disabled">
+                    </select>
+                }
+                else
+                {
+                    <select id="CharityGroupAccess" name="CharityGroupAccess" asp-items="@((List<SelectListItem>)ViewBag.CharitiesAccess)" multiple="multiple"></select>
+                }
+                <br /><span class="info-message">*Use this list to alter the users access by unchecking the charities/branches you wish to revoke access to</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="checkbox col-sm-12">
+                <label>
+                    @Html.CheckBoxFor(model => model.IsFullAccess) @Html.LabelFor(model => model.IsFullAccess)
+                </label>
+            </div>
+        </div>
+        @*<div class="form-group">
+            <div class="checkbox col-sm-12">
+                <label>
+                    @Html.CheckBoxFor(model => model.IsPrivateNotesAccess) @Html.LabelFor(model => model.IsPrivateNotesAccess)
+                </label>
+            </div>
+        </div>*@
+    </div>
+        <partial name="_ModalFooter" model='new ModalFooter { }' />
+    </form>
+</div>

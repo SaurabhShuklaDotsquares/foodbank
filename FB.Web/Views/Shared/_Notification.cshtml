@@ -1,0 +1,36 @@
+﻿@{
+    var notificationModel = ViewData["NotificationModel"] as FB.Web.Notification;
+    if (notificationModel == null)
+    {
+        if (TempData["NotificationModel"] != null)
+        {
+
+            notificationModel = Newtonsoft.Json.JsonConvert.DeserializeObject<FB.Web.Notification>(TempData["NotificationModel"].ToString());
+        }
+    }
+}
+
+@if (notificationModel != null)
+{
+    <div id="notification-div" class="alert alert-@(notificationModel.Type.ToString().ToLower()) alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+            <i class="fa fa-times"></i>
+        </button>
+        <h4>
+            <i class="fa @(notificationModel.Icon)"></i>
+            @notificationModel.Heading
+        </h4>
+        @Html.Raw(notificationModel.Message)
+    </div>
+}
+
+<script type="text/javascript">
+    window.setTimeout(function () {
+        debugger;
+        $('#notification-div .close').trigger('click');
+        $('#notification-div .close').on("click", function () {
+            $('#notification-div').remove();
+        });
+
+    }, 3000);
+</script>

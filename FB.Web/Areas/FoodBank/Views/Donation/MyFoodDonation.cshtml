@@ -1,0 +1,139 @@
+﻿@model FB.Dto.FoodDonationDto
+@{
+    ViewBag.Title = "MyFoodDonation";
+}
+
+@section head{
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/alertify/css/alertify.css" rel="stylesheet" />
+
+}
+
+<section class="content-header">
+    <h1>
+        My Donations
+    </h1>
+</section>
+
+<section class="content">
+    <partial name="_Notification" />
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#fooddonation" data-toggle="tab" class="food-tab">Food Donations</a></li>
+                    <li><a href="#cashcard" data-toggle="tab" class="cash-tab">Cash/Card</a></li>
+                </ul>
+                <input asp-for="FoodBankId" type="hidden" id="hdnFoodBankId" value="@Model.FoodBankId" />
+                <div class="tab-content donations-tab">
+                    <div id="fooddonation" class="tab-pane active">
+                        <div class="content form-horizontal">
+                            @*<div class="table-top">
+                                <a type="button" data-toggle="modal" data-target="#modal-add-food-donations" class="add-food-btn" href="@Url.Action("AddFoodDonation","Donation")">
+                                   
+                                </a>
+                            </div>*@
+                            <div class="table-top add-btn-main">
+
+                                <div class="col-lg-4 col-sm-4 col-xs-12 filter-data" style="background: #efeded; margin:0px 0px 20px 0px;padding:10px 0px">
+                                    <div class="col-lg-2 col-sm-12 col-xs-12" style="">
+                                        <label>Charity  </label>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 col-xs-12">
+                                        @Html.DropDownList("CharityID", (List<SelectListItem>)ViewBag.Charities, new { @class = "form-control", @style = "min-width:300px" })
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-sm-4 col-xs-12 filter-data" style="background: #efeded; margin:0px 0px 20px 0px;padding:10px 0px">
+                                    <div class="col-lg-2 col-sm-12 col-xs-12" style="">
+                                        <label>Branch  </label>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 col-xs-12">
+                                        @Html.DropDownList("BranchID", (List<SelectListItem>)ViewBag.Branches, new { @class = "form-control", @style = "min-width:300px" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-4 col-xs-12 filter-data" style="background: #efeded; margin:0px 0px 20px 0px;padding:10px 0px">
+                                    <div class="col-lg-6 col-sm-12 col-xs-12" style="">
+                                        <label>&nbsp;  </label>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 col-xs-12">
+                                        <a type="button" data-toggle="modal" onclick="ShowLoader()" data-target="#modal-add-food-donations" class="btn btn-primary" href="@Url.Action("AddFoodDonation","Donation")"> <img src="/Content/images/add.png" width="20px" alt="">Add Food Donations &nbsp;&nbsp;</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="fooddonation" class="">
+                                <table id="grid-food-donation" class="table table-bordered table-striped table-condensed food-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>S.No</th>
+                                            <th>Donor Name</th>
+                                            <th>Date of Donation</th>
+                                            <th>Name</th>
+                                            <th>Quantity</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cashcard" class="tab-pane">
+                        <div class="content form-horizontal">
+                            <div class="table-top add-btn-main">
+
+                                <div class="col-lg-4 col-sm-4 col-xs-12 filter-data" style="background: #efeded; margin:0px 0px 20px 0px;padding:10px 0px">
+                                    <div class="col-lg-2 col-sm-12 col-xs-12" style="">
+                                        <label>Charity  </label>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 col-xs-12">
+                                        @Html.DropDownList("CharityID2", (List<SelectListItem>)ViewBag.Charities, new { @class = "form-control", @style = "min-width:300px" })
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-8 col-sm-8 col-xs-12 filter-data" style="background: #efeded; margin:0px 0px 20px 0px;padding:10px 0px">
+                                    <div class="col-lg-2 col-sm-12 col-xs-12" style="">
+                                        <label>Branch  </label>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 col-xs-12">
+                                        @Html.DropDownList("BranchID2", (List<SelectListItem>)ViewBag.Branches, new { @class = "form-control", @style = "min-width:300px" })
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="">
+                                <table id="grid-payment-donation" class="table table-bordered table-striped table-condensed food-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>S.No</th>
+                                            <th>Date of Donation</th>
+                                            <th>Donation Type</th>
+                                            <th>Card type</th>
+                                            <th>Amount</th>
+                                            <th>Is GA declared</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@Html.Partial("_Modal", new Modal { ID = "modal-add-food-donations", AreaLabeledId = "modal-add-food-donations-label", Size = ModalSize.Medium })
+<partial name="_Modal" model='new Modal { ID="modal-delete-donations" , AreaLabeledId="modal-delete-donations-label" , Size=ModalSize.Medium }' />
+<partial name="_Modal" model='new Modal { ID="modal-view-donations" , AreaLabeledId="modal-view-donations-label" , Size=ModalSize.Medium }' />
+
+@section scripts{
+    <script src="~/Scripts/custom/donation/admin-food-donation.js"></script>
+}

@@ -1,0 +1,74 @@
+﻿@model FB.Dto.MSUserDto
+@{
+    string domainName = $"@{Model.Domain}";
+}
+<div id="frm-create-edit-ms-user" class="cmxform">
+    <form asp-controller="User" asp-action="CreateEditMSUser" asp-antiforgery="true" method="post">
+        <partial name="_ModalHeader" model='new ModalHeader { Heading = Model.MSObjectID.IsNotNullAndNotEmpty()? "Edit Microsoft User" : "Add Microsoft User"}' />
+        <div id="validation-summary"></div>
+        <input asp-for="UserId" type="hidden" />
+        <input asp-for="MSObjectID" type="hidden" />
+        <input asp-for="MSUserPrincipalName" type="hidden" />
+        <input asp-for="Domain" type="hidden" />
+        <div class="modal-body form-horizontal">
+            <div class="form-group">
+                <label asp-for="DisplayName" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-9 col-sm-9">
+                    <input asp-for="DisplayName" class="form-control" />
+                    <span asp-validation-for="DisplayName" class="text-red"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-5 col-sm-5">
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-red"></span>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                    <input type="text" class="form-control" value="@domainName" readonly="readonly" />
+                </div>
+            </div>
+
+            @if (string.IsNullOrEmpty(Model.MSObjectID))
+            {
+                <h3 class="page-header"><text>Password</text></h3>
+                <div>
+                    <span class="text" style="background-color:wheat;padding:8px;"><i class="fa fa-fw fa-warning"></i>This Password does not added in MyMembershipManager, Please remember otherwise save this anywhere.</span>
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <br />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="Password" class="col-lg-4 col-sm-4 control-label"></label>
+                                <div class="col-lg-8 col-sm-8">
+                                    <input type="password" asp-for="Password" class="form-control random-password txt-auto-complete" autocomplete="new-password" />
+                                    <span asp-validation-for="Password" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="ConfirmPassword" class="col-lg-4 col-sm-4 control-label"></label>
+                                <div class="col-lg-8 col-sm-8">
+                                    <input  autocomplete="off"  type="password" asp-for="ConfirmPassword" class="form-control random-password" />
+                                    <span asp-validation-for="ConfirmPassword" class="text-red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <button id="btnGeneratePassword" class="btn btn-primary pull-right" type="button">Generate Random Password</button>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+        <partial name="_ModalFooter" model='new ModalFooter { }' />
+    </form>
+</div>

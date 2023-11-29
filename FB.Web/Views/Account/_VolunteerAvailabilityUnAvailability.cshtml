@@ -1,0 +1,70 @@
+﻿<!--====================  UnAlailibility And Availability Grid Section ==============================================-->
+<div class="col-md-12 avail-commen-box">
+    <input type="hidden" id="hdnVolunteerId" value="@ViewBag.VolunteerId" />
+
+    <fieldset class="field-border-block">
+        <legend><strong>Regular Availability</strong></legend>
+        <div class="row">
+            <input type="hidden" id="ParcelTypeId" name="ParcelTypeId" value="1">
+            <div class="col-sm-12">
+
+                <div id="div-volunteer-availability-list">
+                    <div class="table-top">
+                        <a type="button" data-toggle="modal" data-target="#modal-add-availability" class="add-food-btn" onclick="ShowLoader()" href="@Url.Action("addavailability","account",new {volunteerId= @ViewBag.VolunteerId})">
+                            Add Availability
+                        </a>
+                    </div>
+                    <div class="">
+                        <table class="table table-bordered table-striped food-table agencies-table" id="grid-volunteer-availability-list">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>From</th>
+                                    <th>Pattern</th>
+                                    <th>Until</th>
+                                    <th>Times</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+<div class="col-md-12 avail-commen-box">
+    <fieldset class="field-border-block">
+        <legend><strong>Unavailability</strong></legend>
+        <div class="row">
+            <input type="hidden" id="ParcelTypeId" name="ParcelTypeId" value="1">
+            <div class="col-sm-12">
+                <div id="div-volunteer-unavailability-list">
+                    <div class="table-top">
+                        <a type="button" data-toggle="modal" data-target="#modal-add-unavailability" class="add-food-btn" onclick="ShowLoader()" href="@Url.Action("addunavailability","account",new {volunteerId= @ViewBag.VolunteerId})">
+                            Add Unavailability
+                        </a>
+                    </div>
+                    <div class="">
+                        <table class="table table-bordered table-striped  food-table agencies-table" id="grid-volunteer-unavailability-list">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>From</th>
+                                    <th>Pattern</th>
+                                    <th>Until</th>
+                                    <th>Times</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<!--====================  UnAlailibility And Availability Grid Section ==============================================-->

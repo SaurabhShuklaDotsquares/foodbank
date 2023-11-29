@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head{
+    <link href="~/Scripts/plugins/select2/select2.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/select2/select2-bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/datepicker/datepicker3.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/bootstrap-tokenfield/dist/css/tokenfield-typeahead.css" rel="stylesheet" />
+}
+
+<section class="content-header">
+    <h1>
+       Manage Feedback Form
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="box">
+        <partial name="_Notification" />
+        <div class="box-header">
+            <div class="btn-group">
+                <a data-toggle="modal" href="@Url.Action("CreateEdit")" data-target="#modal-create-edit-user-defined-field" class="btn btn-primary">
+                    Add New <i class="fa fa-plus"></i>
+                </a>
+            </div>
+        </div>
+        <div class="box-body ">
+           
+            <table id="grid-user-defined-field" class="table table-bordered table-striped table-hover tbl_bg_clr">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>S.No</th>
+                        <th width="30%">Question </th>
+                        <th>Question Type</th>
+                        <th width="30%">Default Value</th>
+                        <td>Auto Assign</td>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script src="~/Scripts/plugins/select2/select2.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="~/Scripts/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/custom/Feedback/Feedbackuser-defined-field-index.js"></script>
+    <script src="~/Scripts/plugins/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
+
+}
+
+<partial name="_Modal" model='new Modal { ID = "modal-create-edit-user-defined-field", AreaLabeledId = "modal-create-edit-user-defined-field-label", Size = ModalSize.Medium }' />
+<partial name="_Modal" model='new Modal { ID="modal-delete-user-defined-field" , AreaLabeledId="modal-delete-user-defined-field-label" , Size=ModalSize.Medium }' />
+

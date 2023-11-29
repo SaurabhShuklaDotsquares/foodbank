@@ -1,0 +1,105 @@
+﻿@model List<FB.Dto.FoodbankRoleMenuPrivilegeDto>
+
+@{
+    FB.Dto.RoleDto role = ((FB.Dto.RoleDto)ViewBag.Role);
+    List<FB.Dto.MenuDto> menus = ((List<FB.Dto.MenuDto>)ViewBag.Menus);
+    List<int> MenuIds = Model.Select(m => m.MenuID).ToList();
+
+    string[] readOnlyUrl = { "donor/editdonor/{0}" };
+}
+
+<div id="frm-assign-permission" class="cmxform">
+    <form asp-controller="Role" asp-action="MMORolePermission" asp-antiforgery="true" method="post">
+        @{
+            int counter = 0;
+
+            string headerTitle = role.RoleName + "'s Permission";  //<button type='button' id='btnReadOnly' class='btn btn-primary'>Read-Only</button>
+        }
+        <partial name="_ModalHeader" model='new ModalHeader { Heading = headerTitle  }' />
+        <div id="validation-summary"></div>
+        @foreach (var menu in menus.Where(m => m.ParentMenuID == null).ToList())
+        {
+            <div class="col-lg-12 col-md-12  @(menus.Count(m => m.ParentMenuID == menu.MenuID) > 0 ? "top-parent" : "")">
+                <div class="checkbox">
+                    <label>
+                        @Html.Hidden("[" + counter + "].RoleID", role.RoleID)
+                        <input name="@("[" + counter+ "].MenuID")" @(MenuIds.Contains(menu.MenuID) ? "checked=checked" : "") value="@menu.MenuID" type="checkbox" class="@(menus.Count(m => m.ParentMenuID == menu.MenuID) > 0 ? "chkParent" : "chkmenu")" rel="@menu.MenuID" /> @menu.MenuName
+                    </label>
+                </div>
+                @if (menus.Count(m => m.ParentMenuID == menu.MenuID) > 0)
+                {
+                    <div class="parent clearfix">
+                        @foreach (var menulevel1 in menus.Where(m => m.ParentMenuID == menu.MenuID))
+                        {
+                            counter++;
+
+                            <div class="col-lg-3 col-md-3 @(menus.Count(m => m.ParentMenuID == menulevel1.MenuID) > 0 ? "top-parent" : "")">
+                                <div class="checkbox font_bold">
+                                    <label>
+                                        @Html.Hidden("[" + counter + "].RoleID", role.RoleID)
+                                        <input name="@("[" + counter + "].MenuID")" @(MenuIds.Contains(menulevel1.MenuID) ? "checked=checked" : "") value="@menulevel1.MenuID" data-read-only="@(readOnlyUrl.Contains(menulevel1.MenuUrl.ToLower()))" type="checkbox" class="@(menus.Count(m => m.ParentMenuID == menulevel1.MenuID) > 0 ? "chkParent" : "chkMenu")" rel="@menulevel1.MenuID" /> @menulevel1.MenuName
+                                    </label>
+                                </div>
+                                @if (menus.Count(m => m.ParentMenuID == menulevel1.MenuID) > 0)
+                                {
+                                    <div class="parent">
+                                        @foreach (var menulevel2 in menus.Where(m => m.ParentMenuID == menulevel1.MenuID))
+                                        {
+                                            counter++;
+                                            <div class="col-lg-12 col-md-12">
+
+                                                @if (menus.Count(m => m.ParentMenuID == menulevel2.MenuID) > 0)
+                                                {
+                                                    <div class="top-parent">
+                                                        <div class="checkbox font_bold">
+                                                            <label>
+                                                                @Html.Hidden("[" + counter + "].RoleID", role.RoleID)
+                                                                <input name="@("[" + counter + "].MenuID")" @(MenuIds.Contains(menulevel2.MenuID) ? "checked=checked" : "") value="@menulevel2.MenuID" data-read-only="@(readOnlyUrl.Contains(menulevel2.MenuUrl.ToLower()))" type="checkbox" class="@(menus.Count(m => m.ParentMenuID == menulevel2.MenuID) > 0 ? "chkParent" : "chkMenu")" rel="@menulevel2.MenuID" /> @menulevel2.MenuName
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="parent">
+                                                            @foreach (var menulevel3 in menus.Where(m => m.ParentMenuID == menulevel2.MenuID))
+                                                            {
+                                                                counter++;
+
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    <div class="checkbox">
+                                                                        <label>
+                                                                            @Html.Hidden("[" + counter + "].RoleID", role.RoleID)
+                                                                            <input name="@("[" + counter + "].MenuID")" @(MenuIds.Contains(menulevel3.MenuID) ? "checked=checked" : "") value="@menulevel3.MenuID" data-read-only="@(readOnlyUrl.Contains(menulevel3.MenuUrl.ToLower()))" type="checkbox" class="chkMenu" rel="@menulevel3.MenuID" /> @menulevel3.MenuName
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            @Html.Hidden("[" + counter + "].RoleID", role.RoleID)
+                                                            <input name="@("[" + counter + "].MenuID")" @(MenuIds.Contains(menulevel2.MenuID) ? "checked=checked" : "") value="@menulevel2.MenuID" data-read-only="@(readOnlyUrl.Contains(menulevel2.MenuUrl.ToLower()))" type="checkbox" class="chkMenu" rel="@menulevel2.MenuID" /> @menulevel2.MenuName
+                                                        </label>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
+
+                        }
+                    </div>
+                    counter++;
+                }
+                else
+                {
+                    counter++;
+                }
+            </div>
+        }
+        <partial name="_ModalFooter" model='new ModalFooter { }' />
+    </form>
+</div>

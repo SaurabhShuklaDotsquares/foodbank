@@ -1,0 +1,40 @@
+﻿@model List<FB.Dto.PersonLiteDto>
+@Html.Partial("_ModalHeader", new ModalHeader { Heading = "List Donors" })
+<div class="modal-body form-horizontal" style="height:500px;overflow-y:auto;">
+    @if (Model.Count <= 0)
+    {
+        <label style="color:red">No Record found</label>
+    }
+    else
+    {
+        <table id="grid-donor-list" class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Charity</th>
+                    <th>Branch</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Reference</th>
+                    <th>Is Active</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.CharityName</td>
+                        <td>@item.BranchName</td>
+                        <td>@item.PersonName</td>
+                        <td>@item.Address</td>
+                        <td>@item.Reference</td>
+                        <td>@(item.Active ? "Yes" : "No")</td>
+                        <td><button class="btn btn-primary btnDonorSelect" type="button" data-donorid="@item.PersonID">Select</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<div class="clearfix"></div>
+@Html.Partial("_ModalFooter", new ModalFooter { OnlyCancelButton = true })

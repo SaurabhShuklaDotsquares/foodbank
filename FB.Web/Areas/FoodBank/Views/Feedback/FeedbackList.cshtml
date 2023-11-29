@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "FeedbackList";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="wrapper">
+    <div class="">
+        <div class="inner-bg">
+            <section class="content-header">
+                <h1>
+                    Feedback List
+                </h1>
+            </section>
+            <section class="content">
+                <div class="cmxform donor-form referrals-form">
+                    <div class="">
+                        <table id="grid-my-referral" class="table table-bordered table-striped table-condensed food-table">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Feedback date</th>
+                                    <th>Family name</th>
+                                    <th>Delivery Date</th>
+                                    <th>Parcel Type </th>
+                                    <th>Packing Date</th>
+                                    <th>View</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                            <tfoot></tfoot>
+                        </table>                       
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/custom/Feedback/feedbacklist.js"></script>
+}

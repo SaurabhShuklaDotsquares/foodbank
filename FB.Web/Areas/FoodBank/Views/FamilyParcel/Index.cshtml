@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Parcels";
+}
+
+@section head{
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/alertify/css/alertify.css" rel="stylesheet" />
+}
+<div class="wrapper">
+    <div class="">
+        <div class="inner-bg">
+            <section class="content-header">
+                <h1>
+                    Parcels
+                </h1>
+            </section>
+
+            <section class="content">
+                <partial name="_Notification" />
+                <div class="cmxform donor-form referrals-form">
+                    <div class="table-top add-btn-main">
+                        <a class="add-food-btn" href="@Url.Action("createedit")"><img src="/Content/images/add.png" alt="">Add Parcels</a>
+                    </div>
+
+                    <table id="grid-family-parcel-master" class=" table table-bordered table-striped table-condensed food-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>S.No</th>
+                                <th>Parcel Type</th>
+                                <th>Family Name</th>
+                                <th>Due Date</th>
+                                <th>Delivered Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot></tfoot>
+                    </table>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<partial name="_Modal" model='new Modal { ID="modal-delete-parcel" , AreaLabeledId="modal-delete-parcel-label" , Size=ModalSize.Medium }' />
+<partial name="_Modal" model='new Modal { ID="modal-download-qrcode" , AreaLabeledId="modal-download-qrcode-label" , Size=ModalSize.Medium }' />
+
+@section scripts{
+    <script src="~/Scripts/custom/family-parcel/index.js"></script>
+}

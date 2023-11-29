@@ -1,0 +1,132 @@
+﻿@model FB.Dto.FoodbankSettingDto
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="wrapper">
+    <div class="">
+        <div class="inner-bg">
+            <section class="content-header">
+                <h1>Settings</h1>
+            </section>
+            <section class="content">
+                <partial name="_Notification" />
+                <div id="frm-create-donor" class="cmxform donor-form">
+                    <form asp-controller="Setting" asp-action="Index" method="post" novalidate="novalidate" enctype="multipart/form-data" id="foodbanksetting-form">
+                        <div class="row">
+                            <div class="col-sm-12"><h3 class="page-header">Brand Settings</h3></div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="LogoImage" class="col-lg-3 col-sm-3 control-label">Logo Upload<span class="redtext">*</span></label>
+                                    <div class="col-lg-9 col-sm-9">
+                                        <span class="control-fileupload">
+                                            <input asp-for="LogoImage" name="LogoImage" id="LogoImage" accept="image/*" type="file">
+                                        </span>
+                                        <span asp-validation-for="LogoImage" class="text-red"></span>
+                                        @if (Model.LogoImage != null)
+                                        {
+                                            <img src="/FoodbankSettingPhotos/@Model.LogoImage" width="50px" />
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="form-group txt-area">
+                                    <label asp-for="TailoredNotes" class="col-sm-3 control-label">Tailored Notes</label>
+                                    <div class="col-lg-9 col-sm-9"> 
+                                        <textarea asp-for="TailoredNotes" name="TailoredNotes" maxlength="200" id="TailoredNotes" class="form-control" rows="4" cols="50"></textarea>
+                                        <span asp-validation-for="TailoredNotes" class="text-red"></span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="DashboardImage" class="col-sm-4 control-label">Dashboard Image<span class="redtext">*</span></label>
+                                    <div class="col-sm-8">
+                                        <span class="control-fileupload">
+                                            <input asp-for="DashboardImage" name="DashboardImage" accept="image/*" id="DashboardImage" type="file">
+                                        </span>
+                                        <span asp-validation-for="DashboardImage" class="text-red"></span>
+                                        @if (Model.DashboardImage != null)
+                                        {
+                                            <img src="/FoodbankSettingPhotos/@Model.DashboardImage" width="50px" />
+                                        }
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Feedback Page Setting</label>
+                                    <div class="col-sm-8">
+                                        <a href="@Url.Action("index","feedback")">Click for manage feedback form</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12"><h3 class="page-header">Contact Details</h3></div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Email" class="col-lg-3 col-sm-3 control-label">Email<span class="redtext">*</span></label>
+                                    <div class="col-lg-9 col-sm-9">
+                                        <input asp-for="Email" name="Email" id="Email" maxlength="100" class="form-control " type="email">
+                                        <span asp-validation-for="Email" class="text-red"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="PhoneNumber" class="col-lg-3 col-sm-3 control-label">Phone Number<span class="redtext">*</span></label>
+                                    <div class="col-lg-9 col-sm-9">
+                                        <input asp-for="PhoneNumber" name="PhoneNumber" id="PhoneNumber" maxlength="20" class="form-control " type="text">
+                                        <span asp-validation-for="PhoneNumber" class="text-red"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row marT10">
+                            <div class="col-sm-12"><h3 class="page-header">Charity and Branch Settings </h3></div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="ReferralLimit" class="col-lg-3 col-sm-3 control-label">Referral Limit<span class="redtext">*</span></label>
+                                    <div class="col-lg-9 col-sm-9">
+                                        <input asp-for="ReferralLimit" name="ReferralLimit" id="ReferralLimit" maxlength="100" class="form-control " type="number">
+                                        <span asp-validation-for="ReferralLimit" class="text-red"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="ParcelLimit" class="col-lg-3 col-sm-3 control-label"> Parcel Limit <span class="redtext">*</span></label>
+                                    <div class="col-lg-9 col-sm-9">
+                                        <input asp-for="ParcelLimit" name="ParcelLimit" id="ParcelLimit" maxlength="20" class="form-control " type="number">
+                                        <span asp-validation-for="ParcelLimit" class="text-red"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="frm-footer">
+                            <a asp-controller="dashboard" asp-action="index" data-dismiss="modal" id="btn-cancel" class="btn btn-default" type="button">
+                                <i class="fa fa-arrow-circle-left"></i>Cancel
+                            </a>
+                            <button class="btn btn-primary" id="btn-submit" type="submit">
+                                Save
+                                <i class="fa fa-arrow-circle-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+@*@section scripts{
+    <script src="~/Scripts/custom/donation/settings.js"></script>
+}*@
+

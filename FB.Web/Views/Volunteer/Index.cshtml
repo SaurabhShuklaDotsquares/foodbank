@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "Volunteer-Dashboard";
+}
+@section head{
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/alertify/css/alertify.css" rel="stylesheet" />
+    </style>
+}
+
+<div class="inner-bg-white">
+    <div class="banner clearfix">
+        <input id="hdnVolunteerId" value="@ViewBag.VolunteerId" hidden />
+        <div class="bnr_nav">
+            <ul>
+                <li><a href="@Url.Action("updateprofile","volunteer")">My Profile</a></li>
+                <li><a id="my-delivery" href="#">My Deliveries </a></li>
+                <li><a href="@Url.Action("packinglisting","volunteer")">Packing List</a></li>
+            </ul>
+        </div>
+        <div class="pull-right bnr dashboard-sec dashboard-refe dash-volunteer">
+            <div class="dashboard-bg">
+                <div class="dashboard-main">
+                    <div class="row">
+                        @*My Delivery Section*@
+                        <div class="col-lg-8 col-xs-12 my-delivery-list" id="div-volunteer-delivery-list">
+                            <div class="ref-title">My Delivery </div>
+                            <div class="">
+                                <table class="table table-bordered food-table agencies-table" id="grid-volunteer-delivery-list">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Date for delivery</th>
+                                            <th>Family Name</th>
+                                            <th>Parcel Type</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        @*My Delivery Section*@
+
+                    <div class="col-lg-4 col-xs-12">
+                        <div class="volunteer-side-dash">
+                            <div class="ref-title">My Availability</div>
+                            <div class="dash-box blue-bg avail-box next-box">
+                                <figure><img src="Content/images/avail-icon.png"></figure>
+                                <strong>@ViewBag.NextShiftDate</strong>
+                                <span class="dash-bt-txt">Next shift date</span>
+                            </div>
+                        </div>
+                        <div class="volunteer-side-dash volunteer-help-table">
+                            <div class="ref-title">How you've helped us</div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered food-table admin-table">
+                                    <tr>
+                                        <th>1</th>
+                                        <td>Days worked</td>
+                                        <td>@ViewBag.DayCount</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>2</th>
+                                        <td>Parcels Packed</td>
+                                        <td>@ViewBag.TotalPacker</td>
+                                    </tr>
+                                    <tr>
+                                        <th>3</th>
+                                        <td>Delivered </td>
+                                        <td>@ViewBag.TotalDeliver </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="volunteer-side-dash">
+                            <div class="ref-title"> Achievement Badges </div>
+                            <div class="dash-box blue-bg  avail-box next-box">
+                             
+                                <strong>
+                                    <span class="fa fa-star @(ViewBag.TotalDeliver>=((int)AchievementBadges.First)?"checked":"")" title="@((int)AchievementBadges.First) Delivered"></span>
+                                    <span class="fa fa-star @(ViewBag.TotalDeliver>=((int)AchievementBadges.Second)?"checked":"")" title="@((int)AchievementBadges.Second) Delivered"></span>
+                                    <span class="fa fa-star @(ViewBag.TotalDeliver>=((int)AchievementBadges.Third)?"checked":"")" title="@((int)AchievementBadges.Third) Delivered"></span>
+                                    <span class="fa fa-star @(ViewBag.TotalDeliver>=((int)AchievementBadges.Fourth)?"checked":"")" title="@((int)AchievementBadges.Fourth) Delivered"></span>
+                                    <span class="fa fa-star @(ViewBag.TotalDeliver>=((int)AchievementBadges.First)?"checked":"")" title="More than @((int)AchievementBadges.Fifth)   Delivered"></span>
+                                </strong>
+                                <style>
+                                    .checked {
+                                        color: orange;
+                                    }
+                                </style>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="smart-solutions">
+        Software for Churches and Charities.....
+    </div>
+    <div class="doners-records dis_none">
+        <div class="doners-btns">
+        </div>
+        <div class="doners-logo"><img src="Content/images/gamen.png" alt=""></div>
+    </div>
+</div>
+@Html.Partial("_Modal", new Modal { ID = "modal-add-food-donations", AreaLabeledId = "modal-add-food-donations-label", Size = ModalSize.Medium })
+
+@section scripts{
+    <script src="~/Scripts/custom/volunteer/my-delivery-list.js"></script>
+}

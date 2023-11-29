@@ -1,0 +1,346 @@
+﻿@model FB.Dto.PersonDto
+@{
+    ViewBag.Title = "Donor Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script src="~/Scripts/custom/donor/admin-donor-profile.js"></script>
+}
+<div class="inner-bg">
+    <section class="content-header">
+        <h1>
+         Donor Registration
+        </h1>
+    </section>
+    <section class="content">
+        <partial name="_Notification" />
+        <div id="frm-create-donor" class="cmxform donor-form add-donor-frm">
+            <form method="post" novalidate="novalidate">
+                <div id='postcodes4ukey' style='display: none;'>@SiteKeys.Postcode4uKey</div>
+                <div id='postcodes4uuser' style='display: none;'>@SiteKeys.Postcode4uUser</div>
+                <textarea id="copyURL" style="display:none;" rows="1" cols="30"></textarea>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-header">Name</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-lg-3 col-sm-3 control-label" for="Title">Title</label>
+                            <div class="col-lg-9 col-sm-9">
+                                <input asp-for="Title" class="form-control" placeholder="Title" maxlength="4" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-lg-3 col-sm-3 control-label" for="Forenames">
+                                First Name<span class="redtext">*</span>
+                            </label>
+                            <div class="col-lg-9 col-sm-9">
+                                <input asp-for="Forenames" class="form-control" placeholder="First name" />
+                                <span asp-validation-for="Forenames" class="text-red"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Surname">Last Name<span class="redtext">*</span></label>
+                            <div class="col-sm-9">
+                                <input asp-for="Surname" class="form-control" placeholder="Last name" />
+                                <span asp-validation-for="Surname" class="text-red"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Email">Email<span class="redtext">*</span></label>
+                            <div class="col-sm-9">
+                                <input asp-for="Email" class="form-control" placeholder="Email" />
+                                <span asp-validation-for="Email" class="text-red"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-lg-3 col-sm-3 control-label" for="Initials">Initials</label>
+                            <div class="col-lg-9 col-sm-9">
+                                <input asp-for="Initials" class="form-control" placeholder="Initials" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group hidden">
+                            <label class="col-sm-3 control-label" for="Suffix">Suffix</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Suffix" class="form-control" placeholder="Suffix" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-header">Organisation Details</h3>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Title">Organisation<span class="redtext">*</span></label>
+                            <div class="col-sm-9">
+                                <select asp-for="CentralOfficeID" class="form-control create-donor-country" asp-items="@((List<SelectListItem>)ViewBag.Organisations)" readonly></select>
+                                <span asp-validation-for="CentralOfficeID" class="text-red"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Title">Charity<span class="redtext">*</span></label>
+                            <div class="col-sm-9">
+                                <select asp-for="CharityID" class="form-control create-donor-country" asp-items="@((List<SelectListItem>)ViewBag.Charities)" ></select>
+                                <span asp-validation-for="CharityID" class="text-red"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Forenames">Branches<span class="redtext">*</span></label>
+                            <div class="col-sm-9">
+                                <select asp-for="BranchID" class="form-control create-donor-country" asp-items="@((List<SelectListItem>)ViewBag.Branches)" ></select>
+                                <span asp-validation-for="BranchID" class="text-red"></span>
+                                @Html.HiddenFor(model => model.BranchIDs)
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row auto-address">
+                    <div class="col-sm-12">
+                        <h3 class="page-header">Address</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"
+                                   for="Addresses_0__PostCode">Postcode<span class="redtext">*</span></label>
+                            <div class="col-sm-6">
+                                @if (Model.Overseas)
+                                {
+                                    <input asp-for="Addresses[0].PostCode" class="form-control postcode" placeholder="Postcode" disabled="disabled" />
+                                }
+                                else
+                                {
+                                    <input asp-for="Addresses[0].PostCode" class="form-control postcode" placeholder="Postcode" />
+                                    <span asp-validation-for="Addresses[0].PostCode" class="text-red"></span>
+                                }
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="button" class="btn btn-primary ps3" onclick="SearchBegin(this);" value="Lookup" />
+                            </div>
+                        </div>
+
+                        <div class="form-group post-dropdown" style="display:none;">
+                            <label class="col-lg-3 col-sm-3 control-label">Select Address</label>
+                            <div class="col-lg-9 col-sm-9">
+                                <select id="drpPostcodeAddr" style='display:none;' class="form-control dropdown">
+                                    <option>Select an address:</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Addresses_0__HouseName">House Name</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Addresses[0].HouseName" class="form-control house-name" placeholder="House Name" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Addresses_0__HouseNumber">House Number</label>
+                            <div class=" col-sm-9">
+                                <input asp-for="Addresses[0].HouseNumber" class="form-control house-number" placeholder="House Number" />
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Addresses_0__City">City<span class="redtext">*</span></label>
+                            <div class="col-sm-9">
+                                <input asp-for="Addresses[0].City" autocomplete="off" class="form-control city-auto city" placeholder="City" type="text">
+                                <span asp-validation-for="Addresses[0].City" class="text-red"></span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Addresses_0__StreetName">
+                                Street
+                                Name<span class="redtext">*</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input asp-for="Addresses[0].StreetName" class="form-control street-name" placeholder="Street Name" />
+                                <span asp-validation-for="Addresses[0].StreetName" class="text-red"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="Addresses_0__OtherAddressLine">
+                                Other
+                                Address Line
+                            </label>
+                            <div class="col-sm-9">
+                                <input asp-for="Addresses[0].OtherAddressLine" class="form-control other-address-line" placeholder="Other Address Line" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"
+                                   for="Addresses_0__CountryID">Country<span class="redtext">*</span></label>
+                            <div class="col-sm-9">
+                                <select asp-for="Addresses[0].CountryID" class="form-control create-donor-country" asp-items="@((List<SelectListItem>)ViewBag.CountryList)"></select>
+                                <span asp-validation-for="Addresses[0].CountryID" class="text-red"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-9">
+                                <div class="checkbox">
+                                    <label>
+                                        <input asp-for="Overseas" data-val="true"
+                                               data-val-required="'Overseas' must not be empty." id="Overseas"
+                                               name="Overseas" type="checkbox" value="true"><input name="Overseas" type="hidden" value="false"> <label for="Overseas">
+                                            Address is
+                                            Overseas
+                                        </label>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row" style="display:none">
+                    <div class="col-sm-12">
+                        <h3 class="page-header">Reference</h3>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="col-lg-3 col-sm-3 control-label" for="Reference">Reference</label>
+                            <div class="col-lg-9 col-sm-9">
+                                <input asp-for="Reference" class="form-control textReference"
+                                       placeholder="Reference"
+                                       type="text">
+                                <span asp-validation-for="Reference" class="text-red"></span>
+                            </div>
+                            <label id="Donorerrmsg" style="color:red;"></label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <button name="LastReference" type="button" id="LastReference"
+                                class="btn btn-primary" value="Next Reference">
+                            <span id="lastrefmsg"> Next Reference</span>
+                            <i class="fa fa-arrow-circle-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-header">Account Details</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-lg-3 col-sm-3 control-label" for="UserName">User Name<span class="redtext">*</span></label>
+                            <div class="col-lg-9 col-sm-9">
+                                <input asp-for="UserName" class="form-control userAvailbility txt-auto-complete" placeholder="User Name" />
+                                <span asp-validation-for="UserName" class="text-red"></span>
+                                <div style="display:block;text-align:left">
+                                    <div class="col-lg-3 col-sm-3 control-label"></div>
+                                    <div id="divError" class="col-lg-9 col-sm-9" style="text-align:left"></div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                  
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group hi">
+                            <label class="col-lg-3 col-sm-3 control-label" for="ConfirmPassword">Password<span class="redtext">*</span> </label>
+                            <div class="col-lg-9 col-sm-9">
+                                <input asp-for="Password" class="form-control random-password" placeholder="Password" type="password" />
+                                <span asp-validation-for="Password" class="text-red"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group" style="margin-bottom:0px;">
+                            <label class="col-lg-3 col-sm-3 control-label" for="ConfirmPassword">Confirm Password<span class="redtext">*</span></label>
+                            <div class="col-lg-9 col-sm-9">
+                                <input asp-for="ConfirmPassword" class="form-control random-password" placeholder="Confirm Password" type="password" />
+                                <span asp-validation-for="ConfirmPassword" class="text-red"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-9">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="password-field" class="toggle-password" name="ChangePassword" type="checkbox">
+                                    <label for="IsChangePassword">Show Password</label>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-lg-3 col-sm-3 control-label" for="PasswordQuestion">Password Question<span class="redtext">*</span></label>
+                        <div class="col-lg-9 col-sm-9">
+                            <input asp-for="PasswordQuestion" class="form-control alpha-numeric" placeholder="Password Question" />
+                            <span asp-validation-for="PasswordQuestion" class="text-red"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-lg-3 col-sm-3 control-label" for="PasswordAnswer">Password Answer<span class="redtext">*</span></label>
+                        <div class="col-lg-9 col-sm-9">
+                            <input asp-for="PasswordAnswer" class="form-control alpha-numeric" placeholder="Password Answer" />
+                            <span asp-validation-for="PasswordAnswer" class="text-red"></span>
+
+                        </div>
+                    </div>
+                </div>
+                 </div>
+                <div class="form-group">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <button id="btnGeneratePassword" class="btn btn-primary pull-right" type="button">Generate Random Password</button>
+                    </div>
+                </div>
+
+                <div class="frm-footer">
+                    @*<a data-dismiss="modal" id="btn-cancel" class="btn btn-default" href="@Url.Action("login","account")">
+                        <i class="fa fa-arrow-circle-left"></i>
+                        Cancel
+                    </a>*@
+                    <button class="btn btn-primary" id="btn-submit" type="submit">
+                        Save
+                        <i class="fa fa-arrow-circle-right"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </section>
+</div>

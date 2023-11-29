@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@section head{
+    <link href="~/Scripts/plugins/select2/select2.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/select2/select2-bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/datepicker/datepicker3.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/bootstrap-tokenfield/dist/css/tokenfield-typeahead.css" rel="stylesheet" />
+}
+<div class="">
+    <div class="inner-bg">
+        <section class="content-header">
+            <h1>
+                Referrer and Referral
+            </h1>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#food" data-toggle="tab">Referrer </a></li>
+                            <li><a href="#referral" data-toggle="tab">Referral</a></li>
+                        </ul>
+                        <div class="tab-content donations-tab">
+                            <div id="food" class="tab-pane active">
+                                <div class="content form-horizontal">
+                          
+                                      
+                                        <div class="table-top add-btn-main">
+
+                                            <div class="col-lg-8 col-sm-8 col-xs-12 filter-data" style="background: #efeded; margin:0px 0px 20px 0px;padding:10px 0px">
+                                                <div class="col-lg-2 col-sm-12 col-xs-12" style="">
+                                                    <label>Charity  </label>
+                                                </div>
+                                                <div class="col-lg-4 col-sm-12 col-xs-12">
+                                                    @Html.DropDownList("CharityIDRef", (List<SelectListItem>)ViewBag.Charities, new { @class = "form-control", @style = "min-width:300px" })
+                                                </div>
+                                            </div>
+
+                                          
+                                            <div class="col-lg-4 col-sm-4 col-xs-12 filter-data" style="background: #efeded; margin:0px 0px 20px 0px;padding:10px 0px">
+                                                <div class="col-lg-6 col-sm-12 col-xs-12" style="">
+                                                    <label>&nbsp;  </label>
+                                                </div>
+                                                <div class="col-lg-6 col-sm-12 col-xs-12">
+                                                    <a class="btn btn-primary" href="@Url.Action("AddReferrer")"><img src="/Content/images/add.png" width="20px" alt="">Add Referrer</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                               
+                                    <div class="">
+                                        <table class="table table-bordered table-striped table-condensed table-condensed food-table food-table food-don" id="foodbank-referrer-grid">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>S.No</th>
+                                                    <th>User Name</th>
+                                                    <th>Profession</th>
+                                                    <th>Contact Number</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                            <tfoot></tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="referral" class="tab-pane">
+                                <div class="content form-horizontal">
+
+                                    <div class="">
+                                        <div class="table-top add-btn-main">
+
+                                            <div class="col-lg-4 col-sm-4 col-xs-12 filter-data" style="background: #efeded; margin:0px 0px 20px 0px;padding:10px 0px">
+                                                <div class="col-lg-2 col-sm-12 col-xs-12" style="">
+                                                    <label>Charity  </label>
+                                                </div>
+                                                <div class="col-lg-4 col-sm-12 col-xs-12">
+                                                    @Html.DropDownList("CharityID", (List<SelectListItem>)ViewBag.Charities, new { @class = "form-control", @style = "min-width:300px" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-8 col-sm-8 col-xs-12 filter-data" style="background: #efeded; margin:0px 0px 20px 0px;padding:10px 0px">
+                                                <div class="col-lg-2 col-sm-12 col-xs-12" style="">
+                                                    <label>Branch  </label>
+                                                </div>
+                                                <div class="col-lg-4 col-sm-12 col-xs-12">
+                                                    @Html.DropDownList("BranchID", (List<SelectListItem>)ViewBag.Branches, new { @class = "form-control", @style = "min-width:300px" })
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <table class="table table-bordered food-table food-don" id="foodbank-referral-grid">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>S.No</th>
+                                                    <th>Referral Date</th>
+                                                    <th>Family Name</th>
+                                                    <th>Contact Number</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<partial name="_Modal" model='new Modal { ID="modal-delete-Referrer" , AreaLabeledId="modal-delete-Referrer-label" , Size=ModalSize.Medium }' />
+<partial name="_Modal" model='new Modal { ID="modal-accept-Referrer" , AreaLabeledId="modal-accept-Referrer-label" , Size=ModalSize.Medium }' />
+<partial name="_Modal" model='new Modal { ID="modal-reject-Referrer" , AreaLabeledId="modal-reject-Referrer-label" , Size=ModalSize.Medium }' />
+<partial name="_Modal" model='new Modal { ID="modal-postpone-Referrer" , AreaLabeledId="modal-postpone-Referrer-label" , Size=ModalSize.Medium }' />
+<partial name="_Modal" model='new Modal { ID="modal-delete-Referral" , AreaLabeledId="modal-delete-Referral-label" , Size=ModalSize.Medium }' />
+<partial name="_Modal" model='new Modal { ID="modal-accept-Referral" , AreaLabeledId="modal-accept-Referral-label" , Size=ModalSize.Medium }' />
+<partial name="_Modal" model='new Modal { ID="modal-reject-Referral" , AreaLabeledId="modal-reject-Referral-label" , Size=ModalSize.Medium }' />
+<partial name="_Modal" model='new Modal { ID="modal-postpone-Referral" , AreaLabeledId="modal-postpone-Referrer-label" , Size=ModalSize.Medium }' />
+@section scripts{
+    <script src="~/Scripts/plugins/select2/select2.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="~/Scripts/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/custom/FoodbankReferrer/FoodbankReferrer.js"></script>
+    <script src="~/Scripts/plugins/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
+
+
+}

@@ -1,0 +1,63 @@
+﻿@model FB.Dto.NoteDto
+<div id="frm-create-edit-note" class="cmxform">
+    <form asp-controller="Notes" asp-action="CreateEdit" asp-antiforgery="true" method="post">
+        <partial name="_ModalHeader" model='new ModalHeader { Heading = @Model.NoteId == 0 ? "Add Note" : "Edit Note" }' />
+        <div id="validation-summary-note"></div>
+        <input type="hidden" asp-for="NoteId" />
+        <input type="hidden" asp-for="PersonId" />
+        <div class="modal-body form-horizontal">
+            <div class="form-group">
+                <label asp-for="Privacy" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-4 col-sm-4">
+                    @if (Model.NoteId > 0)
+                    {
+                        if (Model.Privacy == Convert.ToBoolean(NotesPrivacy.Private))
+                        {
+                            <input type="text" class="form-control" value="Private" disabled="disabled" />
+                        }
+                        else
+                        {
+                            <input type="text" class="form-control" value="Public" disabled="disabled" />
+                        }
+                        <input type="hidden" asp-for="Privacy" />
+                    }
+                    else
+                    {
+                        <select asp-for="Privacy" class="form-control" asp-items="@((List<SelectListItem>)ViewBag.PrivacyType)">
+                        </select>
+                        <span asp-validation-for="Privacy" class="text-red"></span>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="col-lg-3 col-sm-3 control-label"> Description<span class="text-red">*</span></label>
+                <div class="col-lg-4 col-sm-4">
+                    <input type="text" asp-for="Description" class="form-control" required/>
+                    <span asp-validation-for="Description" class="text-red"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Comment" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-8 col-sm-8">
+                    <textarea asp-for="Comment" rows="2" class="form-control"></textarea>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="NoteDate" class="col-lg-3 col-sm-3 control-label">Note Date<span class="text-red">*</span></label>
+                <div class="col-lg-4 col-sm-4">
+                    <input asp-for="NoteDate" class="form-control datepicker" data-mask=""  data-inputmask="'alias': 'dd/mm/yyyy'" required />
+                    <span asp-validation-for="NoteDate" class="text-red"></span>
+                </div>
+                <div class="col-lg-3 col-sm-3">
+                    <input type="button" class="btn btn-primary date-today ps3" value="Today" />
+                </div>
+            </div>
+
+        </div>
+        <partial name="_ModalFooter" model='new ModalFooter { }' />
+    </form>
+</div>

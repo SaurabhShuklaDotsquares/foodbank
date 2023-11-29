@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Donor-Dashboard";
+}
+
+<section class="content-header">
+    <h1>
+        Dashboard
+    </h1>
+</section>
+<section class="content">
+    <div class="inner-bg-white" style="">
+        <div class="banner clearfix">
+            <div class="bnr_nav">
+                <ul>
+                    <li><a href="@Url.Action("mydonation","donor")">My Donations </a></li>
+                    <li><a href="@Url.Action("updateprofile","donor",new { id = CurrentUser.UserID})">My Profile</a></li>
+                </ul>
+            </div>
+            <div class="pull-right bnr dashboard-sec">
+                <div class="dashboard-bg">
+                  
+                    <div class="dashboard-main">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6">
+                                <a href="donor/mydonation">
+                                    <div class="dash-box label-success">
+                                        <figure class="icon-box lt-green-icon-bg"><img src="Content/images/donate-icon.png"></figure>
+                                        <strong>@ViewBag.TotalDonation</strong>
+                                        <span class="dash-bt-txt">My total donations</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-sm-6">
+                                <a href="donor/mydonation/food" class="total-food">
+                                    <div class="dash-box label-danger">
+                                        <figure class="icon-box lt-red-icon-bg"><img src="Content/images/food-icon.png"></figure>
+                                        <strong>@ViewBag.FoodDonation</strong>
+                                        <span class="dash-bt-txt">Total food donations</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-sm-6">
+                                <a href="donor/mydonation/cash">
+                                    <div class="dash-box blue-bg">
+                                        <figure class="icon-box lt-blue-icon-bg"><img src="Content/images/cash-icon.png"></figure>
+                                        <strong>@ViewBag.CashDonation</strong>
+                                        <span class="dash-bt-txt">Total cash donations</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-sm-6">
+                                <a href="donor/mydonation/card">
+                                    <div class="dash-box black-bg">
+                                        <figure class="icon-box lt-black-icon-bg"><img src="Content/images/card-icon.png"></figure>
+                                        <strong>@ViewBag.CardDonation</strong>
+                                        <span class="dash-bt-txt">Total card donations</span>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="smart-solutions">
+            Software for Churches and Charities.....
+        </div>
+        <div class="doners-records dis_none">
+            <div class="doners-btns">
+            </div>
+            <div class="doners-logo"><img src="Content/images/gamen.png" alt=""></div>
+        </div>
+    </div>
+    </section>

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Grantor";
+}
+
+@section head{
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/alertify/css/alertify.css" rel="stylesheet" />
+}
+<div class="wrapper">
+    <div class="">
+        <div class="inner-bg">
+            <section class="content-header">
+                <h1>
+                    Grantors
+                </h1>
+            </section>
+            <section class="content">
+                <div class="cmxform donor-form referrals-form">
+                    <div class="table-top add-btn-main">
+                        <a class="add-food-btn" href="@Url.Action("createedit")"><img src="/Content/images/add.png" alt="">Add Grantor</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="add-food-btn" href="#"><img src="/Content/images/add.png" alt="">Import Grantor</a>
+                    </div>
+
+                    <table id="grid-grantor-master" class=" table table-bordered table-striped table-condensed food-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>S.No</th>
+                                <th>Name</th>
+                                <th>Contact Number</th>
+                                <th>Total Amount</th>
+                                <th>QR Code</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot></tfoot>
+                    </table>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<partial name="_Modal" model='new Modal { ID="modal-delete-donor" , AreaLabeledId="modal-delete-donor-label" , Size=ModalSize.Medium }' />
+
+@section scripts{
+    <script src="~/Scripts/custom/grantor/index.js"></script>
+}

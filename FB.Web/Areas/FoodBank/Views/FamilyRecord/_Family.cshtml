@@ -1,0 +1,762 @@
+﻿
+@model FB.Dto.EditFamilyDto
+@using System.Web;
+@{
+
+}
+
+<script>
+    var listallerys = '';
+</script>
+@foreach (var appointement in ViewBag.AllergyList)
+{
+    <script>
+        listallerys += "<option value='@appointement.Value'>@appointement.Text</option>";
+    </script>
+}
+
+
+
+<section class="content-header">
+    <h1>
+
+        Edit Family : <span style="font-size:medium">  [ @Model.CharityName - @Model.BranchName ]</span>
+    </h1>
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="PersonID" />
+    <input type="hidden" asp-for="BranchName" />
+    <input type="hidden" asp-for="CharityName" />
+    <input type="hidden" asp-for="BranchID" />
+    <ul class="todo-list ui-sortable">
+        @if (!Model.Active)
+        {
+            <li class="notification">
+                <span class="handle ui-sortable-handle">
+                    <i class="fa fa-fw fa-warning"></i>
+                </span>
+                <span class="text">This Family is inactive!</span>
+            </li>
+        }
+    </ul>
+</section>
+
+<section class="content form-horizontal">
+
+    <div id="validation-summary "></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <partial name="_Notification" />
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#personal" data-toggle="tab">Contact Details</a></li>
+                    <li><a href="#details" data-toggle="tab">Address </a></li>
+                    <li><a href="#family" data-toggle="tab">Family Members</a></li>
+                    <li><a id="grid-parcels" href="#parcels" data-toggle="tab">Parcels</a></li>
+                    <li><a id="grid-agency" href="#agency" data-toggle="tab">Agencies they’ve been referred onto</a></li>
+                    <li><a id="grid-note" href="#note" data-toggle="tab">Notes</a></li>
+                    <li><a href="#userfieldsvoucher" data-toggle="tab">Vouchers</a></li>
+                    <li><a href="#userfields" data-toggle="tab">Feedback</a></li>
+
+                </ul>
+                <div class="tab-content">
+                    <div id="personal" class="tab-pane active ">
+                        <section>
+                            <div class="">
+                                <div class="col-xs-12 col-sm-12 col-lg-12">
+
+                                    <div class=" auto-address cmxform donor-form add-donor-frm ">
+
+
+                                        <h3 class="page-header info-header">
+                                            Family Contact Details
+                                            <a data-toggle="modal" asp-controller="familyrecord" asp-action="UpdatePersonName" asp-route-id="@Model.Id" data-target="#modal-edit-person-name" class="btn btn-primary">
+                                                Edit Contact Details
+                                            </a>
+
+                                        </h3>
+                                        <div class="row  auto-address cmxform donor-form add-donor-frm">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 col-xs-12 control-label" for="Title">
+                                                        Family
+                                                        Name
+                                                    </label>
+                                                    <div class="col-sm-6 col-xs-12">
+
+                                                        <input asp-for="FamilyName" class="form-control" placeholder="Family Name" type="text" readonly disabled />
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 col-xs-12 control-label" for="Initials">Email</label>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <input asp-for="Email" class="form-control" placeholder="Email" type="text" readonly disabled />
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 col-xs-12 control-label" for="Initials">
+                                                        How the family has been referred?
+                                                    </label>
+                                                    <div class="col-sm-6 col-xs-12">
+
+                                                        <input asp-for="SelfRefferedName" class="form-control" placeholder=" " type="text" maxlength="20" readonly disabled />
+
+                                                    </div>
+
+
+
+                                                </div>
+
+
+
+
+
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 col-xs-12 control-label" for="Initials">
+                                                        Contact
+                                                        Number
+                                                    </label>
+                                                    <div class="col-sm-6 col-xs-12">
+
+                                                        <input asp-for="Contactno" class="form-control" placeholder=" Contact Number" type="text" maxlength="20" readonly disabled />
+
+                                                    </div>
+
+
+
+                                                </div>
+
+
+
+
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 col-xs-12 control-label" for="Title">
+                                                        Have they have been on any other agency?
+                                                    </label>
+                                                    <div class="col-sm-6 col-xs-12">
+
+                                                        <input asp-for="OtherAgencyName" class="form-control" placeholder="" type="text" readonly disabled />
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 col-xs-12 control-label" for="Initials">Local Authority Code</label>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <input asp-for="LocalAuthCodeId" class="form-control" placeholder="" type="text" readonly disabled />
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 col-xs-12 control-label" for="Initials">
+                                                        When parcel needs to deliver?
+                                                    </label>
+                                                    <div class="col-sm-6 col-xs-12">
+
+                                                        <input asp-for="ParcelDeliverDate" class="form-control" placeholder=" " type="text" maxlength="20" readonly disabled />
+
+                                                    </div>
+
+
+
+                                                </div>
+
+
+
+
+
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 col-xs-12 control-label" for="Initials">
+                                                        GDPR Preferences
+                                                    </label>
+                                                    <div class="col-sm-6 col-xs-12">
+
+                                                        <input asp-for="GDPRPreferences" class="form-control" placeholder=" " type="text" maxlength="20" readonly disabled />
+
+                                                    </div>
+
+
+
+                                                </div>
+
+
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 col-xs-12 control-label" for="Initials">
+                                                        Delivery Instructions
+                                                    </label>
+                                                    <div class="col-sm-6 col-xs-12">
+
+                                                        <input asp-for="DeliveryNote" class="form-control" placeholder=" " type="text" maxlength="20" readonly disabled />
+
+                                                    </div>
+
+
+
+                                                </div>
+
+
+
+
+
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 col-xs-12 control-label" for="Initials">
+                                                     Status
+                                                    </label>
+                                                    <div class="col-sm-6 col-xs-12">
+
+                                                        <input asp-for="StatusName" class="form-control" placeholder=" " type="text" maxlength="20" readonly disabled />
+
+                                                    </div>
+
+
+
+                                                </div>
+
+
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+
+                                            <div class="modal-footer">
+
+
+                                                @if (Model.Active == true)
+                                                {
+
+                                                    <a data-toggle='modal' data-target='#modal-delete-family' class="btn btn-danger test" title='Family Delete' href="/Foodbank/familyrecord/DeleteFamily/?id=@Model.Id">
+                                                        Delete Family
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a> @if (Model.Confirmed == null)
+                                                    {
+                                                        <a data-toggle='modal' data-target='#modal-accept-family' class="btn btn-success test" title='Family Delete' href="/Foodbank/familyrecord/AcceptFamily/?id=@Model.Id">
+                                                            Accept Family
+                                                            <i class="fa fa-arrow-circle-right"></i>
+                                                        </a>
+                                                        <a data-toggle='modal' data-target='#modal-reject-family' class="btn btn-info test" title='Family Delete' href="/Foodbank/familyrecord/RejectFamily/?id=@Model.Id">
+                                                            Reject Family
+                                                            <i class="fa fa-arrow-circle-right"></i>
+                                                        </a>
+                                                    }
+                                                }
+                                                </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+                    </div>
+
+                    <div id="details" class="tab-pane">
+                        <section>
+                            <div class="">
+                                <div class="col-xs-12 col-sm-12 col-lg-12">
+
+                                    <div class=" auto-address cmxform donor-form add-donor-frm">
+                                        <div class="">
+                                            <h3 class="page-header info-header">
+                                                Family Address Details
+                                                <a data-toggle="modal" asp-controller="familyrecord" asp-action="UpdateFamilyAddress" asp-route-id="@Model.Id" data-target="#modal-edit-familyaddress" class="btn btn-primary">
+                                                    Edit  Address
+                                                </a>
+
+                                            </h3>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-6 control-label"
+                                                       for="Addresses_0__PostCode">Postcode</label>
+                                                <div class="col-sm-6">
+                                                    @if (Model.Overseas)
+                                                    {
+                                                        <input asp-for="PostCode" class="form-control postcode" placeholder="Postcode" disabled="disabled" readonly disabled />
+                                                        <input asp-for="OldPostCode" class="form-control postcode" placeholder="Postcode" hidden />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input asp-for="PostCode" class="form-control postcode" placeholder="Postcode" readonly disabled />
+                                                    }
+                                                </div>
+
+
+
+                                            </div>
+
+
+
+                                            <div class="form-group">
+                                                <label class="col-sm-6 control-label" for="Addresses_0__HouseName">House Name</label>
+                                                <div class="col-sm-6">
+                                                    <input asp-for="HouseName" class="form-control house-name" placeholder="House Name" maxlength="50" readonly disabled />
+                                                    <span asp-validation-for="HouseName" class="text-red"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-6 control-label" for="Addresses_0__HouseNumber">House Number</label>
+                                                <div class=" col-sm-6">
+                                                    <input asp-for="HouseNumber" class="form-control house-number" placeholder="House Number" maxlength="50" readonly disabled />
+                                                    <span asp-validation-for="HouseNumber" class="text-red"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-6 control-label">Street Name</label>
+                                                <div class="col-sm-6">
+                                                    <input asp-for="StreetName" class="form-control street-name" placeholder="Street Name" maxlength="50" readonly disabled />
+                                                    <span asp-validation-for="StreetName" class="text-red"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-6 control-label" for="Addresses_0__City">City</label>
+                                                <div class="col-sm-6">
+                                                    <input asp-for="City" class="form-control city-auto city" placeholder="City" maxlength="50" readonly disabled />
+                                                    <input asp-for="Addressid" name="Addressid" type="hidden" />
+                                                    <span asp-validation-for="City" class="text-red"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-6 control-label"
+                                                       for="Addresses_0__CountryID">Country</label>
+                                                <div class="col-sm-6">
+                                                    <select asp-for="CountryID" class="form-control create-donor-country" readonly disabled asp-items="@((List<SelectListItem>)ViewBag.CountryList)"></select>
+                                                    <span asp-validation-for="CountryID" class="text-red"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div id="family" class="tab-pane">
+                        <section>
+                            <div class="">
+                                <div class="col-xs-12 col-sm-12 col-lg-12">
+
+                                    <div class=" auto-address cmxform donor-form add-donor-frm ">
+                                        <div class="">
+                                            <h3 class="page-header info-header">
+                                                Family Members Details
+
+                                                <a data-toggle="modal" asp-controller="familyrecord" asp-action="UpdateFamilyMember" asp-route-id="@Model.Id" data-target="#modal-edit-familymember" class="btn btn-primary">
+                                                    Edit Family Members Details
+                                                </a>
+                                            </h3>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 col-xs-12">
+                                                <label class="col-sm-6 col-xs-12 control-label" for="Surname">
+                                                    Number of
+                                                    Family Members                                                </label>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <select asp-for="TotalFamily" id="TotalFamilylabel" class=" form-control" disabled style="min-width:60px">
+
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-xs-12">
+
+                                                <label class="col-sm-6 col-xs-12 control-label" for="Surname">
+                                                    How Many Adults
+                                                </label>
+                                                <div class="col-sm-6 col-xs-12">
+                                                    <select asp-for="TotalAdults" id="TotalAdultslable" class=" form-control " disabled style="min-width:60px">
+                                                        <option value="0">0</option>
+                                                        <option value="1" selected>1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-sm-4 col-xs-12">
+                                                <div class="">
+                                                    <label class="col-sm-6 col-xs-12 control-label" for="Surname">
+                                                        How
+                                                        Many Child
+                                                    </label>
+                                                    <div class="col-sm-6 col-xs-12">
+                                                        <select asp-for="TotalChild" id="TotalChildlable" class=" form-control " disabled style="min-width:60px">
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-12">
+                                            <h3 class="page-header info-header">
+                                                Family Members Information
+                                            </h3>
+
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="">
+                                                    @{ int j = 1;}
+                                                    <tr>
+                                                        <th>Sr.no</th>
+                                                        <th>Name</th>
+                                                        <th>Dob</th>
+                                                        <th>Allery Name</th>
+                                                        <th>Is Adult</th>
+
+                                                    </tr>
+
+                                                    @for (int i = 0; i < Model.subfamilyname.Count; i++)
+                                                    {
+                                                        <tr>
+
+                                                            <td>@j</td>
+
+                                                            <td>
+                                                                @Model.subfamilyname[i]
+                                                            </td>
+
+
+                                                            <td>@Model.subfamilydob[i]</td>
+
+                                                            <td width="30%">
+
+                                                                @{
+                                                                    var Arrayallery = Model.SubFamilyAllergryarry[i].Split('%').ToArray();
+                                                                    int k = 1;
+                                                                    List<SelectListItem> allerylist = (List<SelectListItem>)ViewBag.AllergyList;
+                                                                    allerylist = allerylist.Where(x => Arrayallery.Contains(x.Value)).ToList();
+                                                                }
+
+                                                                @foreach (var item in allerylist)
+                                                                {
+
+                                                                    if (k == allerylist.Count)
+                                                                    {
+                                                                        <span>@item.Text </span>
+                                                                    }
+
+                                                                    else
+                                                                    {
+                                                                        <span>@item.Text, </span>
+                                                                    }
+
+                                                                    k = k + 1;
+                                                                }
+
+                                                            </td>
+
+                                                            <td>
+                                                                @(Model.subfamilyisadult[i]=="True"?"Yes":"No")
+
+                                                            </td>
+
+
+                                                        </tr>
+                                                        j = j + 1;
+                                                    }
+
+
+                                                </table>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+
+                    @*Parcels List*@odbank
+                <div id="parcels" class="tab-pane">
+                    <div class="box-body ">
+                      
+                        <div class="table-responsive">
+                            <div class="col-lg-12 col-sm-12">
+                                <table id="grid-family-parcel-master" class=" table table-bordered table-striped table-condensed food-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>S.No</th>
+                                            <th>Parcel Type</th>
+                                            <th>Family Name</th>
+                                            <th>Due Date</th>
+                                            <th>Delivered Date</th>
+                                            <th>Status</th>
+                                            @*<th>Action</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot></tfoot>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    @*<section class="parcels-tab-body"></section>*@
+                </div>
+                    @*Agency List*@
+                <div id="agency" class="tab-pane">
+
+                    <div class="box-header">
+                        <div id="agencyformmaster" novalidate>
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="form-group">
+
+                                    <label class="col-sm-4 control-label" for="Forenames">Select Agency<span class="redtext">*</span></label>
+                                    <div class="col-sm-8 col-xs-12">
+
+                                        @Html.DropDownListFor(M => M.Agencieslist, new SelectList(Model.Agencieslist, "Id", "Name"), "Select Agency...", new { @class = "form-control", @style = "min-width:300px" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-12">
+
+                                <div class="btn-group">
+                                    <a id="Addagecnyfamily" class="btn btn-primary btnHide ps3">
+                                        Add Agency for Family
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-body ">
+                        <input type="hidden" asp-for="Id" id="hnd_feedbackfamilyid" />
+                        <div class="table-responsive">
+                            <div class="col-lg-12 col-sm-12">
+                                <table id="grid-person-agency" class="table table-bordered table-striped table-hover tbl_bg_clr row-pointer">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>S.No</th>
+                                            <th>Agency Name</th>
+                                            <th>Email Address</th>
+                                            <th>Phone Number</th>
+                                            <th width="30%">Action </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <script>
+                        $("#Addagecnyfamily").on("click", function () {
+                            alertify.dismissAll();
+                            if ($("#Agencieslist").val() == "" || $("#Agencieslist").val() == "") {
+                                Global.ShowMessage("Please select agency.", Global.MessageType.Error);
+                                return;
+                            }
+
+                            $.ajax({
+                                url: Global.DomainName + "FoodBank/familyrecord/FamilyagencySave",
+                                data: { agencyid: $("#Agencieslist").val(), familyid: $("#hnd_feedbackfamilyid").val() },
+                                type: "post",
+                                success: function (data) {
+                                    
+                                    $(".img-loading-div").hide();
+                                    if (data.isSuccess) { alertify.dismissAll(); Global.ShowMessage(data.data, Global.MessageType.Success); $("a[href=#agency]").trigger("click"); }
+                                    else { alertify.dismissAll(); Global.ShowMessage(data.data, Global.MessageType.Error); }
+                                },
+                                error: function (data) {
+                                    
+                                    $(".img-loading-div").hide();
+                                },
+                                complete: function (data) {
+                                    
+                                    $(".img-loading-div").hide();
+                                }
+                            });
+                        });
+                        $('body').delegate('.agcecyremoveforfamily', 'click', function () {
+                            alertify.dismissAll();
+                            $.ajax({
+                                url: Global.DomainName + "FoodBank/familyrecord/FamilyagencyDelete",
+                                data: { id: $(this).attr("data-id") },
+                                type: "get",
+                                success: function (data) {
+                                    $(".img-loading-div").hide();
+                                    if (data.isSuccess) { alertify.dismissAll(); Global.ShowMessage(data.data, Global.MessageType.Success); $("a[href=#agency]").trigger("click"); }
+                                    else { alertify.dismissAll(); Global.ShowMessage(data.data, Global.MessageType.Error); }
+                                },
+                                error: function (data) {
+                                    $(".img-loading-div").hide();
+                                },
+                                complete: function (data) {
+                                    $(".img-loading-div").hide();
+                                }
+                            });
+                        });
+                    </script>
+                    @*<section class="agency-tab-body"></section>*@
+                </div>
+                    @*Notes List*@
+                    <div id="note" class="tab-pane">
+                        <section class="note-tab-body"></section>
+                    </div>
+                    @*Voucher List*@
+                <div id="userfieldsvoucher" class="tab-pane">
+                    <div class="box-body ">
+                      
+                        <div class="table-responsive">
+                            <div class="col-lg-12 col-sm-12">
+                                <table id="grid-voucher-master" class="table table-bordered table-striped table-hover tbl_bg_clr row-pointer">
+                                    <thead>
+                                        <tr>
+
+                                            <th>#</th>
+                                            <th>S.No</th>
+
+                                            <th>Refferer Name</th>
+                                            <th>Family Name</th>
+                                            <th>Date of Creation</th>
+                                            <th>Date Redeemed</th>
+                                            <th>Voucher code</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot></tfoot>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    @*<section class="userfieldsvoucher-tab-body"></section>*@
+                </div>
+                    @*Feedback List*@
+                <div id="userfields" class="tab-pane">
+                    <div class="box-body ">
+                        <input type="hidden" id="hdnCurrentUserId" data-rolename="@( CurrentUser.RoleID>10 ? string.Empty :  ((UserRoles)CurrentUser.RoleID).GetDescription())" value="@CurrentUser.UserID" />
+                        <div class="table-responsive">
+                            <div class="col-lg-12 col-sm-12">
+                                <table id="grid-my-referral-family" class="table table-bordered table-striped table-hover tbl_bg_clr row-pointer">
+                                    <thead>
+                                        <tr>
+
+                                            <th>S.No</th>
+                                            <th>Feedback date</th>
+                                            <th>Family name</th>
+                                            <th>Delivery Date</th>
+                                            <th>Parcel Type </th>
+                                            <th>Packing Date</th>
+                                            <th>View</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot></tfoot>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <script src="~/Scripts/custom/Feedback/feedbacklistbyfamilyid.js"></script>
+                    @*<section class="userfields-tab-body"></section>*@
+                </div>
+
+
+
+                </div>
+
+                <div class="clearfix"></div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</section>
+
+
+
+
+
+
+

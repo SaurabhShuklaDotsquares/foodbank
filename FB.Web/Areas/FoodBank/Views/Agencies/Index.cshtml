@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Agencies";
+}
+
+@section head{
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/alertify/css/alertify.css" rel="stylesheet" />
+}
+<div class="inner-bg">
+    <section class="content-header">
+        <h1>
+            Agencies
+        </h1>
+    </section>
+    <section class="content">
+        <partial name="_Notification" />
+        <div class="cmxform donor-form referrals-form ">
+            <div class="table-top">
+                <a class="add-food-btn" href="@Url.Action("createedit","agencies")">
+                    <img src="Content/images/add.png"
+                         alt="">Add Agencies
+                </a>
+            </div>
+            <div class="">
+                <table id="grid-agencies-master" class="table table-bordered table-responsive food-table agencies-table common-tablet">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>S.No</th>
+                            <th>Agency Name</th>
+                            <th>Email Address</th>
+                            <th>Phone Number</th>
+                            <th width="30%">Action </th>
+                        </tr>
+                    <tbody></tbody>
+                    <tfoot></tfoot>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+<partial name="_Modal" model='new Modal { ID="modal-delete-donor" , AreaLabeledId="modal-delete-donor-label" , Size=ModalSize.Medium }' />
+
+@section scripts{
+    <script src="~/Scripts/custom/agencies/index.js"></script>
+}

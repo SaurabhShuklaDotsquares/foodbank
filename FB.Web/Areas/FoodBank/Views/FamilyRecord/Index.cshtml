@@ -1,0 +1,190 @@
+﻿@using System.Text.RegularExpressions;
+
+@{
+    ViewBag.Title = "Families";
+    string OrganisationID = Convert.ToString(ViewBag.OrganisationID);
+    string personId = "0";
+    if (TempData["ID"] != null)
+    {
+        personId = Convert.ToString(TempData["ID"]);
+    }
+}
+
+@section head{
+
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/select2/select2.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/select2/select2-bootstrap.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/datepicker/datepicker3.css" rel="stylesheet" />
+    <link href="~/Content/multiple-select.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/lightbox2/css/lightbox.min.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/select2/select2.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/select2/select2-bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-switch.css" rel="stylesheet" />
+    <link href="~/Content/multiple-select.css" rel="stylesheet" />
+
+    <style>
+        .table-hover > tbody > tr:hover {
+            background-color: #abb9d3;
+        }
+
+        .table-responsive {
+            overflow-x: auto !important;
+        }
+
+        .cke_dialog {
+            z-index: 10055 !important;
+        }
+
+        .famiyIcon::first-letter {
+            color: #f06595;
+        }
+
+        .personIcon::first-letter {
+            color: #09abea;
+        }
+
+        #grid-person > tbody > tr > td {
+            white-space: nowrap;
+        }
+    </style>
+}
+
+
+<section class="content-header">
+    <h1>
+        Families
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <partial name="_Notification" />
+    <div id='postcodes4ukey' style='display: none;'>@SiteKeys.Postcode4uKey</div>
+    <div id='postcodes4uuser' style='display: none;'>@SiteKeys.Postcode4uUser</div>
+    <div class="box">
+        <div class="box-header">
+            <div class="btn-group">
+                <a  asp-controller="FamilyRecord" asp-action="AddFamily" class="btn btn-primary create-person">
+                    Add New <i class="fa fa-plus"></i>
+                </a>
+            </div>
+            <div class="btn-group">
+                <input type="hidden" id="hdnCentralOfficeID" name="hdnCentralOfficeID" value="@OrganisationID" />
+                <input type="hidden" id="hdnPersonID" name="hdnPersonID" value="@personId" />
+            </div>
+            @if (CurrentUser != null && CurrentUser.CharityID == null)
+            {
+                <div class="btn-group">
+                    @Html.DropDownList("CharityFilter", (List<SelectListItem>)ViewBag.Charities, "Select charity", new { @class = "form-control", @style = "min-width:300px" })
+                </div>
+            }
+            @if (CurrentUser != null && CurrentUser.BranchID == null)
+            {
+                <div class="btn-group">
+                    @Html.DropDownList("BranchFilter", (List<SelectListItem>)ViewBag.Branches, "Select branch", new { @class = "form-control", @style = "min-width:300px" })
+                </div>
+            }
+
+
+
+            <div class="btn-group">
+                <input type="button" id="btnCancelFilter" class="btn btn-primary" value="Cancel All Filters" />
+            </div>
+            @if (CurrentUser.OrganisationID == 0)
+            {
+                <div class="btn-group pull-right">
+                    <a data-toggle="modal" asp-controller="familyrecord" asp-action="Index" asp-route-id="" class="btn btn-primary">
+                        Back <i class="fa fa-undo"></i>
+                    </a>
+                </div>
+            }
+
+        </div>
+        <div class="box-body">
+            <div id="alphabet-btn" class="btn-group margin-bottom">
+                <input type="hidden" id="hdnAlphabet" />
+                @foreach (var letter in (List<string>)ViewBag.Alphabets)
+                {
+                    <input type="button" class="alphabet btn btn-primary" value="@letter" />
+                }
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-sm-2">
+                    <table id="grid-person" class="table table-bordered tbl_bg_clr table-striped table-hover row-pointer">
+                        <thead>
+                            <tr>
+                                <th>Family Name</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="col-lg-10 col-sm-10 mrg_top_30">
+
+                    <form id="form-edit-person" method="post" asp-antiforgery="true">
+                        <div id="validation-summary"></div>
+                        <div id="frm-edit" class="frm-edit2">
+                        </div>
+                    </form>
+                    <div class="clear margin-bottom"></div>
+
+                </div>
+                <div class="img-loading-div" style="display:none;">
+                    <div>
+                        <div id="loader" style=" text-align: center;">
+                            <img src="~/Content/images/Spin-1s-91px.gif" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script src="~/Scripts/plugins/ckeditor1/ckeditor.js"></script>
+    <script src="~/Scripts/plugins/select2/select2.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>*@
+
+    <script src="~/Scripts/custom/family/family-admin.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="~/Scripts/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/plugins/postcode4u/postcodes4u.js"></script>
+    <script src="~/Scripts/plugins/autocomplete/bootstrap3-typeahead.js"></script>
+    <script src="~/Scripts/plugins/multiple-select/jquery.multiple.select.js"></script>
+    <script src="~/Scripts/plugins/moment/moment.js"></script>
+    <script src="~/Scripts/plugins/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript">
+        var autoSaveDonor = '@(ViewBag.AutoSaveDonor)';
+    </script>
+
+    <script src="~/Scripts/plugins/select2/select2.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="~/Scripts/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/plugins/select2/select2.js"></script>
+    <script src="~/Scripts/bootstrap-switch.js"></script>
+
+
+    <script src="~/Scripts/plugins/postcode4u/postcodes4u.js"></script>
+    <script src="~/Scripts/plugins/customize-multiple-select/jquery.multiple.select1.js"></script>
+    <script src="~/Scripts/plugins/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
+}
+
+
+
+<partial name="_Modal" model='new Modal { ID = "modal-edit-person-name", AreaLabeledId = "modal-edit-person-name-label", Size = ModalSize.Large }' />
+
+<partial name="_Modal" model='new Modal { ID = "modal-feedback-viewdetails", AreaLabeledId = "modal-feedback-viewdetails-label", Size = ModalSize.Large }' />
+
+<partial name="_Modal" model='new Modal { ID = "modal-create-edit-note", AreaLabeledId = "modal-create-edit-note-label", Size = ModalSize.Large }' />
+<partial name="_Modal" model='new Modal { ID = "modal-delete-note", AreaLabeledId = "modal-delete-note-label", Size = ModalSize.Medium }' />
+
+
+
+<partial name="_Modal" model='new Modal { ID = "modal-edit-familyaddress", AreaLabeledId = "modal-edit-familyaddress-label", Size = ModalSize.Large }' />
+<partial name="_Modal" model='new Modal { ID = "modal-edit-familymember", AreaLabeledId = "modal-edit-familymember", Size = ModalSize.Large }' />
+<partial name="_Modal" model='new Modal { ID="modal-delete-family" , AreaLabeledId="modal-delete-family-label" , Size=ModalSize.Medium }' />
+<partial name="_Modal" model='new Modal { ID="modal-accept-family" , AreaLabeledId="modal-accept-family-label" , Size=ModalSize.Medium }' />
+<partial name="_Modal" model='new Modal { ID="modal-reject-family" , AreaLabeledId="modal-reject-family-label" , Size=ModalSize.Medium }' />
